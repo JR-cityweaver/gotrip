@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.qianfeng.manager.bean.RouteDetailMapper">
+  <resultMap type="com.qianfeng.manager.bean.RouteDetailBean" id="routeDetailMap">
+  	<id column="detail_id" property="detail_id"/>
+  	<result column="route_detail" property="route_detail"/>
+  	<result column="detail_title" property="detail_title"/>
+  	<result column="detail_brief" property="detail_brief"/>
+  	<result column="detail_oldprice" property="detail_oldprice"/>
+  	<result column="detail_newprice" property="detail_newprice"/>
+  	<result column="detail_group" property="detail_group"/>
+  	<result column="detail_feature" property="detail_feature"/>
+  	<result column="detail_special" property="detail_special"/>
+  	<result column="detail_lodging" property="detail_lodging"/>
+  	<result column="detail_include" property="detail_include"/>
+  	<result column="detail_uninclude" property="detail_uninclude"/>
+  	<result column="detail_need" property="detail_need"/>
+  	<result column="detail_trip" property="detail_trip"/>
+  	<result column="detail_taocan" property="detail_taocan"/>
+  	<result column="detail_tuanQi" property="detail_tuanQi"/>
+  	<result column="detail_begin" property="detail_begin"/>
+  	<result column="detail_end" property="detail_end"/>
+  	<result column="detail_days" property="detail_days"/>
+  	<result column="detail_needs" property="detail_needs"/>
+  </resultMap>
+  
+  <select id="selectRouteDetail" parameterType="java.lang.Integer" resultMap="routeDetailMap">
+  	select * from tb_routedetail where route_detail=#{route_detail};
+  </select>
+  </mapper>

@@ -1,0 +1,108 @@
+/*云飞版 首页主体、头部导航js*/
+
+$(function(){
+	//首页图片缓慢放大特效
+	$('.i_discount li').mouseover(function(){
+		n = $('.i_discount li').index(this);
+		$('.i_discount .i_discountImg').eq(n).addClass('i_ImgCurrent');
+		$('.i_discount .c_discountCurrent').eq(n).css({display:"block"});
+		$('.i_discount .i_discountArrow').eq(n).attr({src:"images_c/i_discountArrowCurrent.png"});
+		$(this).mouseout(function(){
+			$('.i_discount .i_discountImg').eq(n).removeClass('i_ImgCurrent');
+			$('.i_discount .c_discountCurrent').eq(n).css({display:"none"});
+			$('.i_discount .i_discountArrow').eq(n).attr({src:"images_c/i_discountArrow.png"});
+		})
+	})
+
+	//首页深度旅游 动画执行时间控制特效
+	window.onscroll = function () { 
+	  var t = document.documentElement.scrollTop || document.body.scrollTop;
+	  if (t > 2500) { 
+	 	$('.i_highQuality li').css({visibility:"visible"}).addClass('bounceInLeft animated');
+	 	$('.i_transparentImg').css({visibility:"visible"}).addClass('fadeInUp animated');
+	  }
+	  if (t < 2000) { 
+	 	$('.i_highQuality li').css({visibility:"hidden"}).removeClass('bounceInLeft animated');
+	 	$('.i_transparentImg').css({visibility:"hidden"}).removeClass('fadeInUp animated');
+	  }
+	  
+	  //鼠标滚动的时候，够主题下拉菜单立即隐藏
+	  $('.navSecFC').hide();
+	}	
+	//首页  够欧洲，够海岛，够自由 顶部 小图标特效
+	$('#i_mainC .i_listMore').mouseover(function(){
+		n = $('#i_mainC .i_listMore').index(this);
+		if(n==0){
+			$('.i_europeAnimate').addClass('swing animated')
+		}else if(n==1){
+			$('.i_islandAnimate').addClass('wobble animated')
+		}else{
+			$('.i_freeAnimate').addClass('swing animated')
+		}
+	})
+	$('#i_mainC .i_listMore').mouseout(function(){
+	    setTimeout(function () {
+	       $('.i_europeAnimate,.i_freeAnimate').removeClass('swing animated')
+			$('.i_islandAnimate').removeClass('wobble animated')
+	    },200);
+	})
+	//  以上js 可以正常运行没有问题
+	
+	
+	
+	// 顶部导航 二维码特效  关注我们
+	$('#about').hover(function(){
+		$('.i_aboutCodeC').css({display:"block"})
+	},function(){
+		$('.i_aboutCodeC').css({display:"none"})
+	})
+	//app下载
+	$('#appDown').mouseover(function(){
+		$('.i_appCodeC').css({display:"block"})
+	})
+	$('#appDown').mouseout(function(){
+		$('.i_appCodeC').css({display:"none"})
+	})
+	
+	
+	//主导航全屏 下拉框   够主题
+	$('#i_navTheme').hover(function(){
+		$('.navSecFC').css({display:"block"});
+	},function(){
+		$('.navSecFC').css({display:"none"})
+	})
+//	
+	$('#i_navFree').hover(function(){
+		$('.navSecSC').css({display:"block"});
+	},function(){
+		$('.navSecSC').css({display:"none"})
+	})
+
+	//导航鼠标滑动特效
+	function navCurrent(a,b){
+		$(a).mouseover(function(){
+			//n = $(a).index(this);
+			$(a).removeClass(b);
+			$(this).addClass(b);
+		})
+		$(a).mouseout(function(){
+			//n = $(a).index(this);
+			$(a).removeClass(b);
+		})
+	}
+	//主导航 选中状态
+	navCurrent('#c_mainNav li','c_current')
+})
+//快速搜索
+
+
+
+
+
+
+
+
+
+
+
+

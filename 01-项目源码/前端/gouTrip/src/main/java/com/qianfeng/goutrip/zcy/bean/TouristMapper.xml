@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.qianfeng.goutrip.zcy.bean.TouristMapper" >
+   <resultMap type="com.qianfeng.goutrip.zcy.bean.RouteOrderDTO" id="touristManResult">
+  	<id column="tourist_id" property="tourist_id"/>
+  	<result column="tourist_type" property="tourist_type"/>
+  	<result column="tourist_name" property="tourist_name"/>
+  	<result column="tourist_sex" property="tourist_sex"/>
+  	<result column="tourist_tele" property="tourist_tele"/>
+  	<result column="tourist_country" property="tourist_country"/>
+  	<result column="tourist_card" property="tourist_card"/>
+  	<result column="tourist_cardnum" property="tourist_cardnum"/>
+  	<result column="theme_routeorder_order_id" property="theme_routeorder_order_id"/>
+  </resultMap>
+  
+  <insert id="insertTourist" parameterType="com.qianfeng.goutrip.zcy.bean.RouteOrderDTO">
+  	insert into tb_touristman(tourist_type, tourist_name, tourist_sex, tourist_tele, tourist_country, tourist_card, tourist_cardnum, theme_routeorder_order_id) values(1,#{tourist_name},#{tourist_sex},#{tourist_tele},#{tourist_country},#{tourist_card},#{tourist_cardnum},#{order_num});
+  </insert>
+  
+  <select id="selectTourist" parameterType="java.lang.String" resultMap="touristManResult">
+  	select * from tb_touristman where theme_routeorder_order_id=#{order_num}
+  </select>
+  </mapper>

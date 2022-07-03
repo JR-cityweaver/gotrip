@@ -1,0 +1,217 @@
+/**
+ * Created by xiaoyu on 2016/10/31.
+ */
+//tab_切换
+function changeTab(i){
+	$(".bg_"+i).addClass("font-c").siblings("li").removeClass("font-c");
+    $(".bg_"+i).parent("ul").removeClass().addClass("tab_"+i);
+    $(".tab_inner_"+i).show().siblings().hide();
+}
+$(function(){
+    
+	$("#next_1").click(function(){
+    	layer.closeAll();
+    	//第一页
+    	var fromcity = $("#fromcity").val();
+    	var termini = $("#termini").val();
+    	var days = $("#days").val();
+		var goTime = $("#goTime").val();
+		
+		var flag = 0;
+		if(fromcity==""){
+			flag = 1;
+			layer.tips('不能为空', $("#fromcity"));
+		}
+		if(termini==""){
+			flag = 1;
+			layer.tips('不能为空', $("#termini"));
+		}
+		if(days==""){
+			flag = 1;
+			layer.tips('不能为空', $("#days"));
+		}
+		if(goTime==""){
+			flag = 1;
+			layer.tips('不能为空', $("#goTime"));
+		}
+		if(flag>0){
+			return false;
+		}
+		changeTab(2);
+		$("#fromcity2").html(fromcity);
+    	$("#termini2").html(termini);
+    	$("#days2").html(days+"天");
+		$("#goTime2").html(goTime);
+    });
+	
+	$("#next_2").click(function(){
+    	layer.closeAll();
+    	
+		//第二页
+		var subject = '';
+		var num = $("#num").val();
+		var money = '';
+		
+		var flag = 0;
+		if($(".theme span").hasClass('col_2')){
+			subject = $(".col_2").html();
+		}else{
+			flag = 1;
+			layer.tips('选择行程主题', $(".theme"));
+		}
+		if(num==0){
+			flag = 1;
+			layer.tips('不能为0', $("#num"));
+		}
+		if($(".budget span").hasClass('col_3')){
+			money = $(".col_3").html();
+		}else{
+			flag = 1;
+			layer.tips('选择人均预算', $(".budget"));
+		}
+		if(flag>0){
+			return false;
+		}
+		
+		changeTab(3);
+		$("#hiddenType").val(subject);
+    	$("#num2").html(eval(parseInt(num)+parseInt($("#withChildren").val())));
+    	$("#hiddenPrice").val(money);
+    });
+	
+	$("#next_3").click(function(){
+    	layer.closeAll();
+    	
+		//第三页
+		var name = $("#name").val();
+    	var phone = $("#phone").val();
+    	var mobileVerify = $("#mobileVerify").val();
+		var email = $("#emails").val();
+		var remark = $("#remark").val();
+		
+		var flag = 0;
+		if(name==""){
+			flag = 1;
+			layer.tips('请填写真实姓名', $("#name"));
+		}
+		if(phone==""){
+			flag = 1;
+			layer.tips('手机号不能为空', $("#phone"));
+		}
+		var tel = /^1[3|4|5|8|7][0-9]\d{8}$/;
+	    if(phone!=""){
+    		if(!tel.test(phone)){
+				flag = 1;
+				layer.tips('手机号不合法', $("#phone"));
+			}
+	    }
+	    
+		if(email==""){
+			flag = 1;
+			layer.tips('邮箱地址不能为空', $("#emails"));
+		}
+		//^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$
+		var m = /^([a-zA-Z0-9_-])+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+		if(email != ""){
+			if(!m.eq(email)){
+				flag = 1;
+				layer.tips('邮箱格式不合法', $("#emails"));
+			}
+		}
+		if(flag>0){
+			return false;
+		}
+		$("#name2").html(name);
+    	$("#phone2").html(phone);
+    	$("#email2").html(m);
+    	$("#remark2").html($('#remark').val());
+    	
+//		$.post('/custom/post.html',
+//                {fromcity:$("#fromcity").val(),termini: $("#termini").val(), days: $("#days").val(),goTime: $("#goTime").val(),
+//				 subject: $("#subject2").html(), num: $("#num").val(),withChildren:$("#withChildren").val(),money:$("#money2").html(),
+//				 name: name,phone: phone,email: email,remark:remark},
+//               function (o) {
+//					 var flag = o.flag;
+//					 if(flag=='success'){
+//						 //信息填写成功
+//						 $(".popUpp,.alert").show();
+//					 }else{
+//						 layer.alert("提交失败，请重新刷新页面再填写信息。"); 
+//					 }
+//               },
+//                'json'
+//        );
+    });
+});
+//人数加减
+$(function(){
+    $(".add").click(function(){
+        $(this).siblings("input").val(parseInt($(this).siblings("input").val()) + 1);
+    });
+    $(".minus").click(function () {
+        if ($(this).siblings("input").val()>= 1) {    //判断数量值>=1时才可以减少
+            $(this).siblings("input").val(parseInt($(this).siblings("input").val()) - 1);
+        } else {
+            $(".minus").attr("disabled", "disabled");//当input.val为0时，不可读状态
+        }
+    });
+});
+//
+// $(function(){
+//     var src="images/tip_03.png";
+//     img = $('<img id="img" src="' + src + '">');
+//     console.log($("#img"));
+//     $("#img").prepend("#laydate_box")
+//     $(".main_btm").click(function(){
+//         console.log(3333);
+//     })
+//
+// })
+//点击切换背景
+$(function(){
+    $(".theme").find("span").click(function(){
+        $(this).toggleClass("col_2").siblings().removeClass("col_2");
+    });
+    $(".budget").find("span").click(function(){
+        $(this).toggleClass("col_3").siblings().removeClass("col_3");
+    });
+});
+
+//验证码等待时间
+var wait=60;
+function time(o) {
+    if (wait == 0) {
+        o.removeAttribute("disabled");           
+        o.value="重新发送";
+        wait = 60;
+    } else {
+        o.setAttribute("disabled", true);
+        o.value="重新发送(" + wait + ")";
+        wait--;
+        setTimeout(function() {
+            time(o);
+        },
+        1000);
+    }
+}
+//获取验证码
+$(function(){
+	$("#getCode").on('click',function(){
+		var tel = $("#phone").val();
+		var reg="^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$";
+		var regExp = new RegExp(reg);
+		if(!regExp.test(tel)){
+			layer.tips('请输入正确手机号!',$("#phone"));
+			return false;
+		}
+		$.get("/indexNew/getCode.html", {tel:tel},function (data) {
+			//显示验证码等待时间
+			$(this).attr("disabled",false); 
+			time(document.getElementById("getCode"));
+			//记录验证码
+			$("#code").val(data.code);
+			var create_time = new Date();
+			$("#create_time").val(create_time);
+		});
+	});
+});

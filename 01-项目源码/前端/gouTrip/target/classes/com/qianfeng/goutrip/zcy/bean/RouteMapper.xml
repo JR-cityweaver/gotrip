@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.qianfeng.goutrip.zcy.bean.RouteMapper">
+  	<resultMap type="com.qianfeng.goutrip.zcy.bean.RouteDTO" id="routeResultMap">
+  		<id column="route_id" property="route_id"/>
+  		<result column="route_name" property="route_name"/>
+  		<result column="route_price" property="route_price"/>
+  		<result column="route_beginning" property="route_beginning"/>
+  		<result column="route_themetype" property="route_themetype"/>
+  		<result column="route_activitytype" property="route_activitytype"/>
+  		<result column="route_hot" property="route_hot"/>
+  		<result column="route_img" property="route_img"/>
+  		<result column="route_days" property="route_days"/>
+  		<result column="route_priceOr" property="route_priceOr"/>
+  		<result column="tb_way" property="tb_way"/>
+  	</resultMap>
+  	
+  	<select id="selectAllRoute" parameterType="java.lang.Integer" resultMap="routeResultMap">
+  		select * from tb_route limit #{pageno},5
+  	</select>
+  	
+  	<select id="selectCount" resultType="int">
+  		select count(*) from tb_route;
+  	</select>
+  	
+  	<select id="selectThemeCount" parameterType="java.lang.Integer" resultType="int">
+  		select count(*) from tb_route where route_themetype=#{route_themetype}; 		
+  	</select>
+  	
+  	<select id="selectRouteByTheme" parameterType="hashmap" resultMap="routeResultMap">
+  		select * from tb_route where route_themetype=#{route_themetype} limit #{pageno},5;
+  	</select>
+  		
+  	<select id="selectRouteByCountry" parameterType="java.lang.String" resultMap="routeResultMap">
+  		select * from tb_route where route_name like concat(concat('%',#{country}),'%');
+  	</select>
+  	
+  	<select id="selectRouteByHot" parameterType="java.lang.Integer" resultMap="routeResultMap">
+  		select * from tb_route  order by route_hot desc limit #{pageno},5;
+  	</select>
+  	 	
+  	
+  	<select id="selectRouteByDays" parameterType="java.lang.Integer" resultMap="routeResultMap">
+  		select * from tb_route order by route_days desc limit #{pageno},5;
+  	</select>
+  	
+  	<select id="selectRouteByDaysAsc" parameterType="java.lang.Integer" resultMap="routeResultMap">
+  		select * from tb_route order by route_days  limit #{pageno},5;
+  	</select>
+  	
+  	<select id="selectRouteByPrice" parameterType="java.lang.Integer" resultMap="routeResultMap">
+  		select * from tb_route order by route_priceOr desc limit #{pageno},5;
+  	</select>
+  	
+  	<select id="selectRouteByPriceAsc" parameterType="java.lang.Integer" resultMap="routeResultMap">
+  		select * from tb_route order by route_priceOr limit #{pageno},5;
+  	</select>
+  	
+  	<select id="selectRouteByTeam" parameterType="java.lang.Integer" resultMap="routeResultMap">
+  		select * from tb_route where tb_way=#{tb_way} limit #{pageno},5; 		
+  	</select>
+  	
+  	<select id="selectTeamCount" parameterType="java.lang.Integer" resultType="int">
+  		select count(*) from tb_route where tb_way=#{tb_way};
+  	</select>
+  </mapper>

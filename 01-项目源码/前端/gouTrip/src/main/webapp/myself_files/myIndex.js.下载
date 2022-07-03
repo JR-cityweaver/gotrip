@@ -1,0 +1,552 @@
+/**
+ * Created by Administrator on 2016/11/13.
+ */
+//个人中心
+var index;
+$(function() {
+	//控制添加联系按钮出现时，上下间距
+	if($("#addbody1,#addbody2").hide()){
+		$(".passagerInfo .title .address1,.addressInfo .title .address2").css({"marginTop":"22px","marginBottom":"22px"});
+		$(".passagerInfo .title,.addressInfo .title").css({"padding":"0"});
+	}else{
+		$("#addbody1,#addbody2").parent("div.title").css({"padding":"0","marginTop":"22px"}).end().siblings("span").css({"marginTop":"24px"});
+	}
+	//左侧头像悬停时切换
+	$(".toggle2").hide();  
+	$(".used_img").hover(function(){
+		$(".toggle2").show().css({"marginRight":"2px"});
+	},function(){
+		
+		$(".toggle2").hide();
+	});
+	
+    //修改头像
+    $("#updateHeaderImg,.update_head_img").unbind('click').click(function(){
+   	 	$('.tabs').hide();
+   	 	$('.update_img').show();
+   	 	return false;
+    });
+    $('#cancelHeaderImg').on('click',function(){
+    	$('#thumbBox').removeClass('thumbBox');
+    	$('.imageBox').css({"background-image":"url('/images_new/index_new/myIndex/mohead_1.jpg')",
+    						"background-size":"400px 400px",
+    						"background-position":"-1px -1px",
+    						"background-repeat":"no-repeat"});
+    	$('.cropped img').attr('src','/images_new/index_new/myIndex/mohead_2.jpg');
+    });
+    $(".side_nav li").on('click', function () {    	
+    	
+    	$('.editData,.update_img').hide();
+    	$('.tabs').show();
+        var index = $(".side_nav li").index(this);       
+        $(".side_nav li").eq(index).addClass("a_cl").siblings("li").removeClass("a_cl");
+        $(this).parent("ul").parent("div").siblings("div").find("li").removeClass("a_cl");      
+        var div_show = $('.tabs>div').eq(index);
+        div_show.fadeIn(0).siblings("div").fadeOut(0);
+        
+        var url = $(this).attr('url');
+        //div_show.find('.state li:first').addClass("bor_btm").siblings().removeClass("bor_btm");//初始化全部订单标签
+        //div_show.find('div .list_show').show().siblings().hide();//显示全部标签下的列表内容
+        div_show.find('.list_show').eq(0).load(url,function(){
+        	if(index==7){//常用旅客
+            	var len = div_show.find('.list_show').eq(0).children("ol").length;
+            	if(len >= 1){
+            		$('.commonUsed').hide();
+            		$('.passager_tab,.addFriend').show();
+            	}else{
+            		$('.commonUsed').show();
+            		$('.passager_tab,.addFriend').hide();
+            	}
+            }
+        	if(index==8){//常用地址
+            	var len = div_show.find('.list_show').eq(0).children("ol").length;
+            	if(len >= 1){
+            		$('.commonUsed').hide();
+            		$('.address_tab,.addAddress2').show();
+            	}else{
+            		$('.commonUsed').show();
+            		$('.address_tab,.addAddress2').hide();
+            	}
+            }
+        });
+        
+        if(index==1){//线路订单
+        	$.get('/memberNew/getOrderNum.json',{type:2},function(data){
+        		$('#routeOrderNumberAll').html(data.orderNumberAll);
+        		$('#routeOrderNumberNoPay').html(data.orderNumberNoPay);
+        		$('#routeOrderNumberPay').html(data.orderNumberPay);
+        	});
+        }else if(index==2){//酒店订单
+        	$.get('/memberNew/getOrderNum.json',{type:1},function(data){
+        		$('#hotelOrderNumberAll').html(data.orderNumberAll);
+        		$('#hotelOrderNumberNoPay').html(data.orderNumberNoPay);
+        		$('#hotelOrderNumberPay').html(data.orderNumberPay);
+        	});
+        }else if(index==3){//优惠券数量
+        	$.get('/member/couponsNum.json',function(data){
+        		$('#noUse').html(data.noUse);
+        		$('#used').html(data.used);
+        		$('#pastTime').html(data.pastTime);
+        	});
+        }else if(index==6){//收藏夹数量
+        	$.get('/bookMarkNew/getBookMarkNum.json',function(data){
+        		$('#routeNum').html(data.routeNum);
+        		$('#hotelNum').html(data.hotelNum);
+        		$('#visaNum').html(data.visaNum);
+        		$('#wifiNum').html(data.wifiNum);
+        	});
+        }
+    });
+    //全部订单切换效果
+    $(".no_pay,.no_trip").hide();
+    $(".state li").on("click",function(){
+        var i=$(this).index();
+        $(this).find("a").addClass("tab_a").end().siblings("li").find("a").removeClass("tab_a");
+        $(this).addClass("bor_btm").siblings().removeClass("bor_btm");
+        var div_show = $(this).parent().next().find('.tab').eq(i);
+        div_show.show().siblings().hide();
+        //加载数据
+        var url = $(this).attr('url');
+        div_show.load(url);
+    });
+    //我的账户tab切换
+    $("#myAccountState li").on("click",function(){
+        var i=$(this).index();
+        $(this).find("a").addClass("tab_a").end().siblings("li").find("a").removeClass("tab_a");
+        $(this).addClass("bor_btm").siblings().removeClass("bor_btm");
+        $(".tab_"+i).show().siblings().hide();
+    });
+    $(".labelTabs li").on("click",function(){//收藏夹标签切换
+        var i=$(this).index();
+        $(this).addClass("a_cl").siblings().removeClass("a_cl");
+        $(this).children("span").children("span").addClass("span_cl").parent("span").parent("li").siblings().children("span").children("span").removeClass("span_cl");
+        var div_show = $(this).parent().next().children().eq(i);
+        div_show.show().siblings().hide();
+        //加载数据
+        var url = $(this).attr('url');
+        div_show.load(url);
+    });
+    
+    //修改登录密码
+    $('#updateLoginPwd').on('click',function(){
+    	$('#updatePwd').addClass("a_cl").siblings("li").removeClass("a_cl");
+    	$('.changePwd').show().siblings("div").hide();
+    });
+    
+    
+    //***********************************************************************
+    //添加旅客信息
+    $(".addPassagerInfo").hide();
+    //点击添加按钮form表单出现
+    $(".addbody").on("click",function(){
+        $(".commonUsed").hide();
+        $(".addPassagerInfo,.passager_tab").show();
+        
+        $('#friend_id').val('');
+    	$("#friend_name").val('');
+        $("#friend_phone").val('');
+        $("#friend_email").val('');
+        $("#friend_idCard").val('');
+        $('#type').val('');
+        //$("#friend_idCard").removeAttr("checked");
+        $("#friend_male").prop("checked", true);
+        $("#friend_adult").prop("checked", true);
+        var birthday = new Date().pattern('yyyy-MM-dd').split("-");
+    	var year = birthday[0];
+    	var month = birthday[1].replace(/^0+/,"");
+    	var day = parseInt(birthday[2]);
+    	$('#year').val(year);
+    	$('#month').val(month);
+    	$('#day').val(day);
+    });
+    
+    //点击确定按钮
+    $("#friend_save").click(function(){
+    	layer.closeAll();
+        //获取所有form输入信息
+    	var id = $('#friend_id').val();
+        var $name=$("#friend_name").val();
+        var $sex=$('.sex input[name="gender"]:checked').val();
+        var $person=$('.person input[name="person"]:checked').val();
+        var $year=$("#year option:selected").val();
+        var $mouth=$("#month option:selected").val();
+        var $day=$("#day option:selected").val();
+        var $tel=$("#friend_phone").val();
+        var $email=$("#friend_email").val();
+        var $idCard=$("#friend_idCard").val();
+        var $type=$("#type option:selected").val();
+        if(!$name){
+        	layer.tips("姓名不能为空", $("#friend_name"));
+        	return false;
+        }
+        if($name && !isNaN(parseInt($name,10))){
+        	layer.tips("姓名不能为数字", $("#friend_name"));
+        	return false;
+        }
+        if(!$tel){
+        	layer.tips("手机号码不能为空", $("#friend_phone"));
+        	return false;
+        }
+        var phone = /^1[3|4|5|8|7][0-9]\d{8}$/;
+	    if($tel){
+    		if(!phone.test($tel)){
+				layer.tips('手机号不合法', $("#friend_phone"));
+				return false;
+			}
+	    }
+	    if(!$idCard){
+        	layer.tips("证件号不能为空", $("#friend_idCard"));
+        	return false;
+        }
+        //信息拼接后加入表格中
+        var birthdayStr=null;
+        if($year && $mouth && $day){
+        	birthdayStr = $year+'-'+$mouth+'-'+$day;
+        	birthdayStr = new Date(birthdayStr).pattern('yyyy-MM-dd');
+        }
+        if(!id){
+        	id=0;
+        }
+        var parm = {id:id,name:$name,gender:$sex,phone:$tel,email:$email,birthday:birthdayStr,
+        			idCard:$idCard,certificateType:parseInt($type),crowdType:parseInt($person)};
+        $.get('/saveTraveller.do',parm,function(data){
+        	$('#friendList').load("/member/friendList.json");
+        });
+        $(".addPassagerInfo").hide();
+        $(".addFriend").show().end().addClass("title_1");
+    });
+    //点击取消按钮时 关闭form表单
+    $(".addPassagerInfo .cancel").on("click",function(){
+    	layer.closeAll();
+        $(".addPassagerInfo,.passager_tab,.title .addbody").hide();
+        $(".commonUsed").show();
+        
+        var len = $('#friendList').children("ol").length;
+    	if(len >= 1){
+    		$('.commonUsed').hide();
+    		$('.passager_tab,.addFriend').show();
+    	}else{
+    		$('.commonUsed').show();
+    		$('.passager_tab,.addFriend').hide();
+    	}
+    });
+    
+    //删除旅客信息
+    $(".deleteFriend").live("click", function(){
+        var id = $(this).attr('focusId');
+        $.get('/member/friendDelete.json',{ idsStr:id}, function (data) {
+        	$('#friendList').load("/member/friendList.json",function(){
+        		var len = $('#friendList').children("ol").length;
+            	if(len >= 1){
+            		$('.commonUsed').hide();
+            		$('.passager_tab,.addFriend').show();
+            	}else{
+            		$('.commonUsed').show();
+            		$('.passager_tab,.addFriend').hide();
+            	}
+        	});
+        });
+    });
+   //***********************************************************************
+    //2016-11-22添加常用地址信息
+    //$(".addAddressInfo").hide();
+    //点击添加按钮form表单出现
+    $(".usedAddress .addbody").on("click",function(){
+        $(".commonUsed").hide();
+        $(".addAddressInfo,.address_tab").show();
+        
+        $('#address_id').val('');
+        $("#address_phone").val('');
+        $("#address_tel").val('');
+        $("#province").val('');
+        $("#city").val('');
+        $("#address_detail").val('');
+        $("#address_postcodes").val('');
+    });
+    
+    //点击确定按钮
+    $("#address_save").click(function(){
+    	layer.closeAll();
+        //获取所有form输入信息
+    	var id = $('#address_id').val();
+    	var $phone=$("#address_phone").val();
+        var tel=$("#address_tel").val();
+        var prov=$("#province option:selected").text();
+        var city=$("#city option:selected").val();
+        var address_detail=$("#address_detail").val();
+        var postcodes=$("#address_postcodes").val();
+        if(!$phone){
+        	layer.tips("手机号码不能为空", $("#address_phone"));
+        	return false;
+        }
+        var phone = /^1[3|4|5|8|7][0-9]\d{8}$/;
+	    if($phone){
+    		if(!phone.test($phone)){
+				layer.tips('手机号不合法', $("#address_phone"));
+				return false;
+			}
+	    }
+	    if(!tel){
+        	layer.tips("联系电话不能为空", $("#address_tel"));
+        	return false;
+        }
+	    if(!prov || prov=='--省份--'){
+        	layer.tips("请选择有效信息", $("#province"));
+        	return false;
+        }
+	    if(!address_detail){
+        	layer.tips("详细地址不能为空", $("#address_detail"));
+        	return false;
+        }
+	    if(!postcodes){
+        	layer.tips("邮政编码不能为空", $("#address_postcodes"));
+        	return false;
+        }
+        //信息拼接后加入表格中
+        if(!id){
+        	id=0;
+        }
+        var parm = {id:id,phone:$phone,tel:tel,province:prov,city:city,address:address_detail,
+        		postcodes:postcodes};
+        $.get('/member/friendAddressSave.json',parm,function(data){
+        	$('#addressList').load("/member/friendAddressList.json");
+        });
+        $(".addAddressInfo").hide();
+        $(".addAddress2").show().end().addClass("title_1");
+    });
+    //点击取消按钮时 关闭form表单
+    $(".addAddressInfo .cacel").on("click",function(){
+    	layer.closeAll();
+        $(".addAddressInfo,.address_tab,.title .addbody").hide();
+        $(".commonUsed").show();
+        
+        var len = $('#addressList').children("ol").length;
+    	if(len >= 1){
+    		$('.commonUsed').hide();
+    		$('.address_tab,.addAddress2').show();
+    	}else{
+    		$('.commonUsed').show();
+    		$('.address_tab,.addAddress2').hide();
+    	}
+    });
+    
+    //修改常用地址信息
+    $(".updateAddress").live("click", function(){
+    	$(".commonUsed").hide();
+        $(".updateAddressInfo,.address_tab").show();
+        var id=$(this).attr('focusId');
+        $.get('/member/tofriendAddress.json',{id:id},function(data){
+        	var address = data.friendAddress;
+        	$('#address_id').val(id);
+        	$("#address_phone").val(address.phone);
+            $("#address_tel").val(address.tel);
+            $("#address_detail").val(address.address);
+            $('#address_postcodes').val(address.postcodes);
+            $("#province option").each(function(){ //遍历全部option
+                var province = $(this).text(); //获取option的内容
+                if(province == address.province){
+                	$("#province").val($(this).val());
+                	getRegion();//加载城市
+                	$("#city option").each(function(){ //遍历全部option
+                        var city = $(this).text(); //获取option的内容
+                        if(city == address.city){
+                        	$("#city").val($(this).val());
+                        	return false;
+                        }
+                    });
+                	return false;
+                }
+            });
+        });
+    }); 
+    
+    //删除常用地址信息
+    $(".deleteAddress").live("click", function(){
+        var id = $(this).attr('focusId');
+        $.get('/member/friendAddressDelete.json',{ idsStr:id}, function (data) {
+        	$('#addressList').load("/member/friendAddressList.json",function(){
+            	var len = $('#addressList').children("ol").length;
+            	if(len >= 1){
+            		$('.commonUsed').hide();
+            		$('.address_tab,.addAddress2').show();
+            	}else{
+            		$('.commonUsed').show();
+            		$('.address_tab,.addAddress2').hide();
+            	}
+        	});
+        });
+    }); 
+    
+});
+//修改旅客信息
+function updateFriend(e){
+	$(".commonUsed").hide();
+    $(".addPassagerInfo,.passager_tab").show();
+    var id=$(e).attr('focusId');
+    $.get('/member/tofriend.json',{id:id},function(data){
+    	var friend = data.friend;
+    	$('#friend_id').val(id);
+    	$("#friend_name").val(friend.name);
+        $("#friend_phone").val(friend.phone);
+        $("#friend_email").val(friend.email);
+        $("#friend_idCard").val(friend.idCard);
+        //$("#friend_idCard").removeAttr("checked");
+        if(friend.gender=='女'){
+        	$("#friend_famale").prop("checked", true);
+        }else{
+        	$("#friend_male").prop("checked", true);
+        }
+        if(friend.crowdType==2){
+        	$("#friend_child").prop("checked", true);
+        }else{
+        	$("#friend_adult").prop("checked", true);
+        }
+        if(friend.birthday){
+        	var birthday = new Date(friend.birthday).pattern('yyyy-MM-dd').split("-");
+        	var year = birthday[0];
+        	var month = birthday[1].replace(/^0+/,"");
+        	var day = parseInt(birthday[2]);
+        	$('#year').val(year);
+        	$('#month').val(month);
+        	$('#day').val(day);
+        }
+        $('#type').val(friend.certificateType);
+    });
+}
+
+
+//2016-12-05 lizhe创建
+$(function(){
+    $(".img_div").hover(function(){
+        $(".img_div+p").addClass("toggle").siblings();
+    },function(){
+        $(".img_div+p").addClass("toggle");
+    });
+    //安全中心首页
+    $('#safe_set').on('click',function(){
+    	$('#safe_set').addClass("a_cl").siblings("li").removeClass("a_cl");
+    	$('.safe').show().siblings("div").hide();
+    	$(".update_mail_inner .one_step,.bind_mail_inner .one_step").hide();
+    	
+    	$('.update_tel_inner,.update_mail_inner').find(".mailbox").hide();
+	    $(".safe,.safe_inner").show();
+    });
+    // 绑定手机号（临时解决绑定手机号）
+	$(".bind_phone").unbind('click').on("click",function(){
+		$('.editData,.update_img').hide();
+    	$('.tabs').show();
+		//如果是其他路径进来，操作标签切换效果
+		$('#safe_set').addClass("a_cl").siblings("li").removeClass("a_cl");
+		$("#my-mon").removeClass("a_cl");
+    	$('.safe').show().siblings("div").hide();
+    	$(".update_mail_inner .one_step,.bind_mail_inner .one_step").hide();
+    	
+	    $(".safe_inner").hide();
+	    $(".update_tel_inner .two_step").show();
+	    return false;
+	});
+    // 修改手机号
+	$(".update_tel,.tel_update").unbind('click').on("click",function(){
+		$('.editData,.update_img').hide();
+    	$('.tabs').show();
+		//如果是其他路径进来，操作标签切换效果
+		$('#safe_set').addClass("a_cl").siblings("li").removeClass("a_cl");
+		$("#my-mon").removeClass("a_cl");
+    	$('.safe').show().siblings("div").hide();
+    	$(".update_mail_inner .one_step,.bind_mail_inner .one_step").hide();
+    	
+	    $(".safe_inner").hide();
+	    $(".update_tel_inner .one_step").show();
+	    return false;
+	});
+    // 修改邮箱
+    $(".update_mail,.mail_update").on("click",function(){
+    	//如果是其他路径进来，操作标签切换效果
+		$('#safe_set').addClass("a_cl").siblings("li").removeClass("a_cl");
+    	$('.safe').show().siblings("div").hide();
+    	$(".update_tel_inner .one_step,.bind_mail_inner .one_step").hide();
+    	
+        $(".safe_inner").hide();
+        $(".update_mail_inner .one_step").show();
+    });
+    // 绑定邮箱
+    $(".bind_mail,.mail_bind").on("click",function(){
+    	//如果是其他路径进来，操作标签切换效果
+		$('#safe_set').addClass("a_cl").siblings("li").removeClass("a_cl");
+    	$('.safe').show().siblings("div").hide();
+    	$(".update_tel_inner .one_step,.update_mail_inner .one_step").hide();
+    	
+        $(".safe_inner").hide();
+        $(".bind_mail_inner .one_step").show();
+    });
+    //单击用户名修改
+    $(".name_update").on("click",function(){
+    	if($(".mobileNumber_update").html() && $('#userInfo_mails').html()){
+    		$(".bind_tip,.upPop").show();
+    	}else{
+    		$(".unbind_tip,.upPop").show();
+    	}
+    });
+//    $(".tel_update").on("click",function(){
+//        $(".unbind_tip,.upPop").show();
+//    });
+    $(".bind_close").on("click",function(){
+        $(this).parent().parent().parent().hide();
+        $(".upPop").hide();
+    });
+    //用户名--立即绑定
+    $("#bund_phone_mail").on("click",function(){
+    	$(this).parent().parent().hide();
+    	$(".upPop").hide();
+    	//如果是其他路径进来，操作标签切换效果
+		$('#safe_set').addClass("a_cl").siblings("li").removeClass("a_cl");
+    	$('.safe').show().siblings("div").hide();
+    	$(".update_tel_inner .one_step,.bind_mail_inner .one_step").hide();
+    });
+    //点击返回安全设置
+	$(".back_safe").on("click",function(){
+	    $(this).parents(".mailbox").hide();
+	    $(".safe,.safe_inner").show();
+	});
+    //点击下一步---到验证第二页
+//    $(".moph1_val_tj").on("click",function(){
+//        $(this).parent().parent().hide();
+//        $(this).parent().parent().siblings(".two_step").show();
+//    });
+//    //点击下一步---到验证第三页
+//    $(".moph2_val_tj").on("click",function(){
+//        $(this).parent().parent().hide();
+//        $(this).parent().parent().siblings(".three_step").show();
+//    });
+
+	//让蒙布的告诉和浏览器窗口一样高
+	$(".upPop").height($(window).height());
+	//点击蒙布出来
+	$(".m_v_d_click,.old_mail_click").on("click",function () {
+	    $(this).parent().parent().parent().siblings(".fixed").show();
+	    $(".upPop").css({"display":"block"});
+	});
+	//点击确定蒙布消失
+	$(".fixed_3_but input").on("click",function () {
+	    $(".upPop,.fixed").css({"display":"none"});
+	});
+	//电话号中间四位变成****
+	$(".moph1_val_dh input").on("change",function () {
+	    $(".m_v_d_dh").html($(".moph1_val_dh input").val());
+	    //让电话号的中间四位变成****需要后台数据
+	});
+	$(".m_v_yz input").on("focus",function () {
+	    $(".m_v_yz span").eq(1).css({"display":"none"});
+	});
+	$(".m_v_yz input").on("blur",function () {
+	    if ($(".m_v_yz input").val()==""){
+	        $(".m_v_yz span").eq(1).css({"display":"block"});
+	    }
+	});
+	$(".m_v_yz span").eq(1).on("click",function () {
+	    $(".m_v_yz span").eq(1).css({"display":"none"});
+	    $(".m_v_yz input").focus();
+	});
+
+});
+

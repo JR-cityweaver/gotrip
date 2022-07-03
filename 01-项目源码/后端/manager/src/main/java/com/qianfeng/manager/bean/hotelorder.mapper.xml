@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.qianfeng.manager.bean.TbHotelOrderMapper">
+	<resultMap type="com.qianfeng.manager.bean.HotelOrderBean" id="hotelOrderResultMap">
+		<id column="hotelorder_id" property="hotelorder_id"/>
+		<result column="hotelorder_number" property="hotelorder_number"/>
+		<result column="hotelorder_name" property="hotelorder_name"/>
+		<result column="hotelorder_price" property="hotelorder_price"/>
+		<result column="hotelorder_manname" property="hotelorder_manname"/>
+		<result column="hotelorder_phone" property="hotelorder_phone"/>
+		<result column="hotelorder_type" property="hotelorder_type"/>
+		<result column="hotelorder_contract" property="hotelorder_contract"/>
+		<result column="hotelorder_count" property="hotelorder_count"/>
+		<result column="hotelorder_intime" property="hotelorder_intime"/>
+		<result column="hotelorder_time" property="hotelorder_time"/>
+		<result column="hotelorder_outtime" property="hotelorder_outtime"/>
+		<result column="hotelorder_inhotel" property="hotelorder_inhotel"/>
+		<result column="hotelorder_remarks" property="hotelorder_remarks"/>
+		<result column="hotelorder_status" property="hotelorder_status"/>
+		<result column="tb_user_user_id" property="tb_user_user_id"/>
+	</resultMap>
+	
+	<delete id="deleteHotelOrder" parameterType="com.qianfeng.manager.bean.HotelOrderBean">
+		delete from tb_hotelorder where hotelorder_id=#{hotelorder_id}
+	</delete>
+	
+	<update id="updatehotel" parameterType="com.qianfeng.manager.bean.HotelOrderBean">
+		update tb_hotelorder set hotelorder_status=#{hotelorder_status} where hotelorder_id=#{hotelorder_id}
+	</update>
+	
+	<select id="getOrderByNum" parameterType="String" resultMap="hotelOrderResultMap">
+		select hotelorder_number,hotelorder_name,hotelorder_price,hotelorder_intime,hotelorder_outtime
+			from tb_hotelorder where hotelorder_number=#{hotelorder_number}
+	</select>
+	
+	<select id="getHotelOrder" parameterType="int" resultMap="hotelOrderResultMap">
+		select * from tb_hotelorder limit #{pageNo},3
+	</select>
+	
+	<select id="getHotelOrderType" parameterType="hashmap" resultMap="hotelOrderResultMap">
+		select * from tb_hotelorder where hotelorder_type=#{hotelorder_type} limit #{pageNo},3
+	</select>
+	
+	<select id="getHotelOrderTypeCount" parameterType="String" resultType="int">
+		select count(hotelorder_id) from tb_hotelorder where hotelorder_type=#{hotelorder_type}
+	</select>
+	
+	<select id="getHotelOrderCount" parameterType="int" resultType="int">
+		select count(hotelorder_id) from tb_hotelorder
+	</select>
+
+	<select id="getHotelPrice" resultType="String">
+		select sum(hotelorder_price) from tb_hotelorder where hotelorder_type='待出行'
+	</select>
+
+</mapper>

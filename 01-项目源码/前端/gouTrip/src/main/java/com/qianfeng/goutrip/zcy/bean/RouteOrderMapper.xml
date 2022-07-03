@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.qianfeng.goutrip.zcy.bean.RouteOrderMapper">
+  <resultMap type="com.qianfeng.goutrip.zcy.bean.RouteOrderDTO" id="routeOrderResult">
+  	<id column="order_id" property="order_id"/>
+  	<result column="order_num" property="order_num"/>
+  	<result column="tb_user_user_id" property="tb_user_user_id"/>
+  	<result column="order_title" property="order_title"/>
+  	<result column="order_room" property="order_room"/>
+  	<result column="order_type" property="order_type"/>
+  	<result column="order_begindate" property="order_begindate"/>
+  	<result column="order_enddate" property="order_enddate"/>
+  	<result column="order_time" property="order_time"/>
+  	<result column="order_adult" property="order_adult"/>
+  	<result column="order_child" property="order_child"/>
+  	<result column="order_begin" property="order_begin"/>
+  	<result column="order_end" property="order_end"/>
+
+  	<result column="detail_order_id" property="detail_order_id"/>
+  	
+
+  	<result column="order_status" property="order_status"/>
+
+  	<result column="order_totalprice" property="order_totalprice"/>
+  </resultMap>
+  
+  <insert id="insertOrder" parameterType="com.qianfeng.goutrip.zcy.bean.RouteOrderDTO" >
+  	INSERT INTO `theme_routeorder` (`order_id`,`order_num`,`order_totalprice`,`order_title`,`order_type`,`order_begindate`,`order_enddate`,`order_adult`,`order_child`,`order_room`,`order_begin`,`order_end`,`tb_user_user_id`,`detail_order_id`) VALUES (#{order_id},#{order_num},#{order_totalprice}, #{order_title}, #{order_type}, #{order_begindate},#{order_enddate}, #{order_adult}, #{order_child}, #{order_room}, #{order_begin}, #{order_end},  5,1);
+  </insert>
+  
+  <select id="selectOrder" parameterType="java.lang.String" resultMap="routeOrderResult">
+  	select * from theme_routeorder where order_num=#{order_num} and order_status=0
+  </select>
+  
+  
+  
+  <update id="updateOrder" parameterType="java.lang.String">
+  	update theme_routeorder set order_type='待出行' where order_num=#{order_num};
+  </update>
+  
+  <select id="selectAllOrder" parameterType="java.lang.Integer" resultMap="routeOrderResult">
+
+  	select * from theme_routeorder where order_status=0  order by order_id  desc limit #{pageno},4;
+
+  </select>
+  
+  <select id="selectOrderCount" resultType="java.lang.Integer">
+  	select count(*) from theme_routeorder where order_status=0;
+  </select>
+  
+  <select id="selectUnpay" parameterType="hashmap" resultMap="routeOrderResult">
+  	select * from theme_routeorder where order_type=#{order_type} and order_status=0 limit #{pageno},4;
+  </select>
+  
+  <select id="selectIspay" parameterType="hashmap" resultMap="routeOrderResult">
+  	select * from theme_routeorder where order_type=#{order_type}  and order_status=0 limit #{pageno},4;
+  </select>
+  
+  <select id="selectUnpayCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+  	select count(*) from theme_routeorder where order_type=#{order_type} and order_status=0;
+  </select>
+  
+
+   <select id="selectLimit" parameterType="java.lang.String" resultType="java.lang.Integer">
+  	select ifnull(sum(order_adult+order_child),0) from theme_routeorder where  order_begindate=#{order_begindate} and detail_order_id=1;
+  </select>
+
+  <update id="deleteUnPay" parameterType="java.lang.String">
+  	update theme_routeorder set order_status=1 where order_num=#{order_num}
+  </update>
+
+	<update id="deleteUnTrip" parameterType="java.lang.String">
+		update theme_routeorder set order_type='已退团' where order_num=#{order_num}
+	</update>
+  </mapper>

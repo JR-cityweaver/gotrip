@@ -1,0 +1,176 @@
+/********************** 
+function : oCookieRecord 
+author : wsg
+lastodify : 2015-11-17 
+    浏览记录
+***********************/  
+  
+//setCookie  
+function setCookie(name, value ,days, path, domain, secure) {  
+        var sCookie = name + "=" + encodeURIComponent(value);
+        if (days) {  
+                var _exp = new Date();  
+                _exp.setTime(_exp.getTime() + days * 24 * 60 * 60 * 1000);  
+                sCookie += "; expires=" + _exp.toGMTString();  
+        }  
+        if (path) {  
+                sCookie += "; path=" + path;  
+        } else {  
+                sCookie += "; path=/";  
+        }  
+        if (domain) {  
+                sCookie += "; domain=" + domain;
+        }  
+        if (secure) {  
+                sCookie += "; secure=";  
+        }  
+        document.cookie = sCookie;  
+}  
+  
+//getCookie  
+function getCookie(name) {  
+        var sRE = "(?:; )?" + name + "=([^;]*);?";  
+        var oRE = new RegExp(sRE);  
+        return (oRE.test(document.cookie)) ? decodeURIComponent(RegExp["$1"]) : null;  
+}  
+  
+//delCookie  
+function delCookie(name, path) {  
+        setCookie(name, "", -1, path);  
+}  
+  
+//CookieRecord  
+var oCookieRecord = new Object();  
+//setCookieRecord  
+oCookieRecord.set = function(oParam) {  
+        //配置参数  
+		// title内容后缀筛选  
+        var sTitleFilter = oParam.sTitleFilter,  
+        //浏览记录id
+        sRecordListId = oParam.sRecordListId,  
+        //浏览记录标签名    
+        sRecordListTagName = oParam.sRecordListTagName,  
+        //浏览记录限制条数
+        nRecordListLength = oParam.nRecordListLength,  
+        //cookie保留天数 
+        nExpires = oParam.nExpires,  
+        //限制cookie访问路径  
+        sCookiePath = oParam.sCookiePath,  
+        //限制cookie域 
+        sDomain = oParam.sDomain,  
+        //参数默认值设置   
+        bSecure = oParam.bSecure; //限制cookie是否为安全网站访问 
+        
+        var title = $('#title').val();
+        
+        var price = $('#goutripPrice').val();
+        
+        var imageurl = $('#focusImage').val();
+  
+        if (!sCookiePath) {  
+                sCookiePath = "/";  
+        }  
+  
+        //setCookie record  
+        var path = window.location.pathname.split("/");  
+        var pathN = path[path.length - 1].split(".")[0];  
+  
+        //筛选带逗号的同一篇文章  
+        if (pathN.indexOf(",") > -1) {  
+                pathN = pathN.slice(0, pathN.indexOf(","));  
+        }  
+        var articleTitle = document.title;  
+  
+        //title后缀筛选  
+        if (sTitleFilter && sTitleFilter != "") {  
+                var tIndex = articleTitle.indexOf(sTitleFilter);  
+                if (tIndex > -1) {  
+                        var tLen = sTitleFilter.length;  
+                        var aLen = articleTitle.length;  
+                        articleTitle = articleTitle.slice(0, tIndex) + articleTitle.slice(tIndex + tLen, aLen);  
+                }  
+        }  
+        var sValue = location.href + "^_^" + articleTitle + "^_^" + title + "^_^" + price + "^_^" + imageurl;
+        //除去线路列表页记录 2016-06-14
+        if(title && price && imageurl){
+        	setCookie(pathN, sValue, nExpires, sCookiePath, sDomain, bSecure);  
+        }
+  
+        //getRecordList  
+        var oCookieList = decodeURIComponent(document.cookie).split(";");  
+        var cookieList = [];  
+        var oFragment = document.createDocumentFragment();  
+  
+        //筛选其他地方创建的cookie  
+        for (var i = 0,  
+        len = oCookieList.length; i < len; i++) {  
+        		var index = oCookieList[i].indexOf("=");
+        		var newStr = oCookieList[i].substring(index+1);
+                if (newStr.indexOf("^_^") > -1) {  
+                        cookieList.unshift(oCookieList.slice(i, i + 1).toString());  
+                }  
+        }  
+  
+        //cookie数超出删除  
+        var len = cookieList.length;  
+        if (len > nRecordListLength) {  
+                for (var i = len - 1; i > nRecordListLength - 1; i--) {  
+                        delCookie(cookieList[i].split("=")[0], sCookiePath);  
+                        cookieList.pop();  
+                }  
+        }  
+        var html = '';
+        var htmlList = '';
+        // 浏览记录填充  
+        for (var i = 0; i < cookieList.length; i++) {  
+                //creat tag  
+                var aCookie = cookieList[i].substring(cookieList[i].indexOf("=")+1).split("^_^");  
+                var aLink = aCookie[0];  
+                var aTitle = aCookie[1];
+                var title2 = aCookie[2];  
+                var price2 = aCookie[3];
+                var imageurl2 = aCookie[4]; 
+                //线路详情页的浏览记录
+                html += '<dl class="rightHistorydl Rel"><a href="'+ aLink +'">'+
+		                '<dt class="f_left mr15"><img src="'+ imageurl2 +'" width="155" height="104"></dt>'+
+		                '<dd class="Rel f_left"><i class="leftDouhao Abs"></i><i class="rightDouhao Abs"></i>'+
+		                '<h2 class="black01 f12">'+ aTitle +'</h2><div class="black02 f12 mt5"><p>'+ title2 +'</p></div></dd>'+
+		                '<dd class="Abs"><p class="black01 mt5">够旅游价：<em class="org">￥'+ price2 +'</em></p></dd>'+
+		                '</a></dl>';
+                //线路列表页的浏览记录
+//                htmlList += '<li class="clearfix"><div class="newLeft">'+
+//			                '<a href="'+ aLink +'"><img src="' + imageurl2 + '" alt="' + aTitle + '"></a>'+
+//			                //'<span>深度探险</span></div>'+
+//			                '</div>'+
+//			                '<div class="newRight"><p>' + aTitle + '</p>'+
+//			                '<span>￥' + price2 + '元起</span></div></li>';
+                htmlList += '<div><a href="'+ aLink +'" target="_blank"><img src="' + imageurl2 + '" alt="' + aTitle + '"></a>'+
+                			'<div><p><a href="'+ aLink +'" target="_blank">' + aTitle + '</a></p><p><a href="'+ aLink +'" target="_blank">'+ title2 +'</a></p>'+
+                			'<p><strong>'+ price2 +'元</strong>&nbsp起/人</p></div></div>';
+        
+        }  
+        if(htmlList){
+        	$('#newOnline').html(htmlList);
+        }else{
+        	//$('#newOnline').html('<div><h3 align="center">暂无记录</h3></div>');
+        	$('.hsty').hide();
+        }
+        $('#recordList').html(html);
+};  
+  
+//delCookieRecord  
+oCookieRecord.del = function(sRecordListId) {  
+        if (document.cookie != "") {  
+                //清空cookie  
+                var cookieList = decodeURIComponent(document.cookie).split(";");  
+                for (var i = 0,  
+                len = cookieList.length; i < len; i++) {  
+                        if (cookieList[i].split("=")[1].indexOf("^_^") > -1) {  
+                                delCookie(cookieList[i].split("=")[0]);  
+                        }  
+                }  
+        }  
+  
+        //清空记录  
+        document.getElementById(sRecordListId).innerHTML = "";  
+};  

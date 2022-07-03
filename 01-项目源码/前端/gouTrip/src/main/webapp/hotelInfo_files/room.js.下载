@@ -1,0 +1,127 @@
+/**
+ * Created by Administrator on 14-11-20.
+ */
+var Room = {
+    getRoomList:function(){
+        var startDateStr = $("#startDay2").val();
+        var endDateStr = $("#endDay2").val();
+        var hotelId = $("#focusId").val();
+        if (0 < startDateStr.length  && /\d{4}-\d{2}-\d{2}/.test(startDateStr) &&
+            0 < endDateStr.length && /\d{4}-\d{2}-\d{2}/.test(endDateStr) && 0 < hotelId) {
+            $.get('/room/list.html',
+                {startDateStr:startDateStr,endDateStr:endDateStr,hotelId:hotelId},
+                function(o){
+                    var roomList = o.roomList;
+                    var html = '';
+                    var bedTypeArray = ['大床','双床','大/双床','三床','一单一双','单人床','上下铺','通铺','榻榻米','水床','圆床','拼床','3张大床','三/四床','复式'];
+                    var breakfastArray = ['','含早','不含早','单早','双早'];
+                    var intelnetArray = ['','无','有'];
+                    var payWayArray = ['','预付','现付','担保支付'];
+                    var outerNote;
+                    var imgUrl='';
+                    if(null != roomList && 0 < roomList.length) {
+                        for (var i in roomList) {
+                            if (roomList[i].outerNote != null && roomList[i].outerNote !== '') {
+                                outerNote = roomList[i].outerNote;
+                            } else {
+                                outerNote = '暂无说明';
+                            }
+                            if (roomList[i].url != null && roomList[i].url !== '') {
+                            	imgUrl = '<img src="' + roomList[i].url + '" alt="">';
+                            } 
+                            html += '<div class="tab-row"><p class="tab-col col-name">' +imgUrl +
+                            		'<span>' + roomList[i].name + '</span></p>' +
+                            		'<p class="tab-col col-bed">' + bedTypeArray[eval(roomList[i].bedType)] + '</p>' +
+                            		'<p class="tab-col col-meal">' + breakfastArray[eval(roomList[i].breakfast)] + '</p>' +
+                            		'<p class="tab-col col-WB">' + intelnetArray[eval(roomList[i].internet)] + '</p>' +
+                            		'<p class="tab-col col-explain">' + outerNote + '</p>' +
+                            		'<p class="tab-col col-parice">￥' + roomList[i].price +'</p>' +
+                            		'<p class="tab-col col-btn"><input type="button" class="hotel_book" data-roomid="' + roomList[i].id + '" value="预定"></p></div>' +
+                            		'<i class="line"></i>';
+                        }
+                    }
+                    $(".hotel_all").html(html);
+                $('.hotel_book').on('click', function () {
+                	var url = '/hotel/orders/orderfill.html';
+                	if($("#startDay2").val() && $("#endDay2").val()){
+                		url += '?hotelid=' + $('#focusId').val()
+                                + '&roomid=' + $(this).data('roomid')
+                                + '&inTime=' + $('#startDay2').val()
+                                + '&outTime=' + $('#endDay2').val();
+                		window.location.href = url;
+                	}else{
+                		alert('请选择入住日期和退房日期再预定');
+                        $(this).attr('href',$(this).attr('href'));
+                	}
+                });
+                },
+                'json')
+                ;
+        } else {
+            alert('请选择入住日期和退房日期再查询');
+            return;
+        }
+    }
+};
+
+$(document).ready(function(){
+    var tomorrow = new Date();
+    var after_tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    after_tomorrow.setDate(after_tomorrow.getDate() + 2);
+    $('#startDay,#startDay2').val(tomorrow.Format('yyyy-MM-dd'));
+    $('#endDay,#endDay2').val(after_tomorrow.Format('yyyy-MM-dd'));
+    var hotelId = $("#focusId").val();
+    if (hotelId > 0) {
+        $.get('/room/list.html',
+            {startDateStr:tomorrow.Format('yyyy-MM-dd'),endDateStr:after_tomorrow.Format('yyyy-MM-dd'),hotelId:hotelId},
+            function(o){
+                var roomList = o.roomList;
+                var html = '';
+                var bedTypeArray = ['大床','双床','大/双床','三床','一单一双','单人床','上下铺','通铺','榻榻米','水床','圆床','拼床','3张大床','三/四床','复式'];
+                var breakfastArray = ['','含早','不含早','单早','双早'];
+                var intelnetArray = ['','无','有'];
+                var payWayArray = ['','预付','现付','担保支付'];
+                var outerNote;
+                var imgUrl='';
+                if(null != roomList && 0 < roomList.length) {
+                    for (var i in roomList) {
+                        if (roomList[i].outerNote != null && roomList[i].outerNote !== '') {
+                            outerNote = roomList[i].outerNote;
+                        } else {
+                            outerNote = '暂无说明';
+                        }
+                        if (roomList[i].url != null && roomList[i].url !== '') {
+                        	imgUrl = '<p class="tab-col col-name"><img class="bgImage" src="" data-original="' + roomList[i].url + '" alt=""><span>' + roomList[i].name + '</span></p>';
+                        }else{
+                        	imgUrl = '<p class="tab-col col-name no-txt-center"><span>' + roomList[i].name + '</span></p>';
+                        } 
+                        html += '<div class="tab-row">' +imgUrl +
+		                		'<p class="tab-col col-bed">' + bedTypeArray[eval(roomList[i].bedType)] + '</p>' +
+		                		'<p class="tab-col col-meal">' + breakfastArray[eval(roomList[i].breakfast)] + '</p>' +
+		                		'<p class="tab-col col-WB">' + intelnetArray[eval(roomList[i].internet)] + '</p>' +
+		                		'<p class="tab-col col-explain">' + outerNote + '</p>' +
+		                		'<p class="tab-col col-parice">￥' + roomList[i].price +'</p>' +
+		                		'<p class="tab-col col-btn"><input type="button" class="hotel_book" data-roomid="' + roomList[i].id + '" value="预定"></p></div>' +
+		                		'<i class="line"></i>';
+                    }
+                }
+                $(".hotel_all").html(html);
+                $(".hotel_all img").lazyload({ effect: "fadeIn"});//图片懒加载
+                $('.hotel_book').on('click', function () {
+                	var url = '/hotel/orders/orderfill.html';
+                	if($("#startDay2").val() && $("#endDay2").val()){
+                		url += '?hotelid=' + $('#focusId').val()
+		                        + '&roomid=' + $(this).data('roomid')
+		                        + '&inTime=' + $('#startDay2').val()
+		                        + '&outTime=' + $('#endDay2').val();
+		        		window.location.href = url;
+                	}else{
+                		alert('请选择入住日期和退房日期再预定');
+                        $(this).attr('href',$(this).attr('href'));
+                	}
+                });
+            },
+        'json');
+    }
+});

@@ -1,0 +1,669 @@
+/*新的主体js*/
+
+/******************************************侧边栏**********************************************
+$(function(){
+	var h1=$(window).height();//获取Body的高度
+	$('.side').height(h1);	
+})
+***/
+
+/*******************************************搜索框效果**********************************************/
+
+	$(document).ready(function(){
+	    //focusblur
+	    jQuery.focusblur = function(focusid) {
+	        var focusblurid = $(focusid);
+	        var defval = focusblurid.val();
+	        focusblurid.focus(function(){
+	            var thisval = $(this).val();
+	            if(thisval==defval){
+	                $(this).val("");
+	            }
+	        });
+	        focusblurid.blur(function(){
+	            var thisval = $(this).val();
+	            if(thisval==""){
+	                $(this).val(defval);
+	            }
+	        });
+	        
+	    };
+	    /*下面是调用方法*/
+	    $.focusblur("#search");
+	});
+
+/********************************************主题热卖切换效果******************************************/
+$(function(){
+	$('.theme_in h2 span').click(function(e) {
+		var num=$(this).index();
+        //$(this).addClass('current2').siblings().removeClass('current2');
+		$('.theme_in').eq(num).fadeIn(500).siblings('.theme_in').fadeOut(500);
+    });
+		
+});
+
+/********************************************目的地、精品酒店切换效果*******************************************/
+$(function(){
+	$('.tab_termini ul li').click(function(e) {
+		var num=$(this).index();
+        $(this).addClass('current4').siblings().removeClass('current4');
+		$('.ter_div').eq(num).addClass('current3').siblings().removeClass('current3');
+    });
+	$('.tab_hotel ul li').click(function(e) {
+		var num=$(this).index();
+        $(this).addClass('current4').siblings().removeClass('current4');
+		$('.hotel_div').eq(num).addClass('current3').siblings().removeClass('current3');
+    });
+	
+	$('.ter_div div,.hotel_div div').mouseenter(function(e) {
+        $(this).find('div,p').stop().animate({"top":"0px"},300);
+    });
+	$('.ter_div div,.hotel_div div').mouseleave(function(e) {
+        $(this).find('div,p').stop().animate({"top":"170px"},300);
+    });
+		
+});
+
+	function indexHotel(){
+		$('.ter_div div,.hotel_div div').mouseenter(function(e) {
+	        $(this).find('div,p').stop().animate({"top":"0px"},300);
+	    });
+		$('.ter_div div,.hotel_div div').mouseleave(function(e) {
+	        $(this).find('div,p').stop().animate({"top":"170px"},300);
+	    });	
+}
+
+/*******************************************回到顶部**************************************************/
+$(function(){
+	$('.return_top').click(function(e) {
+        $('html,body').animate({scrollTop: '0px'}, 500);
+    });	
+});
+
+/******************************************右侧导航效果************************************************/
+
+$(function() {
+	$('.side li,.return_top').hover(function(e) {
+		$(this).find('div').toggle();
+		var img = $(this).find('img').first();
+		var temp = img.attr('src');
+		img.attr('src', img.data('src'));
+		img.data('src', temp);
+	});
+	
+});
+
+/********************************************快速搜索***********************************************/
+$(function(){
+	$('.fast_search,.div3').click(function(e) {
+		if($('.div3').css('display')=="none"){
+			$('.div3').show();
+			$('.fast_search').css({height:"50px",border:"1px solid #e0e0e0",borderBottom:"0 none"});
+			$('.fast_ser').css({height:"50px",background:"#fff"});
+			$('.fast_ser i').css({'border-style':'dashed solid solid solid','border-color':'transparent transparent #0093e7','top':'9px'});
+			$('#startDate').show();
+		}
+		else if($('.div3').css('display')=="block"){
+			$('.div3').hide();
+			$('.fast_search').css({height:"32px",border:"1px solid #0093e7"})
+			$('.fast_ser').css({height:"32px",background:"0 none"});
+			$('.fast_ser i').css({'border-style':'solid solid solid dashed','border-color':'#0093e7 transparent transparent','top':'15px'});
+			$('#startDate').hide();
+		}
+	});
+	$('.fast_search ul li').click(function(e) {
+		$(this).addClass('current6').siblings().removeClass('current6');
+        $('.ser_con').eq($(this).index()).show().siblings('.ser_con').hide();
+    });
+	$('.sel_more').click(function(e){
+    	$('.ser_theme_more,.ser_hotel_more').slideToggle();
+    });
+});
+
+/******************************************线路--选择条件******************************************************/
+$(function(){
+	//点击更多
+	$('.new_city_tab_more').click(function(e){	
+		$('.new_city_button').hide();
+		//alert($('.new_city_tab_more').text());
+		if($('.new_city_tab_more').text()=='更多'){
+			$('.new_city_tab_more').html('收起');
+			$('.new_city_tab_hide').show();
+			$('.new_city_tab_more').append('<i></i>');
+			$('.new_city_tab_more i').css({'border-style':'dashed solid solid solid','border-color':'transparent transparent #ccc','top':'-2px'});
+		}
+		else if($('.new_city_tab_more').text()=='收起'){
+			$('.new_city_tab_more').html('更多');
+			$('.new_city_tab_hide').hide();
+			$('.new_city_tab_more').append('<i></i>');
+			$('.new_city_tab_more i').css({'border-style':'solid solid solid dashed','border-color':'#ccc transparent transparent'});
+		}
+	});
+	//旅行主题---点击多选
+	$('.new_city_tab_selm').click(function(e){
+		if($('.new_city_tab_a i').css('display')=="none"){
+			$('.new_city_tab_a i').show();
+			$(this).parent().parent().css('background','#f5f5f5');
+			$('.new_city_tab_a i').addClass('.new_city_tab_a_i');
+			$('.new_city_button,.new_city_tab_hide').show();
+			$('.new_city_tab_more,.new_city_tab_selm').hide();
+		}else{
+			$('.new_city_tab_a i').hide();
+			//$('.new_city_tab_dl i').hide();
+			$('.new_city_tab_a i').removeClass('.new_city_tab_a_i');
+		}
+	});
+	
+	//主题游  点击每个条件选项
+	$('.new_city_tab_a').click(function(e){
+		if($(this).parent().hasClass('new_selected')){
+			$(this).children('i').css('border','1px solid #ccc');
+			$(this).parent().removeClass('new_selected');
+		}
+		else{
+			$(this).children('i').css('border','0');
+			$(this).parent().addClass('new_selected');
+		}
+	});
+	
+	//出行天数---点击多选
+	$('.new_city_tab_selm2').click(function(e){
+		if($('.new_city_tab_a2 i').css('display')=="none"){
+			$('.new_city_tab_a2 i,.div_day').show();
+			$('.new_city_tab_a2 i').addClass('.new_city_tab_a2_i');
+			$('.new_city_tab_dl2 em a').show();
+			$('.new_city_tab_selm2').hide();
+		}else{
+			$('.new_city_tab_a2 i').hide();
+			$('.new_city_tab_dl2 .new_city_submit,.new_city_tab_dl2 .new_city_cancel').hide();
+			$('.new_city_tab_a2 i').removeClass('.new_city_tab_a2_i');
+		}
+	});
+	//出行天数---点击每个条件选项
+	$('.new_city_tab_a2').click(function(e){
+		if($(this).parent().hasClass('new_selected')){
+			$(this).children('i').css('border','1px solid #ccc');
+			$(this).parent().removeClass('new_selected');
+		}
+		else{
+			$(this).children('i').css('border','0');
+			$(this).parent().addClass('new_selected');
+		}
+	});
+});
+
+
+
+/********************************首页对异步加载的数据进行缓存************************************/
+function Map() {     
+    /** 存放键的数组(遍历用到) */    
+    this.keys = new Array();     
+    /** 存放数据 */    
+    this.data = new Object();     
+         
+    /**   
+     * 放入一个键值对   
+     * @param {String} key   
+     * @param {Object} value   
+     */    
+    this.put = function(key, value) {     
+        if(this.data[key] == null){     
+            this.keys.push(key);     
+        }     
+        this.data[key] = value;     
+    };     
+         
+    /**   
+     * 获取某键对应的值   
+     * @param {String} key   
+     * @return {Object} value   
+     */    
+    this.get = function(key) {     
+        return this.data[key];     
+    };     
+         
+    /**   
+     * 删除一个键值对   
+     * @param {String} key   
+     */    
+    this.remove = function(key) {     
+        this.keys.remove(key);     
+        this.data[key] = null;     
+    };     
+         
+    /**   
+     * 遍历Map,执行处理函数   
+     *    
+     * @param {Function} 回调函数 function(key,value,index){..}   
+     */    
+    this.each = function(fn){     
+        if(typeof fn != 'function'){     
+            return;     
+        }     
+        var len = this.keys.length;     
+        for(var i=0;i<len;i++){     
+            var k = this.keys[i];     
+            fn(k,this.data[k],i);     
+        }     
+    };     
+         
+    /**   
+     * 获取键值数组(类似Java的entrySet())   
+     * @return 键值对象{key,value}的数组   
+     */    
+    this.entrys = function() {     
+        var len = this.keys.length;     
+        var entrys = new Array(len);     
+        for (var i = 0; i < len; i++) {     
+            entrys[i] = {     
+                key : this.keys[i],     
+                value : this.data[i]     
+            };     
+        }     
+        return entrys;     
+    };     
+         
+    /**   
+     * 判断Map是否为空   
+     */    
+    this.isEmpty = function() {     
+        return this.keys.length == 0;     
+    };     
+         
+    /**   
+     * 获取键值对数量   
+     */    
+    this.size = function(){     
+        return this.keys.length;     
+    };     
+         
+    /**   
+     * 重写toString    
+     */    
+    this.toString = function(){     
+        var s = "{";     
+        for(var i=0;i<this.keys.length;i++,s+=','){     
+            var k = this.keys[i];     
+            s += k+"="+this.data[k];     
+        }     
+        s+="}";     
+        return s;     
+    };     
+}
+
+//定义一个Map,存储已经异步加载过的线路
+var routeMap = new Map();
+//定义一个Map,存储已经异步加载过的酒店
+var hotelMap = new Map();
+
+/*
+ * 异步加载酒店
+ */
+function getIndexHotel(id,terminiId){
+	//先根据id查询map中是否有已存在的酒店信息
+	if(!hotelMap.isEmpty()){
+		var content = hotelMap.get("termini_"+id);
+		if(typeof content == 'undefined' || content == null){
+			//根据推荐的id获取所有对应的推荐酒店
+			getHotelById(id,terminiId);
+		}else{
+			$("#hotelContent").empty();
+			$("#indexHotel").attr("href","/hotel/list.html?cityId="+terminiId);
+			$("#hotelContent").append(content);
+			indexHotel();
+}
+	}else{
+		getHotelById(id,terminiId);
+	}
+	
+}
+//根据推荐的id获取所有对应的推荐酒店
+function getHotelById(id,terminiId){
+	var url = "/hotel/getTerminiHotel.json";
+	var params = {"id" : id};
+	$.post(url,params,function(data){
+		$("#hotelContent").empty();
+		var recommendHotelList = data.recommendHotelList;
+		$("#indexHotel").attr("href","/hotel/list.html?cityId="+terminiId); 
+		$(recommendHotelList).each(function(index){
+			var val = {
+				index : index,
+				id : this.id,
+				name : this.name,
+				recommend : this.recommend	
+			};
+			if(this.url){
+				val.image = this.url;
+			}else if(this.imageList && this.imageList[0]){
+				val.image = this.imageList[0].url;
+			}else{
+				val.image = '/images_new/no_img.png';
+			}
+			
+    		val.imageUrl = val.image;
+    		var html = $("#indexHotelTemplate").tmpl(val);
+    		$("#hotelContent").append(html);
+    		//图片延时加载
+    		$("img").lazyload({
+    			effect : "fadeIn"
+    		});
+			
+    		indexHotel();
+		});
+    		//将渲染过的线路页面内容存入map 
+			var str = $("#hotelContent").html();
+			hotelMap.put("termini_"+id,str);
+	},"json");
+}
+
+
+/***********************************************旅行超市 搜索框效果**********************************/
+
+$(function(){
+	$('.tmSearch_out').click(function(e) {
+		$('.tmSer_div').show();
+    });
+	$('.tmSer_select li').hover(function(e) {
+        $(this).addClass('current8').siblings().removeClass('current8');
+		$('.tmSer_div').eq($(this).index()).show().siblings('.tmSer_div').hide();
+    });
+	$('.tmSer_select li').eq(0).mouseover(function(e) {
+        $('.tmSer_select ul').css('background','url(/images_new/travelMarket/arrow_line1.jpg) no-repeat 0 bottom');
+    });
+	$('.tmSer_select li').eq(1).mouseover(function(e) {
+        $('.tmSer_select ul').css('background','url(/images_new/travelMarket/arrow_line2.jpg) no-repeat 0 bottom');
+    });	
+});
+
+/***********************************************旅行超市列表页 点击更多效果**********************************/
+$(function(){
+	$('.seltion_con .more2').click(function(e) {
+		if($('.seltion_open').css('display')=="none"){
+			$('.seltion_con .more2').css('background','url(/images_new/travelMarket/upText.png) no-repeat center center');
+			$('.seltion_open').slideDown();
+		}
+		else {
+			$('.seltion_con .more2').css('background','url(/images_new/travelMarket/moreText.png) no-repeat center center');
+			$('.seltion_open').slideUp();
+		}
+	});	
+	
+});
+
+/********************************************签证专题页 超值推荐切换效果*******************************************/
+//$(function(){
+//	$('.qzTui_tab ul li').click(function(e) {
+//		$(this).addClass('qz_cur').siblings().removeClass('qz_cur');
+//        $('.qzTui_div').eq($(this).index()).slideDown(500).siblings('.qzTui_div').hide(300);
+//    });	
+//});
+
+/********************************************签证订单页 保险费用 下拉效果*******************************************/
+$(function(){
+	//保障天数
+	$('.visa_day_sel_btn').click(function(e) {
+		$('.visa_day_sel ul').slideToggle();
+    });
+	//保障天数选择
+	$('#validityDate2 li').click(function(e) {
+		var val = $(this).html();
+		$('#validityDate').html(val);
+		if(val=='1-10天'){$('#insurancePrice').html('75');calculateBasicInfoPrice();}
+		else if(val=='11-15天'){$('#insurancePrice').html('100');calculateBasicInfoPrice();}
+		else if(val=='16-20天'){$('#insurancePrice').html('120');calculateBasicInfoPrice();}
+		else if(val=='21-30天'){$('#insurancePrice').html('165');calculateBasicInfoPrice();}
+		$('.visa_day_sel ul').slideToggle();
+    });
+});
+
+/********************************************签证支付页面 订单详情效果*******************************************/
+$(function(){
+	$('.order_open_btn').click(function(e) {
+		if($('.visa_order_detail').css('display')=='none'){
+			$('.visa_order_detail').slideDown();
+			$(this).css('background','url(/images_new/travelMarket/order_close.jpg) no-repeat 0 0');
+		}
+		else{
+			$('.visa_order_detail').slideUp();
+			$(this).css('background','url(/images_new/travelMarket/order_open.jpg) no-repeat 0 0');	
+		}
+    });	
+});
+
+/********************************************wifi订单详情 修改选货地址效果*******************************************/
+$(function(){
+	//wifi城市列表
+	$('.visa_num_sel_btn').click(function(e) {
+		$('.visa_num_sel ul').slideToggle();
+    });
+	$('#cityIds li').click(function(e) {
+		var val = $(this).html();
+		$('#selectCity2').html(val);
+		$('.visa_num_sel ul').slideToggle();
+		
+		var cityId = $(this).attr("dataid");
+		$.get('/goods/getWifiAddress.json',{cityId:cityId},function(data){
+			var addressList = data.addressList;
+			var html1 = '';
+			var html2 = '';
+        	for (var i in addressList) {
+        		if(addressList[i].type == 1 || addressList[i].type == 2){
+        			html1 +='<dd><input type="radio" name="getAddress" value="' +addressList[i].address+ '"/>'+
+     			   '<span>' +addressList[i].address+ '</span>'+
+     			   '</dd>';
+        		}
+        		if(addressList[i].type == 1 || addressList[i].type == 3){
+        			html2 +='<dd><input type="radio" name="returnAddress" value="' +addressList[i].address+ '"/>'+
+     			   '<span>' +addressList[i].address+ '</span>'+
+     			   '</dd>';
+        		}
+           }
+           $("#quhuo").html(html1);//取货地址
+           $("#huanhuo").html(html2);//还货地址
+		});
+    });
+	
+	
+	//点击“保存”按钮，显示编辑好的地址
+	$('.wifi_d_save').click(function(e){
+		$('.wifi_d_modify_div').hide();
+		$('.wifi_d_save_div').show();
+		
+		var getAddress = '';
+		var returnAddress = '';
+		var cks = document.getElementsByTagName("input"); //获取页面上所有的input标签
+        for(var i = 0; i < cks.length; i++)//便利所有标签
+        {
+            var ck = cks[i];//获取当前input元素
+            if (ck.type== "radio")//判断是否radio
+            {
+                if (ck.checked && ck.name=="getAddress")//注意：这里使用的checked属性判断该选框是否选中
+                {
+                	getAddress = ck.value;//如果选中，添加到结果中
+                }
+                if(ck.checked && ck.name=="returnAddress"){
+                	returnAddress = ck.value;//如果选中，添加到结果中
+                }
+            }
+        }
+		
+		$('#getAddress').html(getAddress);
+		$('#returnAddress').html(returnAddress);
+    });	
+	
+	//点击“编辑”，显示编辑页面
+	$('.wifi_d_mod_span').click(function(e) {
+		$('.wifi_d_modify_div').show();
+		$('.wifi_d_save_div').hide();
+    });
+})
+
+
+/******************************************主题游主页 banner点击效果 tag切换效果**********************************/
+$(function(){
+	$('.secarch_btn').click(function(e) {
+        $('.themeSel_div').toggle();
+    });	
+	
+	$('.hotRoute_tag a').click(function(e) {
+		$(this).addClass('hover').siblings('a').removeClass('hover');
+        $('.hotRoute_ul').eq($(this).index()).slideDown().siblings('.hotRoute_ul').hide();
+    });
+	
+	//热门路线，鼠标放上滑出效果
+	$('.hotRoute_ul a').mouseover(function(e) {
+		$(this).children('.themeImg_text').stop().animate({'top':'200px'},300);
+		$(this).children('.themeImg_text').css('background','url(/images_new/black_bg.png) repeat 0 0');
+		
+	});
+	$('.hotRoute_ul a').mouseout(function(e) {
+		$(this).children('.themeImg_text').stop().animate({'top':'213px'},300);
+		$(this).children('.themeImg_text').css('background','url(/images_new/black_box.png) repeat 0 0');
+    });
+})
+
+
+/******************************************主题游列表页 左侧导航点击效果**********************************/
+$(function(){
+	$('.themeNav_li02 a').click(function(e) {
+        $(this).addClass('link').siblings('a').removeClass('link').parent().siblings('.themeNav_li01').children('a').removeClass('link');
+    });	
+})
+
+/******************************************主题线路详情页 左侧 满意度、收藏效果**********************************/
+$(function(){
+	//满意度
+	$('.manyiIcon').click(function(e) {
+        $(this).toggleClass('manyiIconcur');
+    });
+	//收藏星星
+//	$('.collStar').click(function(e) {
+//        $(this).toggleClass('collStarcur');
+//    });
+	//微博
+	$('.weiboShare').click(function(e) {
+        $(this).toggleClass('weiboSharecur');
+    });
+	//微信
+	$('.weixinShare').click(function(e) {
+        $(this).toggleClass('weixinSharecur');
+    });
+	
+})
+
+
+/******************************************主题线路详情页 左侧 查看所有航班**********************************/
+$(function () {
+	$('.seeAllplane').click(function(e){
+		if($(this).children('em').html()=='查看'){
+			$('.allPlaneroute').removeClass('hide');
+			$(this).css('background','#fff2e7 url("/images_new/hotelDetail/newIcon3.png") no-repeat -110px -275px').children('em').html('收起');		
+		}
+		else{
+			$('.allPlaneroute').addClass('hide');
+			$(this).css('background','#fff2e7 url("/images_new/hotelDetail/newIcon3.png") no-repeat -110px -256px').children('em').html('查看');
+		}
+	})
+	
+});	  
+
+/******************************************主题线路详情页 左侧 评论 图片轮播**********************************/
+$(function () {
+	//点击小图，对应大图展示
+	$('.photoBox_com_ul li').click(function(e){
+		var imgSrc=$(this).children('img').attr('src');
+		$(this).addClass('comIngcur').siblings().removeClass('comIngcur');
+		$(this).parent('ul').siblings('.comBigimg').removeClass('hide').children('img').attr('src',imgSrc);
+	})
+	
+	//图片大于4时，左右箭头展示
+	var $liNum = $('.photoBox_com_ul li').length;
+	if($liNum > 4){
+		$('.prevCom,.nextCom').removeClass('hide');	
+	}
+		
+	
+	//点击左右箭头，图片滚动
+	var numIndex = 0;
+	
+	$('.nextCom').click(function(e){
+		var $ul=$(this).siblings('.photoBox_com_ul');
+		var $liNum = $ul.children('li').length;
+		
+		
+		numIndex++;
+		if(numIndex > $liNum-4){numIndex=0;}
+		$ul.stop().animate({left: -numIndex * 132},500);	
+	})
+	
+	$('.prevCom').click(function(e){
+		var $ul=$(this).siblings('.photoBox_com_ul');
+		var $liNum = $ul.children('li').length;
+		
+		
+		numIndex--;
+		if(numIndex < 0 ){numIndex=$liNum-4;}
+		$ul.stop().animate({left: -numIndex * 132},500);
+	})
+	
+});
+
+
+/******************************************主题线路详情页 左侧 游动的小鱼**********************************/
+$(function(){
+   	function fishAnimate (fishImg) {
+   			fishImg.show().animate({left:'685px'},3500,function(){
+   			$(this).hide().css('left','0');
+   			$(this).siblings('.fishImg2').show().animate({left:'0'},3500,function(){
+   				$(this).hide().css('left','685px');
+   				fishAnimate(fishImg);
+   			});	
+   		});
+   	}
+   	
+   	$('.fishImg1').each(function(index){
+   		fishAnimate($(this));
+   	});
+})
+
+/******************************************主题预定详情页 快捷登记 性别选择**********************************/
+$(function(){
+   	$('.sexRadio label').click(function(e) {
+        $(this).prev('span').addClass('radioCircle_cur').siblings('span').removeClass('radioCircle_cur');
+        $('#sex').val($('#quickRegist_man').val());
+    });
+	$('.sexRadio span').click(function(e) {
+        $(this).addClass('radioCircle_cur').siblings('span').removeClass('radioCircle_cur');
+        $('#sex').val($('#quickRegist_woman').val());
+    });
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

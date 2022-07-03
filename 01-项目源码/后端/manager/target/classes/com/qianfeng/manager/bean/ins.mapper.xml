@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.manager.bean.InsMapper">
+  <resultMap type="com.qianfeng.manager.bean.InsOrderBean" id="insOrderResultMap">
+  	<id column="ins_id" property="ins_id"></id>
+  	<result column="ins_name" property="ins_name"/>
+  	<result column="ins_whither" property="ins_whither"/>
+  	<result column="ins_days" property="ins_days"/>
+  	<result column="ins_phone" property="ins_phone"/>
+  	<result column="ins_remaks" property="ins_remaks"/>
+  	<result column="ins_status" property="ins_status"/>
+  	<result column="ins_user_id" property="ins_user_id"/>
+  </resultMap>
+  
+  <select id="getInsCount" resultType="int">
+  	select count(ins_id) from tb_inspiration
+  </select> 
+  
+  <select id="getIns" parameterType="int" resultMap="insOrderResultMap">
+  	select * from tb_inspiration limit #{pageNo},3
+  </select>
+  
+  <delete id="deleteIns" parameterType="com.qianfeng.manager.bean.InsOrderBean"> 
+  	delete from tb_inspiration where ins_id=#{ins_id}
+  </delete>
+  
+</mapper>

@@ -1,0 +1,373 @@
+*{font-family: "苹方","微软雅黑"}
+.w1080{width:1080px;margin:0 auto;}
+html{font-size:20px;}
+/*主题头部*/
+.main-top{
+    position: relative;    height: 42.5rem;    overflow: hidden;
+}
+.main-top .banner-s img{
+    width:100%;height:42.5rem;border: none;
+}
+.banner-s img{
+
+}
+.banner3,.banner2{
+	display: none!important;
+}
+.show{
+    display: block !important;
+}
+.hide{
+    display: none !important;
+}
+/*头部banner---上--信息*/
+.fl-bg{
+    width:100%;background-color: rgba(0,0,0,.5);
+}
+.main-top .fl-top{
+   height:6.5rem;position: absolute;  top: 0;
+}
+/*左边---两个标题*/
+.top-titles{
+    padding:.95rem 0;width:45%;
+}
+.rmb i{    font-style: normal;
+    font-size: 1.2rem;font-weight: 200;}
+.top-title{
+    font-size: 1rem;color:#fff;padding-bottom: .3rem;max-height: 1.9rem;
+    overflow: hidden;    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 645px;
+}
+.top-sub-title{
+font-size: .7rem;color:#fff;padding-left: 10px;float: left;max-height: 1.9rem;height: 1.9rem;
+}
+.topLogo{padding-right: 5px;padding-top: 1.3rem;width: 9%;}
+/*日历*/
+.time{display:none;}
+.time table{    margin: 0 auto;width: 615px;}
+.time td{    width: 88px;height: 78px;border:1px solid #eee;}
+.time td div:first-child{    text-align: right;  padding-top: 20px;font-size:12px;}
+.time th{height:40px;font-weight: 500;width: 87px;text-align: center;    color: #333;}
+.time th:first-child,.time th:last-child{color: #239ce8;   }
+.canlar span{    display: inline-block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;}
+.canlarLeft{    background: url(/images_new/index_new/routeDetail3/trror.png) no-repeat 0% 100%;
+    background-size: 100px 100px;left:2%;
+    cursor: pointer;}
+.canlarLeft:hover {
+    background: url(/images_new/index_new/routeDetail3/trror.png) no-repeat 31% -1%;
+    background-size: 100px 100px;
+    cursor: pointer;
+}    
+.canlarRight{    background: url(/images_new/index_new/routeDetail3/trror.png) no-repeat 105% 100%;
+    background-size: 100px 100px;right:2%;
+    cursor: pointer;}
+.canlarRight:hover {
+    background: url(/images_new/index_new/routeDetail3/trror.png) no-repeat 79% -1%;
+    background-size: 100px 100px;
+    cursor: pointer;
+}    
+.timeTitle .yearMouth{font-size:18px;color:#239ce8;display:inline-block;padding-left:90px;margin-top: 10px;}
+.timeTitleTxt{text-align:center;font-size:18px;color:#333;    padding-left: 160px;}
+.timeTitle span i{font-size:14px;font-style:normal;}
+.time td.timeNum div{ padding-top: 0px;}
+.timeNum div:first-child,.timeNum div:nth-child(2){text-align:left;color:#f4ab2e;font-size:14px;    padding-left: 7px;}
+.time input{    margin: 0 170px;  width: 30px;  text-align: center;    background-color: #eaeef2;}
+
+.time>p{width:100%;height:55px;background-color:#ededed;    line-height: 45px;}
+.cancarClose{padding-right:15px;color:#999;    cursor: pointer;}
+.cancarClose:hover{color:#239ce8;}
+/*日历结束*/
+/*右边---价格--按钮*/
+.pro-infor{
+    width:34%;padding: .65rem 0 0 0;
+}
+.price{
+    display: inline-block;    width: 64%;
+}
+.price p{
+    display: inline-block;
+}
+.rmb{
+    color:#f4ad2e;font-size: 2.1rem;
+}
+.old-price{
+    color: #fff;font-size:.7rem;display: block;
+}
+.old-price+span{
+    display: block;color:#f4ad2e;font-size: .7rem;
+}
+.lijiPay{cursor: pointer;
+    width: 6.5rem;  height: 2rem;  line-height: 2rem;  text-align: center;
+    background-color: #f4ad2e;  color: #fff;  font-size: .8rem;  border-radius: 1.5rem;
+    margin-top: .45rem;
+}
+.lijiPay:hover{
+	background:#ffc548  !important;;
+}
+.btn:hover{background:#ffc548 !important;}
+.coll-spe{
+    padding-right: 10px;    clear: both;padding-top: .4rem;
+    padding-left: .6rem;font-size: 0.6rem;
+}
+.coll-spe span{cursor: pointer;
+    display: inline-block !important;  width: 45px;  text-align: right;
+    color: #fff;  font-size: .6rem;  font-family: "宋体";    height: 1rem;
+    line-height: 1rem;
+}
+.coll-spe span:hover{
+    color: #f2af33;
+}
+.close{
+    padding: .75rem;font-size: .9rem;cursor: pointer;
+}
+.collect{
+       background: url(/images_new/index_new/routeDetail3/detail_27.png) no-repeat 0% 0%;
+    width: 50px !important;
+    margin-right: .75rem;
+}
+.collStarcur{
+       background: url(../image/star.png) no-repeat 0% 0%;
+    width: 57px !important;
+    margin-right: .75rem;
+}
+.shape{
+    background: url(../image/detail_30.png) no-repeat 0 50%;    line-height: 1rem;
+}
+.travelTime{font-size: .6rem;
+    color: #fff;   
+    margin-top: 1.3rem;    
+    padding-left: 6px;}
+.travelTime i{font-style: normal;text-align:center;display:inline-block;width:48px;height:20px;
+	border:1px solid #fff;border-radius:5px;line-height:20px;margin: 0 4px;}
+.moreTime{cursor: pointer;
+	background:url(/images_new/index_new/routeDetail3/moreIcon.png) no-repeat 100% 50%;padding-right: 10px;
+}
+.travelTimeTxt{    margin: 0 12px;}
+.time{    position: fixed;
+    top: -5.5rem;
+    left: 0;
+    background: #fff;
+    width: 715px;
+    height: 580px;
+    z-index: 12;
+    right: 0;
+    bottom: 0;
+    margin: auto;}
+.shape-inner{
+    width: 400px;
+    height: 400px;
+    background: #fff;
+    position: fixed;
+    z-index: 555;
+    left: 50%;
+    top: 50%;
+    margin-top: -200px;
+    margin-left: -200px;
+}
+/*右中部---特色*/
+.specail{
+     clear: both;
+    position: absolute;
+     left: 50%; margin-left:-540px;margin-top:-8.5rem;
+    height: 326px;
+     top:  16rem;
+}
+.specail .specail-inner{       letter-spacing: 2px;
+    /* overflow: hidden; */
+    border-bottom-right-radius: 55px;
+    border-top-left-radius: 55px;
+    width: 300px;
+    height: 340px;
+    padding: 36px 20px 35px 30px;
+    line-height: 19px;
+    background: url(../image/spe_06.png) no-repeat 100% 0 rgba(0,0,0,.5);
+}
+.tdSelected div{color:#ffa042}
+.tdSelected div:first-child{color:#000}
+.tdSelected:hover{background-color:#FFA042;}
+.tdSelected:hover div{color:#fff !important}
+.specail-spe{
+    position: absolute;font-size: 14px;color:#fff;
+    top: 8px;  right: 7px;
+}
+.specail-txt{
+    font-size: 12px;color:#fff;  
+    height: 279px;
+    overflow: hidden;
+}
+.specail-txt p{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 13;
+    overflow: hidden;
+    margin: 0 !important;padding: 3px 0;
+}
+.specail-txt p span{
+	font-family:"微软雅黑" !important;font-size: 12px !important;color:#fff !important;display:inline !important;
+}
+/*头部banner---下--信息*/
+.main-top .fl-btm{
+    height:50px;    position: absolute;  bottom: 0;
+}
+.warp{
+    position: relative;    height: 100%;
+}
+/*圆-----左右按钮*/
+.big-cricle{
+       width: 100px;
+    height: 50px;
+    border-radius: 0 0 50px 50px;
+    position: absolute;
+    bottom: 10px;
+    right: 54px;
+}
+.small-cricle{
+   margin: 3px auto;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    border: 2px solid #f4ad2e;
+    position: absolute;
+    bottom: 10px;
+    right: 8px;
+    background-color: rgba(0,0,0,.5);
+}
+.cricle {
+    width: 69px;
+    height: 46px;
+    border-radius: 40px 40px 1px 0px;
+    background-color: rgba(0, 0, 0, .5);
+    position: absolute;
+    bottom: 40px;
+    right: 11px;
+    line-height: 72px;
+    text-align: center;
+}
+.cricle button{
+       display: inline-block;
+    width: 23px;border:0;
+    height: 25px;outline:0;
+    cursor: pointer;
+    margin-left: 3px;
+    margin-top: 23px;
+}
+.left{
+    background: url(../image/lef-rig.png) no-repeat -5% 100%;
+}
+.right{
+       background: url(../image/lef-rig.png) no-repeat 110% 99%;
+}
+.left:hover{
+           background: url(../image/lef-rig.png) no-repeat 40% 2%;
+}
+.right:hover{
+          background: url(../image/lef-rig.png) no-repeat 82% 3%;
+}
+/*产品标签*/
+.fl-btm-tip{
+
+    line-height: 45px;
+}
+.fl-btm-tip a{display: inline-block;}
+.fl-btm-tip span{
+ width:70px;height:18px;margin-right: 7px;display: inline-block;
+    font-family: "宋体";color:#fff;font-size: 12px;    line-height: 18px;
+   overflow: hidden;
+    padding: 0 10px 0 5px;
+}
+.tip-01{
+    background: url(/images_new/index_new/routeDetail3/tip_01.png) no-repeat;
+}
+.tip-02{
+    background: url(/images_new/index_new/routeDetail3/tip_02.png) no-repeat;
+}
+.tip-03{
+    background: url(/images_new/index_new/routeDetail3/tip_03.png) no-repeat;
+}
+.tip-04{
+    background: url(/images_new/index_new/routeDetail3/tip_04.png) no-repeat;
+}
+.tip-05{
+    background: url(/images_new/index_new/routeDetail3/tip_05.png) no-repeat;
+}
+.tip-06{
+    background: url(/images_new/index_new/routeDetail3/tip_06.png) no-repeat;
+}
+.tip-07{
+    background: url(/images_new/index_new/routeDetail3/tip_07.png) no-repeat;
+}
+.tip-08{
+    background: url(/images_new/index_new/routeDetail3/tip_08.png) no-repeat;
+}
+.tip-09{
+    background: url(/images_new/index_new/routeDetail3/tip_09.png) no-repeat;
+}
+.tip-10{
+	background: url(/images_new/index_new/routeDetail3/tip-10.png) no-repeat;
+}
+.tip-11{
+	background: url(/images_new/index_new/routeDetail3/tip-11.png) no-repeat;
+}
+.tip-12{
+	background: url(/images_new/index_new/routeDetail3/tip-12.png) no-repeat;
+}
+/*页码---当前页*/
+.page-num{
+        position: absolute;color:#fff;
+    right: 150px;
+    bottom: 55px;
+}
+.page-num span{
+   display: inline-block; font-size:18px;
+}
+.move{
+    color:#f4ad2e;
+}
+.total{
+    color:#fff;
+}
+/*底部信息开始*/
+.main-btm{
+    background-color: #f8f8f8;width:100%;
+}
+.copy{
+    background: url(/images_new/index_new/routeDetail3/copy_03.png) no-repeat 20% 80%;
+    cursor: pointer;
+}
+.hidden{
+    visibility: hidden;
+}
+.visible{
+    visibility: visible;
+}
+#jiathis_weixin_tip a{
+	display:inline;
+}
+@media screen and (max-width: 1400px) {
+    html{font-size:16.9px;}
+}
+.theme-a{
+	color: #f2af33 !important;
+}
+
+.triangle-top {
+    background: url(/images_new/index_new/tap3_04.png) no-repeat !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+        
+  		<!-- shiro在spring中的核心配置 -->
+        <!-- id=shiroFilter，此id名称必须要和 -->
+        <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		    <property name="securityManager" ref="securityManager"/>
+		    <property name="loginUrl" value="/login.jsp"/>
+		    
+		    <property name="filterChainDefinitions">
+		        <value>
+		          /login.jsp=anon
+		          /index.jsp=authc
+		        </value>
+		    </property>
+		</bean>
+        
+        <bean id="myRealm" class="com.qianfeng.manager.realm.ManagerRealm"></bean>
+
+		<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		    <property name="realm" ref="myRealm"/>
+		</bean>
+		<!-- 简单理解，就是将realm交给spring进行管理 -->
+		<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+        
+</beans>

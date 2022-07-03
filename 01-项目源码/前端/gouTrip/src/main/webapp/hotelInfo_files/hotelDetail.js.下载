@@ -1,0 +1,138 @@
+/**
+ * Created by Administrator on 2016/12/27.
+ */
+//轮播图 开始
+$(function () {
+	
+    var n = 0;
+    var len = $(".bigPic>li").length; //图片数量
+   
+    //点击小图切换对应的大图
+    $(".smallPic>ol li").each(function () {
+    	//除去前5个  后面添加类名
+    	$(".smallPic>ol li").not($(".smallPic>ol li:lt(5)")).addClass("last");
+        $(this).bind("click", function () {
+            var i = $(this).index();
+            n = i;
+            if (n == len) {n = 0;}
+            $(".bigPic>li").eq(i).show().siblings().hide();
+        });
+    });
+    function next() {
+        n++;
+        if (n == len) {n = 0}
+        if (n == 5) {
+            $(".smallPic>ol").find("li:lt(5)").hide();
+            $(".last").show();
+            
+        }
+        if (n == 10) {
+            $(".smallPic>ol").find("li:lt(10)").hide();
+            $(".last").show();
+            
+        }
+        if (n == 0) {
+            $(".smallPic>ol").find("li:lt(5)").show();
+            $(".last").hide();
+        }
+        $(".bigPic li").eq(n).fadeIn(700).siblings().hide();
+        $(".smallPic>ol li").eq(n).addClass("now").siblings().removeClass("now");
+    }
+    function prev() {
+        n--;
+        if (n < 0) {n = len - 1}
+        if (n == 0) {
+            $(".smallPic>ol").find("li:lt(5)").hide();
+            $(".last").show();
+        }
+        if (n == len) {
+            $(".smallPic>ol").find("li:lt(5)").show();
+            $(".last").hide();
+        }
+        $(".bigPic>li").eq(n).fadeIn().siblings().hide();
+        $(".smallPic>ol li").eq(n).addClass("now").siblings().removeClass("now");
+    }
+    var set = setInterval(next, 3000);
+    $(".left").click(function () {
+        prev();
+    });
+    $(".right").click(function () {
+        next();
+    });
+    $(".smallPic>ol>li").click(function () {
+        $(this).addClass("now").siblings().removeClass("now");
+    });
+});
+
+//滚动监听
+//产品特色导航条切换
+$(".mid-nav li").click(function () {
+    var n = $(this).index();//获取点击的下标
+    var innerh = $('.all-inner>div').eq(n).offset().top;//每一详情内容偏移文档顶部的高度
+    $('html,body').animate({scrollTop: innerh - navbarH}, 500);
+});
+//页面滚动，产品介绍标题栏悬挂效果
+var navbar = $(".mid-nav").offset().top;//导航条偏移文档顶部的高度
+
+var sidebar=$(".summary").offset().top;
+var sidebarH=$(".summary").height();
+
+var navbarH = $(".mid-nav").height();//导航条的高度
+var productH=$(".product").height()+100;
+var scrollTop;
+//点击右侧详情按钮   左侧调到详情
+$(".detail").on("click",function(){
+	
+	$(window).scrollTop(navbar);
+})
+$(window).scroll(function () {
+    //$(".summary").addClass("side-fix-max");
+    scrollTop = $(document).scrollTop();//鼠标滚动的距离
+    //二级导航悬挂效果
+    if ((scrollTop > navbar)) {
+        $('.mid-nav').addClass("nav-fixed").removeClass("border");
+        $(".btn,.mid-nav input").show();
+    } else if (scrollTop < navbar) {
+        $('.mid-nav').removeClass("nav-fixed").addClass("border");
+        $(".btn,.mid-nav input").hide();
+    }
+    //侧边栏悬挂效果
+    if ((scrollTop > sidebar)) {
+        $('.summary').addClass("side-fix-max");
+        
+        if(sidebarH>676&&scrollTop>productH){
+        	$('.summary').addClass("side-fix-2");
+        	$('.summary').parents(".w1200").css({"position":"relative"})
+        	
+        }else if(scrollTop<productH){
+        	 $('.summary').removeClass("side-fix-2").addClass("side-fix-max");
+        }
+       
+    } else if (scrollTop < productH) {
+    	
+        $('.summary').removeClass("side-fix-max side-fix-2");
+        
+    }
+    //页面滚动，导航标题切换效果
+    $('.all-inner>div').each(function () {
+        var idx = $(this).index();
+        var innerH = $(".all-inner>div").eq(idx).offset().top;// 每一详情内容 偏移文档顶部的高度
+        if (scrollTop >= innerH-navbarH) {
+            $('.mid-nav li').eq(idx).addClass('font-c-2f7').siblings().removeClass('font-c-2f7');
+            //滚动到产品介绍
+            if($("#day_list").is(".font-c-2f7")){
+                $("#day_bill").removeClass();
+            }else {
+                $("#day_bill").addClass("none");
+            }
+        }
+    });
+    //input 框   输入后字体加深
+    $("input").change(function(){
+    	$(this).css({"color":"#333"})
+    })
+    // var s=$(".tab-col").html()
+    // $(".tab-col").html($.trim(s))
+    // console.log($(".tab-col").html($.trim(s)))
+
+});

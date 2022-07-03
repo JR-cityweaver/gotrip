@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.manager.bean.TbTailorMapper">
+
+	<resultMap type="com.qianfeng.manager.bean.TailorBean" id="tailorResultMapper">
+		<id column="tailor_id" property="tailor_id"/>
+		<result column="tailor_num" property="tailor_num"/>
+		<result column="tailor_start" property="tailor_start"/>
+		<result column="tailor_end" property="tailor_end"/>
+		<result column="tailor_days" property="tailor_days"/>
+		<result column="tailor_gotime" property="tailor_gotime"/>
+		<result column="tailor_type" property="tailor_type"/>
+		<result column="tailor_adult" property="tailor_adult"/>
+		<result column="tailor_child" property="tailor_child"/>
+		<result column="tailor_price" property="tailor_price"/>
+		<result column="tailor_name" property="tailor_name"/>
+		<result column="tailor_phone" property="tailor_phone"/>
+		<result column="tailor_mail" property="tailor_mail"/>
+		<result column="tailor_status" property="tailor_status"/>
+		<result column="tailor_remarks" property="tailor_remarks"/>
+	</resultMap>
+
+	<select id="getTailor" parameterType="Integer" resultMap="tailorResultMapper">
+		select * from tb_tailor where tailor_status=0 limit #{pageNo},3
+	</select>
+	<select id="getTailorCount" resultType="Integer">
+		select count(*) from tb_tailor where tailor_status=0
+	</select>
+	<select id="getTailorInfo" parameterType="Integer" resultMap="tailorResultMapper">
+		select * from tb_tailor where tailor_id=#{tailor_id} and tailor_status=0
+	</select>
+	<update id="deleteTailor" parameterType="Integer">
+		update tb_tailor set tailor_status=1 where tailor_id=#{tailor_id}
+	</update>
+</mapper>

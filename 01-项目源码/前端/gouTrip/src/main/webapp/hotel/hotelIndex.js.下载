@@ -1,0 +1,95 @@
+/**
+ * Created by Administrator on 2016/12/21.
+ */
+$(function(){
+	//设置图片，容器的宽高为当前电脑屏幕的尺寸
+	function accScreen(){
+        var $W=$(document.body).width();
+        var $bannerH=$W*0.33333;
+        $(".slider,.banner").css({"height":$bannerH,"width":$W})
+    }
+        accScreen()
+    $(window).resize(function(){
+        accScreen()
+    })
+    //banner轮播
+    $('.slider').bxSlider({
+    	 mode: 'fade', /*horizontal', 'vertical', 'fade' 定义滚动的方向，三个值可选*/
+         controls: false, /*是否显示“previous”和“next”按钮*/
+         auto: true, /*自动滚动*/
+         autoControls: false, /*自动滚动的控制键 start 和 stop */
+         pagerActiveClass: 'active',
+         autoDirection: 'next',
+         speed: 500
+    });
+    
+    //产品清单---悬停时产品内容切换
+    $(".pro-list li").hover(function(){
+       var i=$(this).index();
+        $(".pro-content li").eq(i).show().siblings("li").hide();
+    },function(){
+
+    });
+    //主题推荐效果
+    $(".hotel-toggle-list li:first").addClass("hotel-toggle-hover")
+    $(".theme-toggle-icon").on("click","li",function(){
+        //var e=$(this).index();
+        //$(".theme-toggle-img").eq(e).show().siblings(".theme-toggle-img").hide();
+        var idName=$(this).find("i").attr("id");
+        $(this).find("i").addClass(idName+"-hover").parent("li").siblings("li").find("i").removeClass();
+        
+        $.get('/hotel/themeHotel.json',{label:$(this).attr('label')},function(data){
+        	var themedList = data.themedList;
+        	var html = '';
+        	if(null != themedList && 0 < themedList.length) {
+        		for(var i=0;i<themedList.length;i++){
+        			html += '<li><img class="bgImage" src="'+themedList[i].url+'" alt="" onclick="window.location.href=\'/hotel/'+themedList[i].id+'.html\'">'+
+		                    '<span class="img-txt"><i class="toggle-img-title">'+themedList[i].name+'</i>'+
+		                    '<span class="toggle-img-parice"><i>￥'+themedList[i].goutripPrice+'</i>起</span>'+
+		                    '</span></li>';
+            	}
+        	}
+        	$(".theme-toggle-img").html(html);
+        });
+    });
+    $("input").change(function(){
+    	$(this).css({"color":"#333"});
+    });
+    //特色酒店效果
+    $(".hotel-toggle-list li").mouseover(function(){    	
+    	$(this).addClass("hotel-toggle-hover").siblings("li").removeClass("hotel-toggle-hover");
+        var x=$(this).index();
+        $(".hotel-toggle-inner li").eq(x).show().siblings("li").hide();
+        
+//        var cityName = $(this).attr('cityName');
+//        var content = '';
+//        if(cityName=='上海'){
+//        	content = '迪士尼2016年6月16日盛大开幕，游乐园的夜晚，帮助孩子们填满心中最美的梦。';
+//        }else if(cityName=='杭州'){
+//        	content = '爱上这儿的天青色，也许不必等烟雨，所有最美的相遇，都不及鲥鱼&花雕的1%。';
+//        }else if(cityName=='三亚'){
+//        	content = '挥别单人房，爱上双人床。与“失散”很久的人，一起用海鲜疗伤，一起荡气回肠。';
+//        }else if(cityName=='厦门'){
+//        	content = '与历史兜圈，和小吃缠绵，住在鼓浪屿，不再新鲜却有说不完的“黑鳳梨”。';
+//        }else if(cityName=='苏州'){
+//        	content = '逃出儿时的必修课，在小城故事与未来城市间任意穿梭，1.8公里的苏州湾，生态美的没话说。';
+//        }
+//        $.get('/hotel/featureHotel.json',{cityId:$(this).attr('cityId')},function(data){
+//        	var featureList = data.featureList;
+//        	var html = '';
+//        	html +='<div class="hotel-inner-title"><span class="address">'+cityName+'</span>';
+//        	html +='<span class="address-cover">'+content+'</span></div>';
+//        	if(null != featureList && 0 < featureList.length) {
+//        		for(var i=0;i<featureList.length;i++){
+//        			html += '<div class="hotel-inner-img">'+
+//                        	'<img src="'+featureList[i].url+'" alt="">'+
+//        					'<span class="img-txt">'+
+//                        	'<i class="toggle-img-title">'+featureList[i].name+'</i>'+
+//                        	'<span class="toggle-img-parice"><i>￥'+featureList[i].goutripPrice+'</i> 起</span>'+
+//        					'</span></div>';
+//            	}
+//        	}
+//        	$(".hotel-toggle-inner li").html(html);
+//        });
+    });
+});

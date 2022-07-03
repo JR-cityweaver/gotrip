@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.goutrip.fqy.bean.hotelOrderMapper">
+	<resultMap type="com.qianfeng.goutrip.fqy.bean.TbHotelOrder" id="hotelOrderResultMap">
+		<id column="hotelorder_id" property="hotelorder_id"/>
+		<result column="hotelorder_number" property="hotelorder_number"/>
+		<result column="hotelorder_name" property="hotelorder_name"/>
+		<result column="hotelorder_price" property="hotelorder_price"/>
+		<result column="hotelorder_manname" property="hotelorder_manname"/>
+		<result column="hotelorder_phone" property="hotelorder_phone"/>
+		<result column="hotelorder_type" property="hotelorder_type"/>
+		<result column="hotelorder_contract" property="hotelorder_contract"/>
+		<result column="hotelorder_count" property="hotelorder_count"/>
+		<result column="hotelorder_intime" property="hotelorder_intime"/>
+		<result column="hotelorder_time" property="hotelorder_time"/>
+		<result column="hotelorder_outtime" property="hotelorder_outtime"/>
+		<result column="hotelorder_inhotel" property="hotelorder_inhotel"/>
+		<result column="hotelorder_remarks" property="hotelorder_remarks"/>
+		<result column="hotelorder_status" property="hotelorder_status"/>
+		<result column="tb_user_user_id" property="tb_user_user_id"/>
+	</resultMap>
+	
+	<insert id="insertOrder" parameterType="com.qianfeng.goutrip.fqy.bean.TbHotelOrder">
+		insert into tb_hotelorder (hotelorder_number,hotelorder_name,hotelorder_price,hotelorder_manname,
+			hotelorder_phone,hotelorder_type,hotelorder_count,hotelorder_intime,hotelorder_time,
+				hotelorder_outtime,hotelorder_inhotel,hotelorder_remarks,tb_user_user_id) 
+		values(#{hotelorder_number},#{hotelorder_name},
+				#{hotelorder_price},#{hotelorder_manname},#{hotelorder_phone},#{hotelorder_type},
+					#{hotelorder_count},#{hotelorder_intime},#{hotelorder_time},#{hotelorder_outtime},
+						#{hotelorder_inhotel},#{hotelorder_remarks},#{tb_user_user_id});
+	</insert>
+	
+	<select id="getOrderByNum" parameterType="String" resultMap="hotelOrderResultMap">
+		select hotelorder_number,hotelorder_name,hotelorder_price,hotelorder_intime,hotelorder_outtime
+			from tb_hotelorder where hotelorder_number=#{hotelorder_number} and hotelorder_status=0
+	</select>
+	
+	<select id="getHotelOrder" parameterType="Integer" resultMap="hotelOrderResultMap">
+		select * from tb_hotelorder where hotelorder_status=0 order by hotelorder_id desc limit #{pageNo},4
+	</select>
+	
+	<select id="getOrderCount" resultType="Integer">
+		select count(*) from tb_hotelorder where hotelorder_status=0
+	</select>
+	
+	<select id="getOrderByType" parameterType="hashmap" resultMap="hotelOrderResultMap">
+		select * from tb_hotelorder where hotelorder_type=#{hotelorder_type} and hotelorder_status=0 
+			order by hotelorder_id desc limit #{pageNo},4 
+	</select>
+	<select id="getOrderTypeCount" parameterType="String" resultType="Integer">
+		select count(*) from tb_hotelorder where hotelorder_type=#{hotelorder_type} and hotelorder_status=0
+	</select>
+	
+	<update id="updateType" parameterType="String">
+		update tb_hotelorder set hotelorder_type='待出行' where hotelorder_number=#{hotelorder_number}
+	</update>
+	
+	<update id="deleteNoPay" parameterType="Integer">
+		update tb_hotelorder set hotelorder_status=1 where hotelorder_id=#{hotelorder_id}
+	</update>
+</mapper>

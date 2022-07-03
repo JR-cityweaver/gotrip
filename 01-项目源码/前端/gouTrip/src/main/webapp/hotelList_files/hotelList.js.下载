@@ -1,0 +1,236 @@
+/**
+ * Created by Administrator on 2016/12/23.
+ */
+$(function(){
+//
+        var n=0;
+        var e,x;
+    var $popUp=$(".popUp2");
+    //小图默认展示4个多余隐藏(加hide类名)
+    $(".carousel").each(function(){
+        $(this).focus(function(){
+            console.log(4444);
+            var n = 0;
+        });
+        $(this).blur(function(){
+            console.log(4444);
+            var n = 0;
+        });
+        $(this).on("click",function(){
+             e=$(".main-content .carousel").index(this);
+           
+        });
+       // $(this).find(".smallPic li:gt(3)").addClass("hide");
+    });
+
+    //点击小图切换对应的大图
+    $(".smallPic ol li").each(function () {
+        $(this).on("click", function () {
+            var i = $(this).index();
+            n = i;
+            // if (n == len) {n = 0;}
+            $(this).parents(".carousel").find(".bigPic>li").
+            eq(i).show().siblings().hide();
+        });
+    });
+    $(".left").click(function () {
+    	var d=$(".veiw-ol li:last").index();
+    	console.log(d);
+        var x=$(this).parents(".carousel").index(".carousel");
+        var len = $(this).parents(".carousel").find(".bigPic>li").length;
+        if(e==x){
+            n--;
+        }else {
+            n=0;
+            n--;
+        }
+        console.log(n);
+        if (n < 0) {n =  0}
+        var b=n/4;
+        if(b<1){
+        	
+        	$(this).parents(".carousel").find(".smallPic ol").css({"left":"0"});
+        }        
+        if(n==7){       	
+        	$(this).parents(".carousel").find(".smallPic ol").css({"left":"-468px"});  
+        }
+        if(n==11){       	
+        	$(this).parents(".carousel").find(".smallPic ol").css({"left":"-936px"});
+        }
+        if(n==15){        	
+        	$(this).parents(".carousel").find(".smallPic ol").css({"left":"-1404px"});
+        }
+        $(this).parents(".carousel").
+        find(".bigPic>li").eq(n).fadeIn().siblings().hide();
+        $(this).parents(".carousel").
+        find(".smallPic ol li").eq(n).addClass("now").siblings().removeClass("now");
+        $(".right").show();
+    });
+
+    $(".right").click(function () {
+    	var f=$(this).parents(".carousel").find(".veiw-ol li:last").index();
+    	console.log(f);
+    	
+    	if(n==(f-1)){$(this).hide()}
+    	
+        var x=$(this).parents(".carousel").index(".carousel");
+        var len = $(this).parents(".carousel").find(".bigPic>li").length;
+        //隔离每个xiaoguo
+        if(e==x){
+            n++;
+        }else {
+            n=0;
+            n++;
+            $(".carousel").eq(e).find(".smallPic li:first").addClass("now").siblings("li").removeClass("now");
+            $(".carousel").eq(e).find(".bigPic li:first").fadeIn(000).siblings("li").fadeOut(000);
+        }
+        //点击下标到4次时，前4个消失
+        var a=n/4;
+        if(a==1){
+        	$(this).parents(".carousel").find(".smallPic ol").css({"left":"-468px"});
+        	console.log(11111);
+        }
+        if(a==2){
+        	$(this).parents(".carousel").find(".smallPic ol").css({"left":"-936px"});
+        	console.log(22222);
+        }
+        if(a==3){
+        	$(this).parents(".carousel").find(".smallPic ol").css({"left":"-1404px"});
+        	console.log(33333);
+        }
+        $(this).parents(".carousel").
+       find(".bigPic li").eq(n).fadeIn(1000).siblings().hide();
+        $(this).parents(".carousel").
+        find(".smallPic ol li").eq(n).addClass("now").siblings().removeClass("now");
+        console.log(n);
+        $(".bigPic li").eq(n).find('img').lazyload({effect: "fadeIn"});//2016-12-14 懒加载轮播图片的不能出现的问题
+    });
+    $(".smallPic ol>li").click(function () {
+        $(this).addClass("now").siblings().removeClass("now");
+    });
+    //点击查看地图
+    $(".hotel-map").on("click",function(e){
+        $(this).parents(".summary").find(".map-detail").show();
+
+        // $popUp.removeClass("hide");
+        $(this).parents(".summary").find(".map-detail").on("click", function(event){
+            $(".bind-close").click(function(){
+                $(this).parents(".map-detail").hide();
+                // $popUp.addClass("hide");
+            });
+            $(document).click(function(){
+                $(".map-detail").hide();
+                // $popUp.addClass("hide");
+            });
+            event.stopPropagation();
+        });
+        e.stopPropagation();
+    });
+    
+    //删除空的 p 标签
+    $(".summ-txt").find("p,span").each(function(){
+    	//删除&nbsp;
+    	$(this).html($(this).html().replace(/&nbsp; &nbsp;/,""))
+    	
+    	
+    	var $len=$(this).text().length;
+    	var $txt=$(this).text();
+    	var re=(/[\u4e00-\u9fa5]/g)
+    	if($len<10){
+    		$(this).attr("style","");  	
+    	}else{
+    				
+    	}
+    	if(!re.test($txt)){
+    	
+    		$(this).css("lineHeight","0");
+    	}
+    	
+    });  
+  //删除br
+    $(".summ-txt").find("br").remove();
+    //判断是否有翻页功能 （如果没有删除最后一条虚线）
+    if(!$("div").hasClass("cont_botm_nav")){
+    	$(".content-inner:last").css({"borderBottom":"0"})
+    }
+  //input 框   输入后字体加深
+    $("input").change(function(){
+    	console.log(333);
+    	$(this).css({"color":"#666"})
+    })
+    //修改高德地图样式
+    $(".amap-info-tabs td").removeClass("selected")
+});
+
+//2016-12-28 筛选条件的拼接
+$(function(){
+	//主题类型
+	$('.type-list li').click(function(){
+	    $(this).addClass('font-bg-c').siblings().removeClass('font-bg-c');
+		linkParm();//拼接参数
+	});
+	
+	//2016-12-28 价格升序与降序
+    $('.parice-top').on('click',function(){
+    	$(this).addClass("parice-top-hover");
+    	$(".parice-btm").removeClass("parice-btm-hover");
+    	linkParm();//拼接参数
+    });
+    $('.parice-btm').on('click',function(){
+    	$(this).addClass("parice-btm-hover");
+    	$(".parice-top").removeClass("parice-top-hover");
+    	linkParm();//拼接参数
+    });
+    
+    $('.recommend').on('click',function(){
+    	$(this).toggleClass('font-c');
+    	linkParm();//拼接参数
+    });
+
+});
+
+//连接的url参数拼接
+function linkParm(){
+		var urlParm = getUrlParm();//拼接【搜索】url参数
+		var url = urlParm;
+		var size=1;
+	    //拼接主题类型参数
+		$(".type-list li").each(function(i,e){
+			if($(this).hasClass('font-bg-c')){
+				url = makeUrl(url,this,size);
+				size++;
+			}
+		});
+		//推荐
+		if($('.recommend').hasClass('font-c')){
+			url = url+"&tj=1";
+		}
+		//价格
+		if($('.parice-top').hasClass('parice-top-hover')){
+			url = url+"&sort=3";
+		}else if($('.parice-btm').hasClass('parice-btm-hover')){
+			url = url+"&sort=4";
+		}
+	 	location.href=url; 
+}
+
+//拼接【搜索】url参数
+function getUrlParm(){
+	var keyword = $("#keyword").val();
+	if('(选填)酒店名称/地标/商圈' == keyword) keyword = '';
+	var cityId = $("#city").attr("cityid");
+	if(typeof(cityId) == "undefined"){cityId ="";}
+	var url = '/hotel/hotelListNew.html?cityId=' + cityId + '&startDay=' + $("#startDay").val() + "&endDay=" + $("#endDay").val() + '&keyword=' + keyword;
+	return url;
+}
+
+function makeUrl(url,e,size){
+	if(size==0){
+		 url = url+"?";
+	}else{
+		 url = url+"&";
+	}
+	var name = 'label';
+	var value = $(e).attr('label');
+	return  url + name +"=" + value;
+}

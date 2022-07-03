@@ -1,0 +1,378 @@
+
+.main {
+   background:#f5f5f5;
+}
+.main span{display: inline}
+.page-route{
+    padding: 18px 0;
+}
+.page-route span{
+    font-size:12px;font-family: "Microsoft Yahei";color:#525866;
+}
+.font-c-f4b{
+    color:#f4b01c !important;
+}
+.container{
+    width:800px;background:#fff;    
+}
+.all-inner,.carousel{padding: 0 20px;}
+.summary{
+    width:370px; padding: 12px;  position: relative;background: #fff;
+
+}
+.hotel-level{
+       padding: 20px;
+}
+.hotel-level i{
+    font-style: normal;
+}
+.hotel-name{
+	font-size:20px;
+}
+/*轮播*/
+.carousel{
+    width:100%;position: relative;
+}
+.bigPic{
+    overflow:hidden;height:370px;
+}
+.bigPic>li{
+    float:left;border-radius:3px;background-color: #fff;
+}
+.bigPic img{
+    width:760px;height:370px
+}
+.smallPic{
+    width:100%;margin-top:15px;position:relative;    padding-bottom: 20px;
+}
+.smallPic input{
+    width:18px;height:86px;float:left;cursor: pointer;
+}
+.left{background:url("/images_new/index_new/hotel/arrow.png") no-repeat  79% 6%;}
+.left:hover{background:url("/images_new/index_new/hotel/arrow.png") no-repeat 122% 105%;}
+.right{background:url("/images_new/index_new/hotel/arrow.png") no-repeat  19% 8%;position:absolute;}
+.right:hover{background:url("/images_new/index_new/hotel/arrow.png") no-repeat -27% 108%;}
+
+.smallPic ol{
+    width:724px;float: left;    padding: 0px 1px;height:86px;overflow: hidden;
+}
+.smallPic li{
+    float:left;margin-left:8px;width:138px;overflow: hidden;
+}
+.smallPic li:first-child,.smallPic li:nth-child(6),.smallPic li:nth-child(11),.smallPic li:nth-child(16){margin-left:0;}
+.smallPic li img{
+    width:134px;height:82px;margin: 2px auto;
+}
+.hide{
+    display:none !important;
+}
+.now{background:  #f2af33;}
+.hotel-tip{
+    position: absolute;right: 0;top:0;
+}
+.hotel-tip span{
+    color:#fff;font-size: 12px;width: 39px;  display: inline-block;  height: 45px;  text-align: center;margin-right: 20px;line-height: 45px;
+}
+.active{
+    background: url(/images_new/index_new/hotel/tip.png) no-repeat;
+}
+/*右侧简介*/
+.sum-parice{
+    text-align: right;padding: 10px 0 12px;
+}
+.parice{
+    color:#f4b01c;font-size: 20px;font-style: normal;
+}
+.parice-detail span{
+    color:#333;font-size: 16px;
+}
+.detail{
+    display:inline-block;margin-left:10px;border-radius:3px;font-size: 16px;
+    color:#fff;background: #f4b01c;width:50px;height:25px;outline: none;border: none;
+}
+.detail1{
+    display:inline-block;margin-left:10px;border-radius:3px;font-size: 16px;
+    color:#fff;background: #f4b01c;width:100px;height:40px;outline: none;border: none;
+}
+.sum-address{
+    padding-bottom: 12px;
+}
+.summary span{
+	display: inline-block;
+}
+.main .hotel-address{
+    width:100px;display: inline-block;text-align: right;font-size: 16px;color:#333;
+    background: url(../image/hotel-addres.png) no-repeat 0 50%;
+}
+.sum-address i{
+    font-style: normal;font-size: 14px;color:#666;
+}
+.sum-device{
+    padding-bottom: 12px;
+}
+.hotel-device{
+    color:#333333;font-size: 16px;display: inline-block;width:75px;background: url(../image/hotel-device.png) no-repeat 0 50%;
+    text-align: right; }
+.sum-device i{
+    width: 20px;display: inline-block;height:20px;vertical-align: middle;
+}
+.device-wifi{
+    background: url(../image/hotel-wifi.png) no-repeat;
+}
+.device-coffee{
+    background: url(../image/hotel-coffee.png) no-repeat;
+}
+.device-pack{
+    background: url(../image/hotel-pack.png) no-repeat;
+}
+.device-pc{
+    background: url(../image/hotel-pc.png) no-repeat;
+}
+.device-tel{
+    background: url(../image/hotel-tel.png) no-repeat;
+}
+.sum-recommend{
+    padding-bottom: 12px;
+}
+.recommend-title{
+    font-size: 16px;color:#333;padding-bottom: 3px;background: url(../image/reco.png) no-repeat 0 50%;width: 140px;  text-align: right;
+}
+.recommend-inner{
+    font-size:14px;color:#666;line-height:25px ;line-height: 24px;
+}
+.sum-envir{
+    padding-bottom: 12px;
+}
+.envir-title{
+ display:block;font-size: 16px;color:#333;padding-bottom: 3px;background: url(../image/environment.png) no-repeat 0 50%;width: 90px;  text-align: right;
+}
+.sum-envir p{
+    font-size: 14px;color: #666;
+}
+.envir-inner i{
+    font-style: normal;
+}
+.sum-map{
+    width: 370px;height: 220px;
+}
+/*地图*/
+.hotel_map {
+    width: 352px;
+    height: 220px;
+    position: absolute;
+   
+}
+.product{
+    padding-bottom: 35px;
+}
+/*产品详情*/
+.nav-fixed{
+padding: 0 15px 0 0;position: fixed;  top: 0;  z-index: 10;background: #fff;width:800px;box-shadow: 1px 1px 10px #ccc;
+}
+/*滚动导航头*/
+.border{
+    border-bottom: 1px solid #ccc;    position: relative;padding: 0 20px;
+}
+.mid-nav li{
+    float: left;color:#333;font-size: 16px;width:91px;padding-bottom: 10px;padding-top:10px;text-align: center;cursor: pointer;
+}
+.mid-nav li.font-c-2f7{
+    color:#2f71b0;border-bottom: 2px solid #2f71b0;
+}
+.btn{
+    background: #f4b01c;color:#fff;width:40px;height: 26px;font: 14px "Microsoft Yahei";margin-top: 10px;
+    border-radius: 4px;
+}
+.mid-nav input[type=text]{
+    width:120px;height:23px;color: #999;    font: 14px "Microsoft Yahei"; padding-left: 5px;   margin-top: 11px;
+}
+.mid-nav ul{
+    padding-right: 15px;
+}
+/*房型预定*/
+.room-time{
+    color:#333;font-size: 14px;padding: 10px 0 18px;
+}
+.room-time input[type=text]{
+    width:232px;height:35px;border-radius: 3px;color:#666666;margin-left:10px;padding-left:7px;font-size: 14px;font-family: "Microsoft Yahei";
+}
+.room-time input[type=button]{
+  background: #f4b01c;  color:#fff;width: 100px;height: 38px;border-radius: 3px;
+}
+.time-remain{
+    margin-left: 20px;font-style: normal;margin-right: 10px;display: inline-block;
+}
+/*房型预定-----表格*/
+.room-table{
+    border: 1px solid #ccc;
+}
+.tab-title{
+    padding:10px 10px;background: #f2f2f2; color: #333;font-size: 14px;
+}
+.room-table span{display:inline-block}
+.tab-body{
+    margin-left: 10px
+}
+.tab-body i:last-of-type{
+   height:0;
+}
+.tab-col{
+    display: inline-block;text-align: center;    vertical-align: middle;
+}
+.tab-body .tab-col.col-name{
+    border:0;    height: 99px;
+}
+.col-name{
+    width:155px;
+}
+.no-txt-center{
+line-height:99px;
+}
+.col-name span{
+    display:block
+}
+.col-name img{
+ vertical-align: middle;
+ width:155px;height:80px;display: inline-block;
+}
+.col-bed,.col-meal,.col-WB{
+    width:80px;
+}
+span.col-bed,span.col-meal,span.col-WB {
+    width: 75px;
+}
+.col-explain{
+	width:187px;
+}
+.col-parice{
+    width:95px;
+}
+.tab-row{
+    font-size: 14px;color:#666;padding: 8px 0;
+}
+.col-btn input{
+width:62px;height:27px;border-radius:5px;font-size: 14px;color:#fff;background: #2f71b0;font-family: "Microsoft Yahei";
+}
+.line{
+    height: 1px;  background: #eee;  width: 80%;  display: block;  float: right;
+}
+/*酒店介绍*/
+.inner-title{
+    border-bottom: 1px solid #e5e5e5;padding-top: 35px;
+}
+.title-log{
+width:125px;display:inline-block !important;padding-bottom:5px;text-align:right;font-size: 22px;color:#333;  border-bottom: 3px solid #f5b639;
+}
+
+.inner-introduce .title-log{
+    background: url(/images_new/index_new/hotel/hotel.png) no-repeat 5% 40%;
+}
+.introduce{
+padding-top: 25px;
+}
+.intro-txt{
+    font-size: 14px;color:#666;line-height: 23px;    padding-bottom: 15px;
+}
+.intro-txt p span,.intro-txt p{  
+	font-size: 14px !important;color: #666 !important;
+	}
+.intro-img img{
+    width:355px;height: 200px;display: inline-block;    padding-left: 15px;
+}
+/*入住政策*/
+.inner-occupancy .title-log{
+    background: url(/images_new/index_new/hotel/occup.png) no-repeat 5% 50%;
+}
+.occupancy{
+    padding: 25px 0 0 0;
+}
+.occupancy li{
+  padding-bottom: 15px;
+}
+.occupancy li:last-child{
+    padding: 0;
+}
+.occu-key{
+    float:left;font-size: 16px;color:#333;display: inline-block;font-style: normal;width: 90px;text-align: right;
+}
+.occu-value{
+    font-size: 14px;display: inline-block;color: #666;padding-left: 17px;float: left;width: 580px;
+}
+/*酒店设施*/
+.inner-install .title-log{
+    background: url(/images_new/index_new/hotel/install.png) no-repeat 5% 50%;
+}
+.install{
+    padding-top: 10px;
+}
+.install-title{
+    font-size:16px ;color: #333;padding-top: 10px;
+}
+.install-txt{
+    font-size: 14px;color:#666;line-height: 24px;
+}
+/*交通信息*/
+.inner-traffic .title-log{
+    background: url(/images_new/index_new/hotel/car.png) no-repeat 5% 50%;
+}
+.traffic{
+    padding: 25px 0;
+}
+.traffic p{
+    font-size: 14px;color:#666;line-height: 25px;
+}
+/*日历样式修改*/
+.laydate_body .laydate_top{height:36px !important;}
+.laydate_body .laydate_ym{height:26px !important;}
+.laydate_body .laydate_bottom{height:32px !important;}
+.laydate_body .laydate_y{margin-right:8px !important;}
+.laydate_body .laydate_y .laydate_yms ul{    overflow: auto;}
+
+.side-fix-max{
+position:fixed;top: 0;margin-top: 0;left: 50%;margin-left: 230px; 
+}
+/*{position: absolute;;
+    bottom: 0;
+    left: 50%;
+    margin-left: 230px;}*/
+.side-fix-2    {margin-left: 230px;
+    
+    position: absolute;
+    left: 50%;
+    
+    z-index: 99;
+    display: block;
+    bottom: 0;
+     top: auto; }
+.btn:hover,.room-time input[type=button]:hover,button:hover{
+	background:#ffc548 !important;
+}
+/*预定交互效果*/
+.hotel_book:hover{
+    background: #0e497f !important;
+}
+.hotel-a {
+    color: #f2af33 !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

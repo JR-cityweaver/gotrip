@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.qianfeng.manager.bean.ContactinfoMapper">
+ <resultMap type="com.qianfeng.manager.bean.ContactinfoBean" id="contactResultMap">
+ 	<id column="contact_id" property="contact_id"/>
+ 	<result column="contact_name" property="contact_name"/>
+ 	<result column="contact_phone" property="contact_phone"/>
+ 	<result column="contact_order" property="contact_order"/>
+ 	<result column="contact_mail" property="contact_mail"/>
+ 	<result column="contact_explain" property="contact_explain"/>
+ </resultMap>
+ 
+  <select id="selectContact" parameterType="java.lang.String" resultMap="contactResultMap">
+  		select * from tb_contactinfo where contact_order=#{orderNum};
+  </select>
+  </mapper>

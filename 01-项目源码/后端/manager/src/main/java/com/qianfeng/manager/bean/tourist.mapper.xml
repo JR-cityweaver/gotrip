@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.qianfeng.manager.bean.TouristMapper" >
+   <resultMap type="com.qianfeng.manager.bean.TouristBean" id="touristManResult">
+  	<id column="tourist_id" property="tourist_id"/>
+  	<result column="tourist_type" property="tourist_type"/>
+  	<result column="tourist_name" property="tourist_name"/>
+  	<result column="tourist_sex" property="tourist_sex"/>
+  	<result column="tourist_tele" property="tourist_tele"/>
+  	<result column="tourist_country" property="tourist_country"/>
+  	<result column="tourist_card" property="tourist_card"/>
+  	<result column="tourist_cardnum" property="tourist_cardnum"/>
+  	<result column="theme_routeorder_order_id" property="theme_routeorder_order_id"/>
+  </resultMap>
+  
+  <select id="selectTourist" parameterType="java.lang.String" resultMap="touristManResult">
+  	select * from tb_touristman where theme_routeorder_order_id=#{orderNum}
+  </select>
+  </mapper>

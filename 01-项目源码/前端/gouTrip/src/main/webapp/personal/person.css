@@ -1,0 +1,343 @@
+/**2016-11-08 私人订制**/
+.main{
+    width:100%;
+    background-image:url(../personal/web_bg.jpg);
+    background-repeat: no-repeat;background-size: cover;
+}
+.main_sub{
+    width:1004px;padding-top: 26px;margin: 0 auto;
+}
+.main_head{
+    text-align: center;
+}
+.main_head h2{
+    font-size: 36px;color:#fff;padding-bottom: 20px;
+}
+.main_head h4{
+    font-size: 16px;color:#fff;
+}
+.hed_nav{
+width:100%;text-align: center;margin: 0 auto;padding-top: 20px;
+}
+.hed_nav ul li{
+width:90px;height:90px;border-radius: 50%;border:2px solid #fff;display:inline-block;margin-right: 200px;padding-top: 7px;
+}
+.hed_nav ul li:last-child{
+    margin: 0;
+}
+.hed_nav ul li p:first-of-type{
+color:#fff;font-size: 30px;
+}
+.hed_nav ul li p:last-of-type{
+color:#fff;font-size: 18px;
+}
+.hed_nav div{
+    margin: 0 auto;text-align: center;width:1004px;
+}
+.hed_nav div p{
+color:#fff;font-size: 16px;display: inline-block;width:112px;    text-align: right;font-family: "宋体";
+}
+.hed_nav div p:nth-child(2){
+    margin: 10px 180px 42px 185px;
+}
+.main_tab{
+  width:702px;float: left;    height: 565px;overflow: hidden;
+}
+.main_tab ul{
+    width:702px;height:48px;
+}
+.main_tab ul.tab_1{
+    background: url(../personal/nav_01.png) no-repeat;background-size: 704px 48px;
+}
+.main_tab ul.tab_2{
+    background: url(../personal/nav_02.png) no-repeat;background-size: 702px 48px;
+}
+.main_tab ul.tab_3{
+    background: url(../personal/nav_03.png) no-repeat;background-size: 702px 48px;
+}
+.main_tab ul li.font-c{
+    color:#00a0e9;
+}
+.main_tab ul li{
+    float: left;color:#fff;font-size: 18px;line-height: 46px;    width: 230px;  text-align: center;
+}
+.main_tab ul li.basic{
+    padding-left: 40px;
+}
+.main_tab ul li.number{
+    padding-left: 45px
+}
+.main_tab ul li.perpson{
+    padding-left: 50px;
+}
+/*基本出游信息*/
+.tab_inner_3,.tab_inner_2{
+    display: none;
+}
+.tab_inner_1,.tab_inner_2,.tab_inner_3{
+    background: #fff;text-align: left;margin-left: 1px;width: 701px;padding-top:35px;
+}
+.tab_title{
+    font-size: 16px;color:#333333;margin:0 0 30px 70px;padding-left:10px;border-left: 1px solid #f5b634;
+}
+.tab_inner_1 ol{
+    padding: 37px 0 50px 0;margin-left:70px;border: 1px dashed #d4d4d4;border-right: 0;border-left: 0;width: 83%;
+}
+.tab_inner_1 ol li{
+    padding-bottom: 15px;
+}
+.tab_inner_1 ol li span{
+    display:inline-block;font-size: 14px;color:#333;
+}
+.tab_inner_1 ol li div{
+display: inline-block;padding-left: 5px;
+}
+.tab_inner_1 ol li div input{
+    width:200px;height:30px;border: 1px solid #d4d4d4;font-size: 14px;color:#333;
+}
+.tab_inner_1 ol li div a{
+    color:#00a0e9;font-size:12px;display: inline;padding-right: 7px;
+}
+.tab_inner_1 ol li.time span.minus,.tab_inner_1 ol li.time span.add{
+display: inline-block;width:20px;height:20px;vertical-align: middle;cursor: pointer;
+}
+.tab_inner_1 ol li.time span.minus{
+    background: url(../personal/minus.jpg) no-repeat;
+}
+.tab_inner_1 ol li.time span.add{
+    background: url(../personal/add.jpg) no-repeat;
+}
+.tab_inner_1 ol li.time input{
+    width:80px;text-align: center;
+}
+.tab_inner_1 ol li.date{
+    position: relative;
+}
+.tab_inner_1 ol li.date span{
+    vertical-align: top;padding-top: 6px;
+}
+.tab_inner_1 ol li.date p span{
+    color: #666;font-size: 12px;
+}
+.tab_inner_1 ol li.address div span{
+    padding-left: 5px;
+}
+.tab_inner_1 .tab_next{
+;margin-top: 35px;padding-bottom:75px;margin-left: 155px;
+}
+.tab_inner_1 .tab_next span{width:140px;height:30px;text-align:center;line-height:30px;display: inline-block;
+color:#00a0e9;font-size: 14px;border: 1px solid #00a0e9;border-radius: 5px;cursor: pointer;
+}
+/*日历修改*/
+#laydate_YY{
+    width: 123px;
+    height: 26px;
+    margin-bottom: 5px;
+}
+#laydate_MM{
+    height:26px;
+}
+#laydate_box .laydate_bottom{
+    height:30px;
+}
+#laydate_box {
+    margin-left: 210px;width: 260px;border: 1px solid #ccc;
+    padding: 10px;
+    margin-top: -29px;
+    /*left: 780px !important;*/
+    /*top: 616px !important;*/
+}
+.laydate_body .laydate_top{border:0 !important;}
+.laydate_body .laydate_bottom{border: 0 !important;}
+/*侧边内容*/
+.main_sub .main_side{
+    float: right;width: 279px;    height: 565px;overflow: hidden;
+}
+.main_sub .main_side .side_nav{
+ height:48px;background: url(../personal/side.png);background-size: 279px 48px;color:#fff;font-size: 18px;  line-height: 50px;text-align: center;
+}
+.main_sub .main_side .side_list{
+    background: rgba(13,26,43,0.7);
+}
+.main_sub .main_side .side_list{
+    padding-top: 35px;padding-left: 25px;padding-right: 25px;
+}
+.main_sub .main_side .side_list ul{
+    padding-bottom: 10px;border-bottom: 1px dashed #252e3b;
+}
+.main_sub .main_side .side_list ol{
+    padding-top:20px;
+}
+.main_sub .main_side .side_list li{
+    font-size: 14px;color:#b5daff;padding-bottom: 14px;
+}
+.main_sub .main_side .side_list li span{
+    display: inline-block;
+}
+.main_sub .main_side .side_list li div{
+    color:#fff;font-size: 14px;display: inline-block;
+}
+.main_sub .main_side .side_list li textarea{
+    background:rgba(13,26,43,0.0);border: none ;resize: none;color: #fff;
+}
+.main_btm{
+    padding-top: 15px ;border-top:1px solid #d3d3d3 ;width:1150px;text-align: center;margin: 71px auto 0;
+}
+.main_btm p{
+    font-size: 12px;color:#fff;text-align: center;padding-bottom: 5px;
+}
+.side_list li div{
+    width:154px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;height: 16px;
+}
+.side_list li.copy_remark div{
+    width:246px;height:67px;margin: 5px 0;
+}
+/*2出游人数及预算*/
+.tab_inner_2 ol{
+    padding: 30px 0 27px 0;margin-left:70px;border: 1px dashed #d4d4d4;border-right: 0;border-left: 0;width: 83%;
+}
+.tab_inner_2 ol li{
+    padding-bottom: 15px;
+}
+.tab_inner_2 ol li i{
+    display:inline-block;font-size: 14px;color:#333;font-style: normal;    vertical-align: top; margin-top: 5px;
+}
+.tab_inner_2 ol li div{
+    display: inline-block;padding-left: 15px;width: 455px;
+}
+.tab_inner_2 ol li div.theme span{cursor: pointer;
+display:inline-block;font-size: 14px;padding: 4px 19px;border: 1px solid #ccc;margin-right:10px;margin-bottom: 10px;color:#00a0e9;
+}
+.tab_inner_2 ol li div.theme span.col_1{
+}
+.tab_inner_2 ol li div.theme span.col_2,.tab_inner_2 ol li div.budget span.col_3{
+    color:#fff;background: #00a0e9;
+}
+.tab_inner_2 ol li div.budget span{cursor: pointer;
+    display:inline-block;color:#00a0e9;font-size: 14px;text-align:center;margin-right:25px;line-height:27px;width:98px;height:27px;border: 1px solid #ccc;margin-bottom: 10px;
+}
+
+.tab_inner_2 ol li div.trip{
+    width:500px;
+}
+
+.tab_inner_2 ol li div.trip p{
+    display: inline-block;
+}
+.tab_inner_2 ol li div.trip p span{
+color:#333;font-size: 14px;display: inline-block;    vertical-align: middle;
+}
+.tab_inner_2 ol li div.trip i.minus {
+    background: url(../personal/minus.jpg) no-repeat;
+}
+.tab_inner_2 ol li div.trip i.tip{
+    font-size: 12px;color:#666;font-style: normal;
+}
+.tab_inner_2 ol li div.trip i.minus, .tab_inner_2 ol li div.trip i.add {
+    display: inline-block;  width: 20px;  height: 20px;vertical-align: middle;margin: 0;cursor: pointer;
+}
+.tab_inner_2 *::selection{background:transparent;}
+.tab_inner_2 *::-moz-selection{background:transparent;}
+.tab_inner_2 *::-webkit-selection{background:transparent;}
+.tab_inner_2 ol li div.trip i.add {
+    background: url(../personal/add.jpg) no-repeat;
+}
+.tab_inner_2 ol li div.trip input{
+    width:60px;text-align: center;height:30px;border: 1px solid #d4d4d4;font-size: 14px;color:#333;
+}
+.tab_inner_2 .tab_btn .btn_prev{
+    float: left;    margin-top: 40px;  padding-bottom: 38px;  margin-left: 160px;
+}
+.tab_inner_2 .tab_btn .btn_next{
+    float: left;    margin-top: 40px;  padding-bottom: 38px;  margin-left: 80px;
+}
+.tab_btn .btn_prev span,.tab_btn .btn_next span,.tab_btn .btn_next input{cursor: pointer;
+background:#fff;width:140px;height:30px;text-align:center;line-height:30px;display: inline-block;  color: #00a0e9;  font-size: 14px;  border: 1px solid #00a0e9;  border-radius: 5px;
+}
+
+/*3个人信息*/
+
+.tab_inner_3 ol{
+    padding: 21px 0 20px 0;margin-left:70px;border: 1px dashed #d4d4d4;border-right: 0;border-left: 0;width: 83%;
+}
+.tab_inner_3 ol li{
+    padding-bottom: 15px;
+}
+.tab_inner_3 ol li span{
+color:#333333;font-size:14px;display: inline-block;width:85px;text-align: left;
+}
+.tab_inner_3 ol li div{
+    display: inline-block;padding-left: 15px;
+}
+.tab_inner_3 ol li div i{
+color:#ff3535;font-size:12px;font-style: normal;
+}
+.tab_inner_3 ol li div input[type=text]{
+    width:200px;height:30px;border:1px solid #cccccc;font-size: 14px;color:#333;
+}
+.tab_inner_3 ol li div input[type=button]{
+    color: #00a0e9;font-size: 14px;padding: 5px 20px;border: 1px solid #00a0e9;background: #fff;border-radius: 5px;cursor: pointer;
+}
+.tab_inner_3 ol li.msg div input[type=text]{
+    width: 115px;margin-right: 10px;font-size: 14px;color:#333;
+}
+.tab_inner_3 ol li.remark span{
+    vertical-align: top;
+}
+.tab_inner_3 ol li.remark div textarea{
+    resize:none;width: 335px;height:80px;font-size: 14px;padding-top: 5px;padding-left: 10px;
+}
+.tab_inner_3 .tab_btn .btn_prev,.tab_btn .btn_next{
+    padding-bottom: 42px;margin-top:40px;
+}
+.tab_inner_3 .tab_btn .btn_prev{
+    float: left;    margin-top: 40px;  padding-bottom: 41px;  margin-left: 175px;
+}
+.tab_inner_3 .tab_btn .btn_next{
+    float: left;    margin-top: 40px;  padding-bottom: 41px;  margin-left: 80px;
+}
+
+
+.popUpp{
+    position: fixed;top:0;left:0;background: rgba(0,0,0,.7);z-index: 999;width: 100%;  height: 100%;display:none;
+}
+.alert{
+    padding-bottom:  90px;width:500px;position: absolute;z-index: 1110;display:none;
+    top:50%;left:50%;margin-left:-250px;margin-top: -250px;text-align: center;
+}
+.txt{
+    background: #fff;
+    overflow: hidden;
+    width: 100%;
+    height: 200px;
+    padding-top: 50px;
+}
+.txt p.first{
+    font-size: 18px;color: #666666;padding-bottom: 5px;    padding-right: 15px;
+}
+.txt p.first span{
+    display: inline-block;font-size: 20px;color:#333;    vertical-align: middle;
+}
+.txt p.second{
+    padding-left: 60px;font-size: 14px;padding-bottom: 5px;
+}
+p.third{
+    padding-left: 45px;font-size: 14px;
+}
+p.third i{
+    font-style: normal;color: #28a8f2;font-weight: 600;
+}
+.txt img{
+    display: inline-block;width:40px;height:40px;margin-right: 12px;vertical-align: middle;
+}
+.btn{
+    margin-top: 15px;
+}
+.btn span{
+    color: #fff;font-size: 14px;padding: 10px 25px;background: #fd8924;display: inline-block;border-radius:6px;cursor: pointer;
+}
+.person-a{
+	color: #f2af33 !important;
+}
+
+

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.qianfeng.goutrip.zcy.bean.LimitMapper">
+  	<resultMap type="com.qianfeng.goutrip.zcy.bean.LimitDTO" id="limitResultMap">
+  		<id column="limit_id" property="limit_id"/>
+  		<result column="limit_date" property="limit_date"/>
+  		<result column="limit_count" property="limit_count"/>
+  		<result column="limit_detail" property="limit_detail"/>
+  	</resultMap>
+  
+ 	<select id="selectCount" parameterType="hashmap" resultType="java.lang.Integer">
+ 		select limit_count from tb_limit where limit_detail=#{limit_detail} and limit_date=#{limit_detail};
+ 	</select>
+ 	
+ 	<update id="updateCount" parameterType="hashmap">
+ 		update tb_limit set limit_count=(limit_count+#{new_count}) where limit_detail=#{limit_detail} and limit_date=#{limit_detail};
+ 	</update>
+  </mapper>

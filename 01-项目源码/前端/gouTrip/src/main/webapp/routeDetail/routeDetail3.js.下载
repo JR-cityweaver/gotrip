@@ -1,0 +1,322 @@
+
+//导航条滚动定位
+$(function () {
+	
+	
+    //产品特色导航条切换
+    $(".mid_nav li").click(function () {
+        var n = $(this).index();//获取点击的下标
+        var innerh = $('.all_inner>div').eq(n).offset().top;//每一详情内容偏移文档顶部的高度
+        $('html,body').animate({scrollTop: innerh - navbarH}, 500)
+    })
+    //页面滚动，产品介绍标题栏悬挂效果
+    var navbar = $(".mid_nav").offset().top;//导航条偏移文档顶部的高度
+    var navbarH = $(".mid_nav").height();//导航条的高度
+    var scrollTop;
+
+    $(window).scroll(function () {
+        scrollTop = $(document).scrollTop();//鼠标滚动的距离
+        if ((scrollTop > navbar)) {
+            $('.mid_nav').addClass("nav_fixed").removeClass("border");
+            $(".btn").show();
+        } else if (scrollTop < navbar) {
+            $('.mid_nav').removeClass("nav_fixed").addClass("border");
+            $(".btn").hide();
+        }
+        //页面滚动，导航标题切换效果
+        $('.all_inner>div').each(function () {
+            var idx = $(this).index();
+            var innerH = $(".all_inner>div").eq(idx).offset().top;// 每一详情内容 偏移文档顶部的高度
+            if (scrollTop >= innerH-navbarH) {
+                $('.mid_nav li').eq(idx).addClass('font_c').siblings().removeClass('font_c');
+                //滚动到产品介绍
+                if($("#day_list").is(".font_c")){
+                    $("#day_bill").removeClass()
+                }else {
+                    $("#day_bill").addClass("hide");
+                }
+            }
+        });
+    });
+});
+// 侧导航点击滚动事件
+$(function(){
+    var navbarH = $(".mid_nav").height();//导航条的高度
+    var mark=1;
+//点击左侧 行程天数列表 切换
+    $("#day_bill li").click(function () {
+        $(this).addClass("bg_c").siblings("li").removeClass("bg_c");
+        mark=2;
+        var e = $(this).index();//获取点击的下标
+        var $innerH = $('.floor').eq(e).offset().top;//相同下标的.偏移文档顶部的高度
+        $('html,body').animate({scrollTop: $innerH-navbarH},500,function(){mark=1});
+    });
+
+    $(window).scroll(function () {
+        var scrollTop = $(this).scrollTop();//鼠标滚动的距离
+        if(mark==1){
+            //页面滚动，侧导航标题切换效果
+            $('.floor').each(function () {
+                var i = $(this).index();
+                var floorH = $(".floor").eq(i).offset().top;// 每一详情内容 偏移文档顶部的高度
+                if (scrollTop >= floorH-navbarH) {
+                    $('#day_bill li').eq(i).addClass('bg_c').siblings().removeClass('bg_c');
+                }
+            });
+        }
+    });
+});
+//banner  切换
+$(function(){
+    $(".img_arr").last().css({"marginBottom":"20px","paddingBottom":0});
+    //var $moveNum=Number($(".move").text());
+    var n=$(".banner-s img").size();
+    $(".total").text(n);
+    
+    var $left=$(".left"),
+        $move=$(".move"),
+        $right=$(".right"),
+        $banner1=$(".banner-1"),
+        $banner2=$(".banner-2");
+    
+    $left.on("click",function(){
+    	x=$(".banner-s img").filter(".show").index();
+        if(x-1>=0){
+        	$(".banner-s img").eq(x-1).addClass("show").siblings("img").removeClass("show");
+            $(".move").text(x);      
+            if(x==0){
+            	$(".move").text(1);
+            }
+        }
+    });
+                                                                                                 
+    $right.on("click",function(){
+        $("img.banner2").lazyload({effect: "fadeIn"});
+        w=$(".banner-s img").filter(".show").index();
+        if(w+1<=n){
+        $(".banner-s img").eq(w+1).addClass("show").siblings("img").removeClass("show");
+        $(".move").text(w+2);
+        var z=$(".move").text();
+        if(z==(n+1)){        	
+        	$(".move").text(n);
+        	}
+        }
+        
+    });
+});
+//酒店图片切换
+$(function(){
+	//判断是否有图片
+	 $(".arr_inner:first").addClass("show");
+	var leng = $('#hotelImage').find('img').length;
+	if(leng==0) $('#hotelImage').hide();
+	
+    var $imgarr=$(".img-arr .arr_inner").size();
+
+    	if($imgarr<2){$(".lef,.rig").css({"visibility":"hidden"})}
+    var $i=$(".slider-img button"),
+        $lef=$(".lef"),
+        $rig=$(".rig");
+    $rig.on("click",function(){
+    	var n=$(".img-arr>.arr_inner").filter(".show").index();    	   	
+    	var i=n+1;
+    	if(i==$imgarr){
+    		i=0;
+    	}
+    	$(".arr_inner").eq(i).addClass("show").siblings(".arr_inner").removeClass("show");    	
+    })
+    $lef.on("click",function(){
+    	var z=$(".img-arr>.arr_inner").filter(".show").index();
+    	var x=z-1;
+    	$(".arr_inner").eq(x).addClass("show").siblings(".arr_inner").removeClass("show");   	
+    })
+//    if($imgarr<=3){
+//    	$i.hide();
+//    }    
+//    if(3<$imgarr<=6){
+//        $lef.css({"visibility":"visible"});
+//        $lef.on("click",function(){
+//            $(this).css({"visibility":"hidden"});
+//            $(".img-arr div").eq(1).hide();
+//            $(".img-arr div").eq(2).show();
+//            $rig.css({"visibility":"visible"});
+//        });
+//        $rig.on("click",function(){
+//            $(this).css({"visibility":"hidden"});
+//            $lef.css({"visibility":"visible"});
+//            $(".img-arr div").eq(1).show();
+//            $(".img-arr div").eq(2).hide();
+//        });
+//    };
+//    if(6<$imgarr<=9){
+//        $rig.css({"visibility":"visible"});
+//        var i=0;
+//        $lef.on("click",function(){
+//            i--;
+//            var b=i%3;
+//            if(b<0){b=0}
+//            $(".img-arr>div").eq(i).show().siblings().hide();
+//            if(b==1){
+//                $rig.css({"visibility":"visible"});
+//            }
+//            if(b==0){
+//                $lef.css({"visibility":"hidden"});
+//            }
+//        });
+//        $rig.on("click",function(){
+//            i++;
+//            var a=i%3;
+//            $(".img-arr>div").eq(i).show().siblings().hide();
+//            if(a==1){
+//                $lef.css({"visibility":"visible"});
+//            }
+//            if(a==2){
+//                $rig.css({"visibility":"hidden"});
+//            }
+//        })
+ //   }
+});
+//弹出层图片切换
+$(function(){
+    var $rotue=$(".rotue"),$popUp=$(".popUp-2");
+    var n=0;
+    var $imgLen;
+    $rotue.on("click",function (e) {
+    	var url = '/route/getTravelDescriptionListByTravelId.html';
+    	var routeId = $('#routeId').val();
+    	var travelId = $(this).attr('travelId');
+    	var $this = $(this).parents(".floor_top").siblings(".alert");
+    	$this.load(url,{travelId:travelId,routeId:routeId},function(){
+    		if($this.children().length){//说明行程描述不为空
+    			//弹窗刚出现时，初始化样式
+            	n=0;
+            	$(".alert-lef").hide();
+            	$imgLen= $this.find(".alert-img").children("li").length;//计算是否有右箭头用
+            	if(n==(Number($imgLen-1))){
+            		$(".alert-rig").hide();
+                }else{
+                	$(".alert-rig").show();
+                }
+            	$this.find(".alert-img li").eq(0).show().siblings("li").hide();
+            	$this.find(".alert-inner li").eq(0).show().siblings("li").hide();
+            	$this.find(".alert-title li").eq(0).addClass("a-cl").siblings("li").removeClass("a-cl");
+                
+            	$this.show();
+                $popUp.show();
+    		} 
+    	});
+        e.stopPropagation();
+    });
+    //点击空白处，关闭行程描述窗口
+    $(".alert").on("click", function(event){   
+    	event.stopPropagation();
+        $(document).click(function(){
+            $(".popUp-2,.alert").hide();
+        });
+    });
+    
+    //关闭按钮，关闭行程描述窗口功能
+    $(".alert").on('click','.bind_close',function(){
+        $(".popUp-2,.alert").hide();
+    });
+
+    $(".alert").on("click",'.alert-lef',function(){
+        n--;
+        $(".alert-rig").show();
+        if(n==0){
+        	$(this).hide();           
+        }
+       
+        $(this).siblings(".alert-img").find("li").eq(n).show().siblings("li").hide();
+        $(this).siblings(".alert-inner").find("li").eq(n).show().siblings("li").hide();
+        $(this).siblings(".alert-title").find("li").eq(n).addClass("a-cl").siblings("li").removeClass("a-cl");
+
+    });
+    $(".alert").on("click",'.alert-rig',function(){
+        n++;
+        if(n==1){
+        	$(".alert-lef").show();
+        }
+        if(n==(Number($imgLen-1))){
+        	$(this).hide();
+        }
+        $(this).siblings(".alert-img").find("li").eq(n).show().siblings("li").hide();
+        $(this).siblings(".alert-inner").find("li").eq(n).show().siblings("li").hide();
+        $(this).siblings(".alert-title").find("li").eq(n).addClass("a-cl").siblings("li").removeClass("a-cl");
+    });
+    //图片懒加载
+    $("img").lazyload({effect: "fadeIn",threshold : -50});
+//    //分享按钮
+//    $(".shape-inner").hide();
+//    $(".shape").click(function(e){
+//        $(".shape-inner,.popUp-2").show();
+//        $(document).click(function(){
+//            $(".shape-inner,.popUp-2").hide();
+//            $(".shape-inner").click(function(event){
+//                event.stopPropagation();
+//            });
+//        });
+//        e.stopPropagation();
+//    });
+    //打印行程
+    $(".copy").on("click",function(){
+        preview();
+    });
+    function preview() {
+        bdhtml=window.document.body.innerHTML;
+        sprnstr="<!--startprint-->";
+        eprnstr="<!--endprint-->";
+        prnhtml=bdhtml.substring(bdhtml.indexOf(sprnstr)+17);
+        prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));
+        window.document.body.innerHTML=prnhtml;
+        window.print();
+        //window.document.body.innerHTML=bdhtml;//页面js不能动
+        location.reload();
+    }
+    //判断每个标签里包含【】的设置样式
+    $(".day").find("p,span").each(function(){
+    	var $p=$(this).html();
+    	var $span=$(this).text();
+    	if($p.indexOf("】")!=-1){
+    		$(this).css({"paddingTop":"10px"});
+    		$("span").css({"paddingTop":"0px"});
+    		if($span.length>15){
+    			$(this).css({"paddingTop":"0px","color":"#555","paddingLeft":"4px"});
+    		}
+    	}else{
+    		$(this).css({"lineHeight":"21px","color":"#555","paddingLeft":"4px"});
+    	}
+    	
+    });   
+  //特色双数行加下划线
+    $(".specail-txt").find("p,span").each(function(){
+		var $p=$(this).text();
+		console.log($p)
+		if($p.length<5){
+			$(this).remove()
+		}
+	})
+	$(".specail-txt p:odd").css({"border-bottom":"1px dashed rgba(255,255,255,.5)"})
+	$(".specail-txt p:last").css({"border-bottom":"0"})
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,361 @@
+
+/*产品列表*/
+.main_middle{
+    background: #f8f8f8;
+}
+.main_middle .mid_title span{
+    margin: 10px 30px;float:right;color:#6a6a6a;font-size: 14px;display: inline-block;width:100px;text-align: right;
+}
+.mid_product{
+    background: #fff;    border-top-left-radius: 35px;  border-top-right-radius: 35px;
+}
+.mid_product .mid_nav.border{
+    border-bottom: 1px solid #ccc;    position: relative;
+}
+.mid_product .mid_nav ul li{
+    float:left;padding:19px 32px 19px 32px;color:#333;cursor:pointer;font-size:16px;
+}
+.mid_product .mid_nav ul li:hover{
+color:#28a8f2;
+}
+.mid_product .mid_nav ul li.font_c{
+    color:#28a8f2;font-weight:600;border-bottom: 2px solid #28a8f2;
+}
+.mid_product .inner_title{
+    font-weight:600;color:#333333;font-size:16px;padding: 34px 0 30px 0;
+}
+.mid_product .inner_core{
+    width:976px;margin: 0 auto;
+}
+.mid_product .hotel_inner .inner_core{width: 1080px;font-size:16px;}
+.mid_nav input{
+cursor: pointer;position:relative;display:none;margin: 10px 75px 0 0;color:#fff;width:140px;height:36px;background: #f2af33;font-size: 18px;border: 0;border-radius: 6px;
+}
+.nav_fixed{
+    position: fixed;  top: 0;  z-index: 10;background: #fff;width:1080px;box-shadow: 1px 1px 10px #ccc;
+}
+/*路线简介*/
+.sum_inner .inner_title{
+    padding-left: 52px;
+}
+.sum_inner .sum_map{
+    width:700px;height:350px;border-radius: 5px;margin: 0 auto;-webkit-border-radius: 9px;
+    -moz-border-radius: 9px;padding-bottom: 30px;
+}
+.sum_inner .inner_core{
+    padding-bottom: 25px;    border-bottom: 1px solid #ccc;
+}
+.sum_inner .prodect{
+    background: url(../image/pro_03.png) no-repeat;width: 975px;height:404px;
+}
+
+.pro-img{
+        width: 355px;height: 270px;margin: 67px 40px 20px 65px;
+
+}
+.pro-txt {
+    font-size: 14px;
+    color: #333;
+    padding: 50px 30px 35px 30px;
+    width: 515px;
+    display: table;
+    height: 404px;
+}
+.txt-1{
+        display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 16;
+    overflow: hidden;
+    text-indent: 2em;
+    max-height: 230px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    
+}
+.txt-inner{
+	    display: table-cell;
+    vertical-align: middle;
+}
+.txt-2{
+    clear: both;
+    display: -webkit-box;text-indent: 2em;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+/*产品介绍*/
+.sug_inner .suggest{
+    padding-left: 42px;
+}
+.sug_inner .suggest h3{
+    text-align: center;color:#333;padding-bottom: 15px;
+}
+.sug_inner .suggest .sug_txt{
+    color:#333;font-size: 14px;padding-bottom: 35px;
+}
+.sug_inner .suggest .sug_img{
+    padding-bottom: 35px;
+}
+.sug_inner .suggest .sug_img img{
+    width:350px;height:220px;display: inline-block;
+}
+.sug_inner .suggest .sug_img div{
+    display: inline-block;vertical-align: middle;width:660px;padding-left: 35px;
+}
+.sug_inner .suggest .sug_img div h3{
+    text-align: left;
+}
+/*每日行程*/
+/*日期清单*/
+.day_inner,.cost_inner{
+    margin: 0 52px;  border-top: 1px solid #ccc;
+}
+.cost_inner{min-height: 620px;}
+.hotel_inner  .inner_title{    padding-left: 52px;
+}
+.day_inner #day_bill{
+    position: fixed;
+    top: 78px;
+    left: 50%;
+    margin-left: -550px;
+}
+.day_inner #day_bill li{
+    cursor:pointer;margin-left:10px;background:#e8e8e8 ;color:#6f6f6f;font-size: 12px;width:48px;height:32px;line-height:30px;text-align: center;margin-bottom: 5px;
+}
+.day_inner #day_bill li.bg_c{
+    background: #28a8f2;color:#fff;
+}
+.icon_address{
+    font-style: normal;color:#888888;line-height: 45px;font-size:16px;
+    background: url(/images_new/index_new/routeDetail3/icon_03.png) no-repeat 0 50%;display: inline-block;width:85px;height:45px;padding-left:15px;text-align: right;
+}
+.icon_train{
+    background: url(/images_new/index_new/routeDetail3/icon_07.png) no-repeat 0 10%;
+}
+.icon_foot{
+    background: url(/images_new/index_new/routeDetail3/icon_10.png) no-repeat 0 20%;
+}
+.icon_bed{
+    background: url(/images_new/index_new/routeDetail3/icon_16.png) no-repeat 0 20%;
+}
+.icon_rotue{
+    background: url(/images_new/index_new/routeDetail3/icon_07.png) no-repeat 0 10%;
+}
+.icon_plan{
+    background: url(/images_new/index_new/routeDetail3/icon_13.png) no-repeat 0 10%;
+}
+.rotue{
+    color:#28a8f2;display: inline;cursor: pointer;
+}
+.day_inner .inner_core .day_num span{
+    color:#333333;padding-left: 15px;display: inline-block;font-size:16px;
+}
+.top_content ol{
+    padding: 5px 0 0 33px;border-left: 1px dashed #ccc;  margin-left: 15px;
+}
+.top_content ol li{
+    font-size: 14px;color:#333;padding-bottom: 15px;padding-left: 35px;
+}
+.day{
+    font-size: 14px;    padding: 3px 0 0 30px;  border-left: 1px dashed #ccc;  margin-left: 15px;
+}
+.day_name{
+    font-weight: bold;padding-bottom: 5px;
+}
+.day_detail{
+    padding-bottom: 10px;
+}
+.day p:last-child{padding-bottom: 15px;    line-height: 22px;}
+.img_arr{
+    margin-left: 15px;padding-bottom: 20px;  padding-left: 30px;  border-left: 1px dashed #ccc;
+}
+
+.img_arr div{
+   height:180px;margin-right: 8px;float: left;width: 32.7%;
+}
+.img_arr div:last-of-type{margin-right: 0}
+.img_arr img{
+    width:305px;height:100%;
+}
+.dashed{border-top:1px dashed #ccc;width: 100%;margin-top: 25px;height:1px;float: right}
+/*费用说明*/
+
+.cost{
+    border-bottom: 1px dashed #ccc;padding-top: 30px;
+}
+.cost:first-child{
+    padding-top:0 ;
+}
+.cost:last-child{
+    border-bottom: 0;
+}
+.cost h4{
+    font-size: 12px;margin-top: 7px;  color: #fff;  padding-bottom: 25px;
+    width: 40px;  background-color: #28a8f2;  text-align: center;
+    line-height: 19px;  height: 40px;  letter-spacing: 2px;padding-left: 3px;
+    border-top-left-radius: 18px;  border-bottom-right-radius: 18px;
+}
+.cost .cost_include{
+    padding-bottom: 50px;width:95%;
+}
+.cost .cost_include p,.cost .cost_prompt p{
+    font-size: 14px;color:#333; line-height: 23px;
+}
+/*预定须知*/
+.remark p{
+    font-size:14px;color:#333;padding-bottom: 25px;line-height: 20px;
+}
+.remark_inner .inner_core{
+    border-bottom: 0;margin-bottom: 25px;
+}
+/*酒店住宿*/
+.hotel_name{
+    color:#333;font-size: 14px;font-weight: 600;padding-bottom: 7px;    width: 99%;
+}
+.hotel_detail{
+    color:#333;font-size: 14px;padding-bottom: 12px;text-align: left;
+}
+.hotel-note{   
+	text-align: left;padding: 0 0 10px 52px;font-size: 10px;
+}
+i.no{display: inline-block;width:65px;text-align: right;
+    font-style:normal;background: url(/images_new/index_new/routeDetail3/icon_10.png) no-repeat 0 100%;
+}
+.hotel{padding: 0 52px;}
+/*公共滚动*/
+.hotel_inner .inner_core{text-align: center;}
+.slider-img button {
+    display: block;  width: 25px;  height: 190px;  cursor: pointer;    border: 0;outline:0;
+}
+.slider-img{
+    margin: 0 auto;display: inline-block;overflow: hidden;height: 190px;margin-bottom: 25px;
+}
+.img-arr{
+    width: 972px;  float: left;
+}
+.arr_inner{
+	display:none;
+}
+.show{display:block;}
+.arr_inner div{
+    height:190px;margin-right: 8px;float: left;position: relative;
+}
+.arr_inner div span{
+    position: absolute;bottom: 0;left: 0;display: none;z-index: 9999;
+    width:100%;background: rgba(0,0,0,.4);  font-size: 14px;height:40px;
+    color: #fff;  padding: 10px 10px;  max-height: 60px;  word-warp: break-word;
+    word-break: break-all;
+}
+.arr_inner div:hover span{display:block}
+.img-arr div div:last-child{margin-right:0;}
+.slider-img img{
+    width:318px;height:100%;
+}
+.slider-img span.bg_color {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .1);
+}
+i.rig{
+    margin-left: 3px;
+}
+.lef-icon{
+    background: url(/images_new/index_new/routeDetail3/trror.png) no-repeat 0% 11%;background-size:  100px 100px;cursor: pointer;
+}
+.rig-icon{
+    background: url(/images_new/index_new/routeDetail3/trror.png) no-repeat 105% 11% ;background-size:  100px 100px;cursor: pointer;
+}
+.lef-icon:hover{
+    background: url(/images_new/index_new/routeDetail3/trror.png) no-repeat 33% 101% ;background-size:  100px 100px;;cursor: pointer;
+}
+.rig-icon:hover{
+    background: url(/images_new/index_new/routeDetail3/trror.png) no-repeat 77% 101% ;background-size:  100px 100px;;cursor: pointer;
+}
+.left-icon{
+    background: url(/images_new/index_new/routeDetail3/trror.png) no-repeat 0% 100%;background-size:  100px 100px;cursor: pointer;
+}
+.right-icon{
+    background: url(/images_new/index_new/routeDetail3/trror.png) no-repeat 105% 100% ;background-size:  100px 100px;cursor: pointer;
+}
+.left-icon:hover{
+    background: url(/images_new/index_new/routeDetail3/trror.png) no-repeat 31% -1% ;background-size:  100px 100px;;cursor: pointer;
+}
+.right-icon:hover{
+    background: url(/images_new/index_new/routeDetail3/trror.png) no-repeat 79% -1%;background-size:  100px 100px;;cursor: pointer;
+}
+.floor{position: relative}
+.alert{
+    width:888px;height:600px;position: fixed;z-index: 9999;display: none;
+    margin: auto;
+    background: #fff;padding: 20px 90px 30px;border: 6px solid rgba(0,0,0,.5);
+    border-radius: 15px;   top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+.alert-title{
+    padding-bottom: 20px;
+}
+.alert-title li{
+    font-size:16px;color:#333;
+}
+.day_inner .alert-img{
+    width:691px;height:372px;overflow: hidden;margin: 0 auto;
+}
+.day_inner .alert-inner{
+
+}
+.alert-img li{
+    width:100%;
+}
+.alert-img img{
+    width:602px;height:372px;margin: 0 auto;
+}
+.alert button{
+    display: inline-block;width:20px;height:20px;position: absolute;top:40%;border:0;outline:none;
+}
+button.alert-rig{
+    right: 96px;
+}
+.alert-inner{
+    font-size:12px;color:#666;text-indent:2em;padding-top: 13px;line-height: 19px;height:129px;
+    display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 6;overflow: hidden;
+}
+.popUp-2{width:100%;height:100%;background: rgba(0,0,0,.6);position: fixed;
+    top:0;left:0;right:0;bottom:0;display: none;z-index: 11;}
+@media screen and (max-width: 1200px) {
+    .banners,.fl-bg {
+        width: 1200px;
+    }
+}
+.alert-title li.a-cl{
+    color:#28a8f2;
+}
+.alert-title li.a-cl i{
+    color:#333;
+}
+.warm-tip{
+    font-size: 12px;  color: #333;
+    padding: 0 30px 20px;  margin-left: 15px;  border-left: 1px dashed #ccc;
+}
+.bind_close img{
+    
+    width: 40px;
+    height: 40px;
+    text-align: center;  
+    cursor: pointer;
+    position:absolute;
+    top:8px;
+    right:10px;
+    background:url(/images_new/index_new/routeDetail3/close.png) no-repeat;
+}
+.theme-a{
+	color: #f2af33 !important;
+}
+.triangle-top {
+    background: url(/images_new/index_new/tap3_04.png) no-repeat !important;
+}

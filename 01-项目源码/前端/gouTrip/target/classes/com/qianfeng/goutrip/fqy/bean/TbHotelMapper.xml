@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.qianfeng.goutrip.fqy.bean.hotelListMapper">
+	<resultMap type="com.qianfeng.goutrip.fqy.bean.TbHotel" id="hotelResultMapper">
+		<id column="hotel_id" property="hotel_id"/>
+		<result column="hotel_name" property="hotel_name"/>
+		<result column="hotel_introduce" property="hotel_introduce"/>
+		<result column="hotel_address" property="hotel_address"/>
+		<result column="hotel_price" property="hotel_price"/>
+		<result column="hotel_type" property="hotel_type"/>
+		<result column="hotel_groom" property="hotel_groom"/>
+		<result column="hotel_around" property="hotel_around"/>
+		<result column="hotel_xingji" property="hotel_xingji"/>
+		<result column="hotel_food" property="hotel_food"/>
+		<result column="hotel_play" property="hotel_play"/>
+		<result column="hotel_meeting" property="hotel_meeting"/>
+		<result column="hotel_card" property="hotel_card"/>
+		<result column="hotel_traffic" property="hotel_traffic"/>
+		<result column="hotel_status" property="hotel_status"/>
+		<collection property="roomList" ofType="com.qianfeng.goutrip.fqy.bean.TbRoom" column="tb_hotel_hotel_id">
+			<id column="room_id" property="room_id"/>
+			<result column="room_name" property="room_name"/>
+			<result column="room_bed" property="room_bed"/>
+			<result column="room_breakfast" property="room_breakfast"/>
+			<result column="room_wifi" property="room_wifi"/>
+			<result column="room_explain" property="room_explain"/>
+			<result column="room_price" property="room_price"/>
+			<result column="room_area" property="room_area"/>
+			<result column="room_floor" property="room_floor"/>
+		</collection>
+	</resultMap>
+	
+	<!-- <select id="getHotelByType" parameterType="hashmap" resultMap="hotelResultMapper">
+		<choose>
+			<when test="null==hotel_type">
+				select * from tb_hotel limit #{pageNo},2
+			</when>
+			<otherwise>
+				select * from tb_hotel where hotel_type=#{hotel_type} limit #{pageNo},2
+			</otherwise>
+		</choose>
+	</select> -->
+	<select id="getAllHotel" parameterType="Integer" resultMap="hotelResultMapper">
+		select * from tb_hotel where hotel_status=0 limit #{pageNo},1
+	</select>
+	<select id="getHotelByType" parameterType="hashmap" resultMap="hotelResultMapper">
+		select * from tb_hotel where hotel_type=#{hotel_type} and hotel_status=0 limit #{pageNo},1
+	</select>
+	<select id="getTotalCount" resultMap="hotelResultMapper">
+		select * from tb_hotel where hotel_status=0
+	</select>
+	<select id="getTypeCount" parameterType="Integer" resultMap="hotelResultMapper">
+		select * from tb_hotel where hotel_type=#{hotel_type} and hotel_status=0
+	</select>
+	<!-- <select id="getCount" parameterType="Integer" resultMap="hotelResultMapper">
+		<choose>
+			<when test="hotel_type==null">
+				select count(*) from tb_hotel where hotel_status=0
+			</when>
+			<otherwise>
+				select count(*) from tb_hotel where hotel_type=#{hotel_type}
+			</otherwise>
+		</choose>
+	</select> -->
+	
+	<select id="getTypeHotel" resultMap="hotelResultMapper">
+		select * from tb_hotel where hotel_type=0 limit 0,8
+	</select>
+	
+	<select id="getSHHotelByLike" resultMap="hotelResultMapper">
+		select hotel_id,hotel_name,hotel_price from tb_hotel where hotel_name like '%上海%' limit 0,1
+	</select>
+	<select id="getHZHotelByLike" resultMap="hotelResultMapper">
+		select hotel_id,hotel_name,hotel_price from tb_hotel where hotel_name like '%杭州%' limit 0,1
+	</select>
+	<select id="getSYHotelByLike" resultMap="hotelResultMapper">
+		select hotel_id,hotel_name,hotel_price from tb_hotel where hotel_name like '%三亚%' limit 0,1
+	</select>
+	<select id="getXMHotelByLike" resultMap="hotelResultMapper">
+		select hotel_id,hotel_name,hotel_price from tb_hotel where hotel_name like '%厦门%' limit 0,1
+	</select>
+	<select id="getSZHotelByLike" resultMap="hotelResultMapper">
+		select hotel_id,hotel_name,hotel_price from tb_hotel where hotel_name like '%苏州%' limit 0,1
+	</select>
+	
+	<select id="getHotelBySearch" parameterType="String" resultMap="hotelResultMapper">
+		select hotel_id,hotel_name,hotel_introduce,hotel_address,hotel_price from tb_hotel where hotel_name like concat(concat('%',#{city}),'%') and hotel_status=0
+	</select>
+	
+	<!-- <select id="getRoomByHotel" parameterType="Integer" resultMap="hotelResultMapper">
+		select * from tb_hotel h join tb_room r where h.hotel_id=r.tb_hotel_hotel_id and h.hotel_id=#{hotel_id}
+	</select> -->
+	
+	<select id="getHotelInfo" parameterType="Integer" resultMap="hotelResultMapper">
+		select * from tb_room r join tb_hotel h where r.tb_hotel_hotel_id=h.hotel_id and h.hotel_id=#{hotel_id}
+	</select>
+	<!-- <select id="getRoomByHotel" parameterType="Integer" resultMap="hotelResultMapper">
+		select * from tb_room r join tb_hotel h where r.tb_hotel_hotel_id=h.hotel_id and h.hotel_id=#{hotel_id}
+	</select>  -->
+	
+</mapper>

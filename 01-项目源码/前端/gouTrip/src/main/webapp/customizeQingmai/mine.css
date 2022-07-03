@@ -1,0 +1,22 @@
+/*经典案例-----法国*/
+.c_parisBanner{ width:100%; height:480px; position:relative; background:url(../images_c/classicCase/parisBanner.jpg) no-repeat center 0;}
+.c_parisBanner_text{ width:100%; height:80px; font-size:36px; letter-spacing:3px; position: absolute; left:0; bottom:0; background:rgba(0,0,0,0.5); color:#fff; text-align:center; line-height:80px;}
+.c_parisContent{ width:100%; height:4760px; background:url(../images_c/classicCase/parisBg.jpg) no-repeat center 0;}
+.c_parisConin{ padding:40px 0 0 170px; box-sizing:border-box; height:4759px;}
+.c_parisConin_tit{ padding-left:28px;}
+.c_parisConin_tit p{ font-size:14px; color:#fff; line-height:24px;}
+.c_parisConin_tit p:nth-of-type(3){ margin-bottom:15px;}
+.c_parisConin_text{ padding-left:20px;}
+.c_parisConin_text img{ margin-top:20px; display:block; overflow:hidden;}
+.c_parisConin_text .aloneP{ width:760px; height:54px; padding-left:18px; box-sizing:border-box; color:#fff; line-height:54px; background:rgba(0,0,0,0.6);}
+.c_parisConin_text1{ width:760px; color:#fff; box-sizing:border-box; padding:15px 18px; text-align:justify; background:rgba(0,0,0,0.6);}
+.c_parisConin_text1 p{ line-height:24px; color: #fff; font-size:14px;}
+
+/*经典案例-----清迈*/
+.c_qingmaiBanner{ background:url(../images_c/classicCase/qingmaiBanner.jpg) no-repeat center 0;}
+.c_qingmaiContent{ width:100%; height:6333px; background:url(../images_c/classicCase/qingmaiBg.jpg) no-repeat center 0;}
+
+/*经典案例-----普陀山*/
+.c_putuoshanBanner{ background:url(../images_c/classicCase/putuoshanBanner.jpg) no-repeat center 0;}
+.c_putuoConin_tit p{ font-size:14px; color:#000; line-height:24px;}
+.c_putuoshanContent{ width:100%; height:5327px; background:url(../images_c/classicCase/putuoshanBg.jpg) no-repeat center 0;}

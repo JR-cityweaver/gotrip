@@ -1,0 +1,197 @@
+// 生成4位数字验证码
+$(".code").html(null);
+function createCode() {
+    var code = "";
+    var length = 4;
+    var i;
+    var str = "";
+    var content;
+    var codeSpan = $(".code");
+    var arrColor = ["blue", "red", "green", "brown", "gray", "pink", "red", "green", "brown", "blue"];
+    codeSpan.html(null);
+    for (i = 0; i < length; i++) {
+        index = Math.floor(Math.random() * 6);
+        code = Math.floor(Math.random() * 10);
+        str += code;
+        color = arrColor[index];
+        content = $("<i></i>").html(code);
+        content.appendTo(codeSpan);
+        $(".code i").eq(index).css({"color": color});
+    }
+    codeSpan.attr("data-val", str);
+}
+createCode();
+$("#change_code").click(createCode);
+
+//邮箱绑定激活
+$('#mail_bind_activated').on('click',function(){
+	var mail = $('#input_mail').val();
+	var filter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	if (!filter.test(mail)){
+		layer.tips('您的电子邮件格式不正确',$('#input_mail'));
+		return false;
+	}
+	//图片验证码
+	var imgCode = $('#imgCode').val();
+	var changeCode = $(".code").attr("data-val");
+	if(imgCode!=changeCode){
+		layer.tips('请输入正确验证码!',$("#imgCode"));
+		return false;
+	}
+	var elem = $(this).parent().parent();
+	var mailType=$(this).attr('mailType');
+	$.get('/member/mailGetCode.html',{mailCode:mail,mailType:mailType},function(data){
+		if(data.message=='success'){
+			$(".hide_email").val(mail);
+			var reg = /(.{2}).+(.{2}@.+)/g;
+			mail = mail.replace(reg, "$1****$2");//隐藏邮箱中间位置
+			$('.bind_mail').html(mail);
+			elem.hide();
+			elem.siblings(".two_step").show();
+		}else{
+			layer.tips('您的电子邮件发送失败',$('#input_mail'));
+		}
+	});
+});
+
+//重新发送邮件
+$('.again_send').on('click',function(){
+	var mail = $('.hide_email').val();
+	var filter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	if (!filter.test(mail)){
+		layer.tips('您的电子邮件格式不正确',$('#input_mail'));
+		return false;
+	}
+	var $this = $(this);
+	$.get('/member/mailGetCode.html',{mailCode:mail},function(data){
+		if(data.message=='success'){
+			layer.tips('您的电子邮件发送成功',$this);
+		}else{
+			layer.tips('您的电子邮件发送失败',$this);
+		}
+	});
+});
+
+//////2016-12-07////////////
+//邮箱获取验证码
+$("#getMailCode").on('click',function(){
+	var old_mail = $("#old_mail").val();
+	var reg="^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$";
+	var regExp = new RegExp(reg);
+	if(!regExp.test(old_mail)){
+		layer.tips('邮箱格式不正确!',$(".old_mail"));
+		return false;
+	}
+	$.get("/member/mailGetCode2.html", {mailCode:old_mail},function (data) {
+		//显示验证码等待时间
+		$(this).attr("disabled",false); 
+		wait=60;
+		time(document.getElementById("getMailCode"));
+		//记录验证码
+		$("#mail_code").val(data.code);
+		var create_time = new Date();
+		$("#create_time_mail").val(create_time);
+	});
+});
+//点击下一步---到验证第二页
+$('#update_mail_next').on('click',function(){
+	var yanCode = $("#mailCode").val();
+	if(!yanCode){
+		layer.tips('验证码不能为空!',$("#mailCode"));
+		return false;
+	} 
+    var code = code_is_equal($("#create_time_mail"),$("#mail_code"));
+    if(yanCode == code){
+    	$(this).parent().parent().hide();
+        $(this).parent().parent().siblings(".two_step").show();
+    }else{
+    	layer.tips('邮箱验证码错误!',$("#mailCode"));
+    }
+});
+
+//跳转到指定的邮箱登录页面
+$(".btn_actemail").click(function () {
+    var uurl = $(".hide_email").val();
+    uurl = gotoEmail(uurl);
+    if (uurl != "") {
+        var url = "http://"+uurl;
+        window.open(url); 
+    } else {
+       alert("抱歉!未找到对应的邮箱登录地址，请自己登录邮箱查看邮件");
+    }
+});
+
+//新邮箱绑定激活
+$('#update_new_mail').on('click',function(){
+	var mail = $('#mail_new').val();
+	var filter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	if (!filter.test(mail)){
+		layer.tips('您的电子邮件格式不正确',$('#mail_new'));
+		return false;
+	}
+	var elem = $(this).parent().parent();
+	var mailType=$(this).attr('mailType');
+	$.get('/member/mailGetCode.html',{mailCode:mail,mailType:mailType},function(data){
+		if(data.message=='success'){
+			$(".hide_email").val(mail);
+			var reg = /(.{2}).+(.{2}@.+)/g;
+			mail = mail.replace(reg, "$1****$2");//隐藏邮箱中间位置
+			$('.bind_mail').html(mail);
+			elem.hide();
+			elem.siblings(".three_step").show();
+		}else{
+			layer.tips('您的电子邮件发送失败',$('#mail_new'));
+		}
+	});
+});
+
+//功能：根据用户输入的Email跳转到相应的电子邮箱首页
+function gotoEmail($mail) {
+    $t = $mail.split('@')[1];
+    $t = $t.toLowerCase();
+    if ($t == '163.com') {
+        return 'mail.163.com';
+    } else if ($t == 'vip.163.com') {
+        return 'vip.163.com';
+    } else if ($t == '126.com') {
+        return 'mail.126.com';
+    } else if ($t == 'qq.com' || $t == 'vip.qq.com' || $t == 'foxmail.com') {
+        return 'mail.qq.com';
+    } else if ($t == 'gmail.com') {
+        return 'mail.google.com';
+    } else if ($t == 'sohu.com') {
+        return 'mail.sohu.com';
+    } else if ($t == 'tom.com') {
+        return 'mail.tom.com';
+    } else if ($t == 'vip.sina.com') {
+        return 'vip.sina.com';
+    } else if ($t == 'sina.com.cn' || $t == 'sina.com') {
+        return 'mail.sina.com.cn';
+    } else if ($t == 'tom.com') {
+        return 'mail.tom.com';
+    } else if ($t == 'yahoo.com.cn' || $t == 'yahoo.cn') {
+        return 'mail.cn.yahoo.com';
+    } else if ($t == 'tom.com') {
+        return 'mail.tom.com';
+    } else if ($t == 'yeah.net') {
+        return 'www.yeah.net';
+    } else if ($t == '21cn.com') {
+        return 'mail.21cn.com';
+    } else if ($t == 'hotmail.com') {
+        return 'www.hotmail.com';
+    } else if ($t == 'sogou.com') {
+        return 'mail.sogou.com';
+    } else if ($t == '188.com') {
+        return 'www.188.com';
+    } else if ($t == '139.com') {
+        return 'mail.10086.cn';
+    } else if ($t == '189.cn') {
+        return 'webmail15.189.cn/webmail';
+    } else if ($t == 'wo.com.cn') {
+        return 'mail.wo.com.cn/smsmail';
+    } else if ($t == '139.com') {
+        return 'mail.10086.cn';
+    } else {
+        return '';
+    }
+};

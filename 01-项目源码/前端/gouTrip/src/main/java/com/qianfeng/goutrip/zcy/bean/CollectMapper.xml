@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.qianfeng.goutrip.zcy.bean.CollectMapper">
+  	<resultMap type="com.qianfeng.goutrip.zcy.bean.CollectDTO" id="collectResultMap">
+  		<id column="collect_id" property="collect_id"/>
+  		<result column="collect_name" property="collect_name"/>
+  		<result column="collect_picture" property="collect_picture"/>
+  		<result column="collect_detail_id" property="collect_detail_id"/>
+  		<result column="user_collect" property="user_collect"/>		
+  	</resultMap>
+  	
+  	<insert id="insertCollect" parameterType="com.qianfeng.goutrip.zcy.bean.CollectDTO">
+  		insert tb_collect(collect_name,collect_picture,collect_detail_id,user_collect)
+  			values(#{collect_name},#{collect_picture},#{collect_detail_id},#{user_collect})
+  	</insert>
+  	
+  	<delete id="deleteCollect" parameterType="java.lang.Integer">
+  		delete from tb_collect where collect_detail_id=#{collect_detail_id};
+  	</delete>
+  	
+  	<select id="selectCollectById" parameterType="java.lang.Integer" resultMap="collectResultMap">
+  		select * from tb_collect where collect_detail_id=#{collect_detail_id};
+  	</select>
+  	
+  	<select id="selectAllColl" parameterType="java.lang.Integer" resultMap="collectResultMap">
+  		select * from tb_collect where user_collect=#{user_collect};
+  	</select>
+  </mapper>

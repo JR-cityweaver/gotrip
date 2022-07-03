@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.qianfeng.goutrip.zcy.bean.ContactinfoMapper">
+ <resultMap type="com.qianfeng.goutrip.zcy.bean.RouteOrderDTO" id="contactResultMap">
+ 	<id column="contact_id" property="contact_id"/>
+ 	<result column="contact_name" property="contact_name"/>
+ 	<result column="contact_phone" property="contact_phone"/>
+ 	<result column="contact_order" property="contact_order"/>
+ 	<result column="contact_mail" property="contact_mail"/>
+ 	<result column="contact_explain" property="contact_explain"/>
+ </resultMap>
+  <insert id="insertContactMan" parameterType="com.qianfeng.goutrip.zcy.bean.RouteOrderDTO">
+  insert into tb_contactinfo(contact_name, contact_phone, contact_mail, contact_explain,contact_order) values(#{contact_name},#{contact_phone},#{contact_mail},#{contact_explain},#{order_num});
+  </insert>
+  
+  <select id="selectContact" parameterType="java.lang.String" resultMap="contactResultMap">
+  		select * from tb_contactinfo where contact_order=#{order_num};
+  </select>
+  </mapper>

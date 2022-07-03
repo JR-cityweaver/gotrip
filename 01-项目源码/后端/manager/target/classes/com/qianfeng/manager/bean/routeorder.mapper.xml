@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.qianfeng.manager.bean.TbRouteOrderMapper">
+	<resultMap type="com.qianfeng.manager.bean.RouteOrderBean" id="routeOrderResultMap">
+		<id column="order_id" property="orderId"/>
+	  	<result column="order_num" property="orderNum"/>
+	  	<result column="tb_user_user_id" property="tb_user_user_id"/>
+	  	<result column="order_title" property="orderTitle"/>
+	  	<result column="order_room" property="orderRoom"/>
+	  	<result column="order_type" property="orderType"/>
+	  	<result column="order_begindate" property="orderBegindate"/>
+	  	<result column="order_enddate" property="orderEnddate"/>
+	  	<result column="order_time" property="orderTime"/>
+	  	<result column="order_adult" property="orderAdult"/>
+	  	<result column="order_child" property="orderChild"/>
+	  	<result column="order_begin" property="orderBegin"/>
+	  	<result column="order_end" property="orderEnd"/>
+	  	<result column="order_status" property="orderStatus"/>
+  		<result column="order_totalprice" property="orderTotalprice"/>
+	</resultMap>
+	
+	<update id="deleteRouteOrder" parameterType="String">
+		update theme_routeorder set order_status=1 where order_num=#{orderNum}
+	</update>
+	
+	<select id="selectOrder" parameterType="java.lang.String" resultMap="routeOrderResultMap">
+  		select * from theme_routeorder where order_num=#{orderNum} and order_status=0
+  	</select>
+	
+	<select id="getAllRouteOrderById" parameterType="int" resultMap="routeOrderResultMap">
+		select * from theme_routeorder where order_status=0 limit #{pageNo},3
+	</select>
+	
+	<select id="getRouteOrderType" parameterType="hashmap" resultMap="routeOrderResultMap">
+		select * from theme_routeorder where order_type=#{orderType} and order_status=0 limit #{pageNo},3
+	</select>
+	
+	<select id="getRouteOrderCount" parameterType="String" resultType="int">
+		select count(order_id) from theme_routeorder where order_status=0
+	</select>
+	
+	<select id="getRouteOrderTypeCount" parameterType="String" resultType="int">
+		select count(order_id) from theme_routeorder where order_type=#{orderType} and order_status=0
+	</select>
+	
+	<select id="getTotalPrice" resultType="String">
+		select sum(order_totalprice) from theme_routeorder where order_type='待出行' and order_status=0
+	</select>
+</mapper>

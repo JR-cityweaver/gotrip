@@ -1,0 +1,85 @@
+/**
+ * update by wsg on 15-12-29.
+ */
+$(document).ready(function(){
+    $(".collection").click(function(){
+        if('已收藏' == $(".collection").html()) return;
+        var userId = $("#userId").val();
+        var userName = $("#userName").val();
+        var type = $("#type").val();
+        var focusId = $("#focusId").val();
+        var focusName = $("#focusName").val();
+        var focusImage = $("#focusImage").val();
+        var goutripPrice = $("#goutripPrice").val();
+        if(0 < eval(userId) && 0 < eval(focusId)){
+            $.get('/bookmark/isBookMarked.html',
+                {userId:userId,userName:userName,type:type,focusId:focusId,focusName:focusName,focusImage:focusImage,price:goutripPrice},
+                function(o){
+                    if(1 == o.status) {
+                        $(".collection").html('已收藏');
+                        $(".collection").attr('href','javascript:;');
+                    }
+                },
+                'json');
+        }
+    });
+    $(".collStar,.collect,.collect-2").click(function(){
+        var userId = $("#userId").val();
+        var userName = $("#userName").val();
+        var type = $("#type").val();
+        var focusId = $("#focusId").val();
+        var focusName = $("#focusName").val();
+        var focusImage = $("#focusImage").val();
+        var goutripPrice = $("#goutripPrice").val();
+        if(0 < eval(userId) && 0 < eval(focusId)){
+            if($(this).hasClass('collStarcur')){//假如收藏了，再次点击会取消收藏
+            	$.get('/bookmarkNew/delete.json',
+                    {userId:userId,delType:type,focusId:focusId},
+                    function(o){
+                        if(2 == o.status) {
+                        	$(".collStar").html('收藏');
+                        	$('.collStar').addClass('collect').removeClass('collStarcur');
+                        }
+                    },
+                'json');
+            	return true;
+        	}
+        	
+            $.get('/bookmark/isBookMarked.html',
+                {userId:userId,userName:userName,type:type,focusId:focusId,focusName:focusName,focusImage:focusImage,price:goutripPrice},
+                function(o){
+                    if(1 == o.status) {
+                    	$(".collStar").html('已收藏');
+                    	$('.collStar').addClass('collStarcur').removeClass('collect');
+                    }
+                },
+                'json');
+        }else{
+        	var returnUrl = encodeURIComponent(window.location.href);
+        	var url = '/member/login.html?returnUrl='+returnUrl;
+        	window.location.href = url;
+        }
+    });
+    isBookMarked();
+});
+function isBookMarked(){
+    var userId = $("#userId").val();
+    var userName = $("#userName").val();
+    var type = $("#type").val();
+    var focusId = $("#focusId").val();
+    var focusName = $("#focusName").val();
+    var focusImage = $("#focusImage").val();
+    var goutripPrice = $("#goutripPrice").val();
+    if(0 < eval(userId) && 0 < eval(focusId)){
+        $.get('/bookmark/isBookMarked.html',
+            {userId:userId,userName:userName,type:type,focusId:focusId,focusName:focusName,focusImage:focusImage,action:'search',price:goutripPrice},
+            function(o){
+                if(1 == o.status) {
+                    $(".collection,.collStar").html('已收藏');
+                    $(".collection").attr('href','javascript:;');
+                    $('.collStar').addClass('collStarcur').removeClass('collect');
+                }
+            },
+            'json');
+    }
+}

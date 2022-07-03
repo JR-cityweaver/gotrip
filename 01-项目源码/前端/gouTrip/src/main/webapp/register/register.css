@@ -1,0 +1,186 @@
+/**2016-10-24 注册页面**/
+
+#logo{
+	width:72px;height:60px;margin: 70px auto 0;
+}
+.logo-1{
+	background-image: url(/images_new/index_new/member/logo-1.png);
+}
+.logo-2{
+	background-image: url(/images_new/index_new/member/logo-2.png);
+}
+
+body{
+width:100%;height:100%;background-image: url(../image/enroll_02.png);background-repeat:no-repeat;background-size: cover;position: relative;
+}
+.main{
+    width: 500px;  margin: 30px auto; text-align: center; background: #fff;   border: 10px solid hsla(0,0%,0%,0.1);
+    border-radius: 21px;
+    background: white;
+    background-clip: padding-box;}
+.main p.title{
+    color:#666;padding:22px 0 40px 0px;    font-size: 20px;
+    font-family: "Microsoft YaHei";
+}
+.main ul{
+    position: relative;z-index: 1000;
+}
+.main ul li{padding-bottom: 15px;}
+.main ul li i{color:#fc992b;font-style: normal}
+.main ul li>span{
+    display: inline-block;font-size: 14px;color:#333;width:70px;text-align: right;margin-right:20px ;
+}
+.main ul li:nth-child(3) span,.main li:last-child span{
+    width:83px;
+}
+.main ul li>input{
+    width:300px;height: 38px;border: 1px solid #cccccc;    padding: 0 4px;
+}
+.main ul li:nth-child(2) input{
+    width: 180px;
+}
+/*.main ul li:nth-child(2) img{*/
+    /*display: inline-block;  vertical-align: middle;border: none;*/
+/*}*/
+.main ul li:nth-child(2) input:last-child{
+	    font-family: "Microsoft YaHei";
+    border-radius: 4px;
+    border: 0;
+    width:116px;background: #2ea8e4;color:#fff;font-size: 14px;display: inline-block;height: 38px;
+}
+.main div.main_btm{
+    margin-left: 95px;text-align: left;
+}
+.main p.ipt{
+padding-bottom: 20px;padding-top: 2px;
+}
+.main p.ipt span{
+    display: inline-block;color:#b1b3b3;font-size: 12px;
+}
+.main p.ipt span a{
+  display: inline;  color:#3fb9ff;font-style: normal;
+}
+.main p.btn{
+    margin-bottom: 20px;
+}
+.main p.btn button{
+    padding: 14px 69px;background: #2ea8e4;color:#fff;font-size: 18px;border: 0;border-radius: 5px;
+}
+.main p.enter{
+    padding-bottom: 20px;border-bottom: 1px solid #ccc;width:305px;margin-bottom: 16px;
+}
+.main p.enter span{
+    color:#666666;font-size: 14px;display: inline;
+}
+.main p.enter a{
+    color:#2ea8e4;  font-style: normal;font-size: 14px;display: inline;
+}
+.main div.main_btm{
+    padding-bottom: 40px;width:305px;margin-top: 5px;
+}
+.main div div p{
+    color:#666666;font-size:14px;font-weight: 600;margin-bottom: 10px;
+}
+.main div div a{
+    display: inline-block;padding-right: 20px;
+}
+/*提示框*/
+.tip{
+    position: absolute;
+    width: 1100px;
+    top: 50%;
+    /*height: 426px;*/
+    margin-left: -550px;
+    margin-top: -190px;
+    left: 50%;
+}
+.tip ol{
+    overflow: hidden;float: right;  width:325px;
+}
+.tip ol li{
+    font-size: 12px;color:#666;height:45px;margin-bottom: 5px;line-height: 40px;
+}
+.tip ol li.one{
+    background: url(../image/enroll_07.png) no-repeat;
+}
+.tip ol li.two{
+    background: url(../image/enroll_10.png) no-repeat;
+}
+.tip ol li.three{
+    background: url(../image/enroll_13.png) no-repeat;
+}
+.tip ol li.four{
+    background: url(../image/enroll_16.png) no-repeat;
+}
+.tip ol li.five{
+    background: url(../image/enroll_19.png) no-repeat;
+}
+.tip ol li img,.tip ol li span{
+    display: inline-block;vertical-align: middle;
+}
+.tip ol li img{
+    padding-left: 15px;
+}
+.bottom{
+    margin-top: 70px;text-align: center;
+}
+.bottom p{
+    font-size: 12px;color:#fff;padding-top: 10px;
+}
+
+/**2016-11-10 验证码弹框**/
+.popUp{
+    position: fixed;top:0;left:0;background: rgba(0,0,0,.7);width: 100%;  height: 100%;z-index: 2222;display:none;
+}
+.alert{
+    padding-bottom:  90px;width:470px;position: absolute;z-index: 2223;height:270px;
+    top:50%;left:50%;margin-left:-235px;margin-top: -135px;text-align: center;display:none;
+}
+.txt{
+    background: #fff;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 50px; border: 10px solid #6b6b6b;
+    border-radius: 15px;
+}
+.txt p.first{
+   padding-bottom: 5px;    padding-right: 15px;
+}
+.txt p.first span{
+    display: inline-block;color:#666666;font-size: 14px;    vertical-align: middle;
+}
+.txt p.second{
+    padding-left: 43px;font-size: 14px;padding-top: 15px;color:#28a8f2;
+}
+p.second a,p.second img{
+	display:inline-block;
+}
+p.second img{
+	padding-right:5px;
+}
+.txt input{
+    border: 1px solid #c6c6c6;padding-left: 7px;font-size: 12px;width:190px;height:40px;
+}
+
+.btn span{
+    margin-left:45px;color: #fff;font-size: 14px;padding: 7px 0;width:190px;background: #28a8f2;display: inline-block;border-radius:6px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

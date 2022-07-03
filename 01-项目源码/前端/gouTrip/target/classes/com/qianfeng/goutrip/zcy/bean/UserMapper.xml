@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.qianfeng.goutrip.zcy.bean.UserMapper">
+  	<resultMap type="com.qianfeng.goutrip.zcy.bean.UserDTO" id="userResultMap">
+  		<id column="user_id" property="user_id"/>
+  		<result column="user_phone" property="user_phone"/>
+  		<result column="user_password" property="user_password"/>
+  		<result column="user_nicheng" property="user_nicheng"/>
+  		<result column="user_realname" property="user_realname"/>
+  		<result column="user_tele" property="user_tele"/>
+  		<result column="user_email" property="user_email"/>
+  		<result column="user_sex" property="user_sex"/>
+  		<result column="user_birthday" property="user_birthday"/>
+  	</resultMap>
+  
+  <select id="login" parameterType="com.qianfeng.goutrip.zcy.bean.UserDTO" resultMap="userResultMap">
+  	select * from tb_user where user_phone=#{user_phone} and user_password=#{user_password};
+  </select>
+  
+  <update id="updateInfo" parameterType="com.qianfeng.goutrip.zcy.bean.UserDTO">
+  	update tb_user set user_nicheng=#{user_nicheng},user_realname=#{user_realname},user_tele=#{user_tele},user_email=#{user_email},user_sex=#{user_sex},user_birthday=#{user_birthday} where user_id=5;
+  </update>
+  
+  <select id="selectInfo" parameterType="java.lang.Integer" resultMap="userResultMap">
+  	select user_nicheng,user_realname,user_tele,user_email,user_sex,user_birthday from tb_user where user_id=#{user_id};
+  </select>
+  
+  
+  </mapper>

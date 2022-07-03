@@ -1,0 +1,171 @@
+/**
+ * Created by Administrator on 2017/1/9.
+*/
+$(function(){
+	
+	
+	//设置图片，容器的宽高为当前电脑屏幕的尺寸
+    function accScreen(){
+        var $W=$(document.body).width();
+        var $bannerH=$W*0.3645;
+        $(".slider,.banner").css({"height":$bannerH,"width":$W});
+    }
+        accScreen();
+    $(window).resize(function(){
+        accScreen();
+    });
+    
+
+    //slider插件
+    $('.slider').bxSlider({
+        mode: 'fade', /*horizontal', 'vertical', 'fade' 定义滚动的方向，三个值可选*/
+        controls: false, /*是否显示“previous”和“next”按钮*/
+        auto: true, /*自动滚动*/
+        autoControls: false, /*自动滚动的控制键 start 和 stop */
+       
+        
+    });
+    
+    // 下拉框 效果
+     $(function(){
+        $(".nav-sub").hover(function(){
+            $(".drop-down").show();
+        },function(){
+            $(".drop-down").hide();
+        });
+     });
+    //够主题 效果
+    $(".Items .pop").hover(function(){
+        $(this).find(".themes-name").animate({"top": "43%"},200,function(){
+            $(this).addClass("themes-name-hover");
+        });
+        $(this).find(".themes-des,.h3-line").fadeIn(900);
+    },function(){
+        $(this).find(".themes-name").animate({"top": "50%"},1000,function(){
+            $(this).removeClass("themes-name-hover");
+        });
+        $(this).find(".themes-des,.h3-line").fadeOut(100);
+    });
+    //定制-弹层移动
+
+    function show(i){
+        $(".anime"+i).mouseenter(function(){
+            //触发两个方法控制a 的显示隐藏   是为了兼容ie9
+        	bb();
+        	$(this).find("a").fadeIn(700);
+            $(this).find(".sub-list").fadeOut(2000);
+        });
+        $(".anime"+i).mouseleave(function(){
+            cc();
+           
+        	$(this).find("a").fadeOut(700);
+            $(this).find(".sub-list").fadeIn(500);
+        });
+        function bb(){
+            $(".anime"+i).find("a").animate({left:0,opacity:1},700);
+        }
+        function cc(){
+            $(".anime"+i).find("a").animate({left:'376px',opacity:0},500);
+        }
+    }
+    show("1");
+    show("2");
+    show("3");
+	//侧边栏
+	$(".asides li").mouseover(function(){
+	    $(this).find("div").show();
+	}).mouseout(function(){
+	    $(this).find("div").hide();
+	});
+	$(".close").click(function(){
+	    if($(".asides li").is(":hidden")){
+	        $(".asides li").slideDown();
+	    }else{
+	        $(".asides li:not(':last-child')").slideUp();
+	    }
+	});
+     
+	 //页面滚动 侧边栏显示 与 隐藏
+     $(".asides").hide();
+     $(window).scroll(function(){
+         var $scrollH=$(window).scrollTop();
+         if(850<$scrollH){
+             $(".asides").show();
+             if($scrollH>4285){
+                 $(".asides").hide();
+             }
+         }else{
+             $(".asides").hide();
+         }
+
+     });
+     //回到顶部
+     $(".toTop").click(function(){
+         $("body,html").animate({scrollTop:0},500);
+         return false;
+     });
+     //导航条波动
+     $(".nav-hov").hover(function(){
+         $(this).find("a").animate({"bottom":"5px"},300);
+     },function(){
+         $(this).find("a").animate({"bottom":"0"},300);
+     });
+
+	  //图片懒加载
+      $("img").lazyload({ effect: "fadeIn"});
+      
+      //搜索框 聚焦显示下拉，失焦隐藏  
+      $(".searchList").hide();
+      $(".searchInput").click(function(event){
+    	  $(".searchList").show();
+    	  $(document).click(function(){
+    		  $(".searchList").hide();
+          });
+          event.stopPropagation();          
+      });
+      $(".seach-history-inner li").click(function(){
+    	  var keyword = $(this).text();
+    	  console.log(keyword);
+    	  $(".searchInput").val(keyword); 
+    	  $(".searchList").hide();
+      }); 
+      $(".clear").on("click",function(){
+    	   window.location.href='/clear/keywordList.html';
+      });
+      
+      //够主题下面的类型
+      $.get('/types.json', function (data) {
+  	 	var typelist = $('#typelist');
+          var html = '';
+          for (var i = 0; i < data.length; i++) {
+        	  //if(i==3) break;
+          	  html +='<div class="drop-module clearfix fl"><p class="drop-module-title clearfix"><img class="type-img" src="' + data[i].colorUrl + '"/>'+
+                     '<span class="module-title-name fl" onclick="window.location.href=\'/themeTrip/themeList.html?typeId=' + data[i].id + '\'">' + data[i].name + '</span>'+
+                     '<span class="module-title-more fr" onclick="window.location.href=\'/themeTrip/themeList.html?typeId=' + data[i].id + '\'">更多</span></p>'+
+                     '<ul class="drop-module-inner clearfix">';
+              var terminiList = data[i].terminiList;
+              if(terminiList!=null && terminiList.length>0){
+              	for (var j = 0; j < terminiList.length; j++) {
+  	            	html +='<li class="module-inner-nation fl" onclick="window.location.href=\'/themeTrip/themeList.html?typeId='+ data[i].id +'&terminiId='+terminiList[j].id+'\'">'+terminiList[j].name+'</li>';
+  	            }
+              }
+              html +='</ul></div>';
+          }
+          typelist.html(html);
+          
+      });
+      
+      //2017-1-19 热门目的地
+      $.get('/recommend/terminiOutsideHot.json', function (data) {
+          var html = '';
+          var terminiList = data.terminiList;
+          if(terminiList!=null && terminiList.length>0){
+        	  for (var i = 0; i < terminiList.length; i++) {
+        		  html +='<li><a href="/recommend/hotRouteContentByTerminiId.html?terminiId=' + terminiList[i].id + '">' + terminiList[i].title + '</a></li>';
+              } 
+          }
+          $('.hot-list-inner').html(html);
+      });
+    
+      
+});

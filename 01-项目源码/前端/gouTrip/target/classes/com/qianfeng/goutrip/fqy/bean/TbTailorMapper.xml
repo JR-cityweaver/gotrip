@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.goutrip.fqy.bean.TbTailorMapper">
+
+	<resultMap type="com.qianfeng.goutrip.fqy.bean.TbTailor" id="tailorResultMapper">
+		<id column="tailor_id" property="tailor_id"/>
+		<result column="tailor_num" property="tailor_num"/>
+		<result column="tailor_start" property="tailor_start"/>
+		<result column="tailor_end" property="tailor_end"/>
+		<result column="tailor_days" property="tailor_days"/>
+		<result column="tailor_gotime" property="tailor_gotime"/>
+		<result column="tailor_type" property="tailor_type"/>
+		<result column="tailor_adult" property="tailor_adult"/>
+		<result column="tailor_child" property="tailor_child"/>
+		<result column="tailor_price" property="tailor_price"/>
+		<result column="tailor_name" property="tailor_name"/>
+		<result column="tailor_phone" property="tailor_phone"/>
+		<result column="tailor_mail" property="tailor_mail"/>
+		<result column="tailor_remarks" property="tailor_remarks"/>
+	</resultMap>
+
+	<insert id="insertTailor" parameterType="com.qianfeng.goutrip.fqy.bean.TbTailor">
+		insert into tb_tailor (tailor_num, tailor_start, tailor_end, tailor_days, tailor_gotime, tailor_type, 
+			tailor_adult, tailor_child, tailor_price, tailor_name, tailor_phone, tailor_mail, 
+				tailor_remarks) values(#{tailor_num},#{tailor_start}, #{tailor_end}, #{tailor_days}, #{tailor_gotime},
+					 #{tailor_type}, #{tailor_adult}, #{tailor_child}, #{tailor_price}, #{tailor_name}, 
+					 		#{tailor_phone}, #{tailor_mail}, #{tailor_remarks})
+	</insert>
+	
+	<select id="getTailor" parameterType="String" resultMap="tailorResultMapper">
+		select * from tb_tailor where tailor_num=#{tailor_num}
+	</select>
+</mapper>

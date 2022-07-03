@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.qianfeng.manager.bean.TbRoomMapper">
+	<resultMap type="com.qianfeng.manager.bean.RoomBean" id="TbRoomResultMap">
+		<id column="room_id" property="room_id"/>
+		<result column="room_name" property="room_name"/>
+		<result column="room_bed" property="room_bed"/>
+		<result column="room_breakfast" property="room_breakfast"/>
+		<result column="room_wifi" property="room_wifi"/>
+		<result column="room_explain" property="room_explain"/>
+		<result column="room_price" property="room_price"/>
+		<result column="room_area" property="room_area"/>
+		<result column="room_floor" property="room_floor"/>
+		<result column="room_status" property="room_status"/>
+		<result column="tb_hotel_hotel_id" property="tb_hotel_hotel_id"/>
+		<association property="hotel" javaType="com.qianfeng.manager.bean.ThemeHotelBean">
+			<id column="hotel_id" property="hId"/>
+			<result column="hotel_name" property="hName"/>
+			<result column="hotel_introduce" property="hIntroduce"/>
+			<result column="hotel_address" property="hAddress"/>
+			<result column="hotel_price" property="hPrice"/>
+			<result column="hotel_type" property="hType"/>
+			<result column="hotel_groom" property="hGroom"/>
+			<result column="hotel_around" property="hAround"/>
+			<result column="hotel_xingji" property="hXingji"/>
+			<result column="hotel_food" property="hFood"/>
+			<result column="hotel_play" property="hPlay"/>
+			<result column="hotel_meeting" property="hMeeting"/>
+			<result column="hotel_card" property="hCard"/>
+			<result column="hotel_traffic" property="hTraffic"/>
+			<result column="hotel_status" property="hStatus"/>
+		</association>
+	</resultMap>
+	
+	<!-- <select id="getRoomByHotel" parameterType="Integer" resultMap="TbRoomResultMap">
+		select * from tb_room r join tb_hotel h where r.tb_hotel_hotel_id=#{hotel_id}
+	</select>  -->
+	
+	<select id="getRoomOrder" parameterType="Integer" resultMap="TbRoomResultMap">
+		select * from tb_room where room_id=#{room_id} and room_status=0
+	</select>
+	
+	<update id="updateRoom" parameterType="com.qianfeng.manager.bean.RoomBean">
+		update tb_room set room_name=#{room_name},room_bed=#{room_bed},room_breakfast=#{room_breakfast},
+		 	room_wifi=#{room_wifi},room_explain=#{room_explain}, room_price=#{room_price},
+		  		room_area=#{room_area}, room_floor=#{room_floor} where room_id=#{room_id}
+	</update>
+	
+	<update id="deleteRoom" parameterType="Integer">
+		update tb_room set room_status=1 where room_id=#{room_id}
+	</update>
+	
+	<insert id="insertRoom" parameterType="com.qianfeng.manager.bean.RoomBean">
+		insert into tb_room (room_name, room_bed, room_breakfast, room_wifi, room_explain, room_price, room_area, room_floor,tb_hotel_hotel_id) 
+			values(#{room_name},#{room_bed},#{room_breakfast},#{room_wifi},#{room_explain},#{room_price},#{room_area},#{room_floor},#{tb_hotel_hotel_id})
+	</insert>
+</mapper>

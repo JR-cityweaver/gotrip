@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+   <!--核心配置,此处就是shiro.ini的配置        spring集成shiro进行过滤的详情， -->     
+   <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+    	<property name="securityManager" ref="securityManager"/>
+  	 <property name="unauthorizedUrl" value="/loginRegister.jsp" />
+  	 <property name="loginUrl" value="/loginRegister.jsp"/> 
+  	 
+     <property name="filterChainDefinitions">
+        <value>
+        /**.css=anon
+        /**.js=anon
+        /**.jpg=anon
+        /**.png=anon
+       
+          /home.jsp=anon
+          /register.jsp=anon
+          /login.jsp=anon
+         /loginRegister.jsp=anon
+         /order/*.do=authc
+         /routeDetail/orderWrite.do=authc 
+         /collect/selectSingle.do=authc
+         /OrderJSP/*.jsp=authc
+         /myself.jsp=user
+         /hotelorder.do=authc
+         /hotelOrder.jsp=authc
+         /hotelPay.jsp=authc
+         /hotelpaySuccess.jsp=authc
+         /personal.jsp=authc
+         /hotelalipay.jsp=authc
+        </value>
+    </property>
+</bean>
+ 
+<!-- realm的路径 -->
+<bean id="myRealm" class="com.qianfeng.goutrip.shiro.myrealm.MyRealm"></bean>
+
+ <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+    <property name="realm" ref="myRealm"/>    
+</bean>  
+<!-- 将realm交给spring进行管理 -->
+<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+</beans>

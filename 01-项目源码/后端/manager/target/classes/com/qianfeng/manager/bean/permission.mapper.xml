@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.manager.bean.permissionMapper">
+	<resultMap type="com.qianfeng.manager.bean.PermissionBean" id="permissionResultMapper">
+		<id column="perm_id" property="pId"/>
+		<result column="perm_name" property="pName"/>
+		<result column="perm_manager_id" property="pManagerId"/>
+	</resultMap>
+	<select id="getPermissionListByName" parameterType="string" resultType="string">
+		select p.perm_name from tb_manager m join tb_manager_permission mp on m.manager_id=mp.mp_m_id join tb_permission p on p.perm_id=mp.mp_p_id and m.manager_name=#{mName}
+	</select>
+</mapper> 

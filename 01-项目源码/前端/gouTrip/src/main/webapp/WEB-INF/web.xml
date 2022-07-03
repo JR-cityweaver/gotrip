@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>Archetype Created Web Application</display-name>
+    <!-- <context-param>    
+        <param-name>log4jConfigLocation</param-name>    
+    <param-value>/WEB-INF/log4j.properties</param-value>    
+    </context-param>  
+	<listener>  
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>  
+    </listener> -->
+
+
+  
+  <context-param> 
+     <param-name>contextConfigLocation</param-name> 
+     <param-value> 
+         classpath:spring-shiro-web.xml,
+         /WEB-INF/spring-servlet.xml
+     </param-value> 
+ </context-param> 
+ 
+ <error-page>
+ 	<error-code>404</error-code>
+ 	<location>/WEB-INF/errorPage.jsp</location>
+ </error-page>
+ 
+ <filter>
+    <filter-name>shiroFilter</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+   <!-- 将过滤器的出生到销毁都交给spring管理 -->
+    <init-param>
+        <param-name>targetFilterLifecycle</param-name>
+        <param-value>true</param-value>
+    </init-param>
+</filter>
+
+<filter-mapping>
+    <filter-name>shiroFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
+
+    <!-- 当tomcat启动的时候，优先加载spring的配置 -->
+    <listener> 
+    	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class> 
+ 	</listener> 
+  
+  <servlet-mapping>
+  	<servlet-name>default</servlet-name>
+  	<url-pattern>*.css</url-pattern>
+  	<url-pattern>*.js</url-pattern>
+  	<url-pattern>/hotel/*</url-pattern>
+  	<url-pattern>/image/*</url-pattern>
+  	<url-pattern>*.png</url-pattern>
+  	<url-pattern>*.PNG</url-pattern>
+  	<url-pattern>*.jpg</url-pattern>
+  </servlet-mapping>
+  <filter>
+  	<filter-name>Encoding</filter-name>
+  	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+  	<init-param>
+  		<param-name>encoding</param-name>
+  		<param-value>utf-8</param-value>
+  	</init-param>
+  </filter>
+  <filter-mapping>
+  	<filter-name>Encoding</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <servlet>
+  	<servlet-name>spring</servlet-name>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>spring</servlet-name>
+  	<url-pattern>/</url-pattern>
+  </servlet-mapping>
+</web-app>

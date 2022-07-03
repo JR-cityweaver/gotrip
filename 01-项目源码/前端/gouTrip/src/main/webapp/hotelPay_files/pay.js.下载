@@ -1,0 +1,25 @@
+/**
+ * Created by Administrator on 2016/12/30.
+ */
+$(function(){
+    $(".tab_2,.tab_3").hide();
+    $(".main_tab li").click(function(){
+        $(this).addClass("bord_btm").siblings("li").removeClass("bord_btm");
+        var i=$(this).index();
+        $(".tab").eq(i).show().siblings(".tab").hide();
+        if($(".main_tab li").eq(0).hasClass("bord_btm")){
+            $(".main_tab li").eq(0).addClass("remcon")
+        }else{
+            $(".main_tab li").eq(0).removeClass("remcon")
+        }
+    })
+    $(".detial-btn").click(function(){
+        $(".detail-inner").toggle();
+        $(this).toggleClass("top");
+    })
+    $(".alert-close,.alert-btn").on("click",function(){
+        $(".over-time-alert,.pop").hide();
+    })
+
+    
+});

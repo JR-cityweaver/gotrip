@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.qianfeng.goutrip.fqy.bean.TbRoomMapper">
+	<resultMap type="com.qianfeng.goutrip.fqy.bean.TbRoom" id="TbRoomResultMap">
+		<id column="room_id" property="room_id"/>
+		<result column="room_name" property="room_name"/>
+		<result column="room_bed" property="room_bed"/>
+		<result column="room_breakfast" property="room_breakfast"/>
+		<result column="room_wifi" property="room_wifi"/>
+		<result column="room_explain" property="room_explain"/>
+		<result column="room_price" property="room_price"/>
+		<result column="room_area" property="room_area"/>
+		<result column="room_floor" property="room_floor"/>
+		<association property="hotel" javaType="com.qianfeng.goutrip.fqy.bean.TbHotel">
+			<id column="hotel_id" property="hotel_id"/>
+			<result column="hotel_name" property="hotel_name"/>
+			<result column="hotel_introduce" property="hotel_introduce"/>
+			<result column="hotel_address" property="hotel_address"/>
+			<result column="hotel_price" property="hotel_price"/>
+			<result column="hotel_type" property="hotel_type"/>
+			<result column="hotel_groom" property="hotel_groom"/>
+			<result column="hotel_around" property="hotel_around"/>
+			<result column="hotel_xingji" property="hotel_xingji"/>
+			<result column="hotel_food" property="hotel_food"/>
+			<result column="hotel_play" property="hotel_play"/>
+			<result column="hotel_meeting" property="hotel_meeting"/>
+			<result column="hotel_card" property="hotel_card"/>
+			<result column="hotel_traffic" property="hotel_traffic"/>
+			<result column="hotel_status" property="hotel_status"/>
+		</association>
+	</resultMap>
+	
+	<!-- <select id="getRoomByHotel" parameterType="Integer" resultMap="TbRoomResultMap">
+		select * from tb_room r join tb_hotel h where r.tb_hotel_hotel_id=#{hotel_id}
+	</select>  -->
+	
+	<select id="getRoomOrder" parameterType="Integer" resultMap="TbRoomResultMap">
+		select * from tb_room where room_id=#{room_id}
+	</select>
+	
+</mapper>

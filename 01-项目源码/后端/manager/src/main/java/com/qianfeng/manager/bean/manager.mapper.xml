@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.manager.bean.managerMapper">
+	<resultMap type="com.qianfeng.manager.bean.ManagerBean" id="managerResultMap">
+	  	<id column="manager_id" property="mId"/>
+	  	<result column="manager_name" property="mName"/>
+	  	<result column="manager_password" property="mPassword"/>
+	  	<result column="manager_phone" property="mPhone"/>
+	  	<result column="manager_addr" property="mAddr"/>
+	  	<result column="manager_email" property="mEmail"/>
+	  	<result column="manager_type" property="mType"/>
+	</resultMap>
+	<insert id="insertManager" parameterType="com.qianfeng.manager.bean.ManagerBean">
+		insert into tb_manager(manager_name,manager_password,manager_phone,manager_addr,manager_email)
+		values(#{mName},#{mPassword},#{mPhone},#{mAddr},#{mEmail})
+	</insert>
+	<delete id="deleteManager" parameterType="com.qianfeng.manager.bean.ManagerBean">
+		delete from tb_manager where manager_id=#{mId}
+	</delete>
+	<select id="getManager" parameterType="com.qianfeng.manager.bean.ManagerBean" resultMap="managerResultMap">
+    	select * from tb_manager where manager_name=#{mName} and manager_password=#{mPassword}
+  	</select>
+	<select id="getManagerList" resultMap="managerResultMap" parameterType="int">
+		select * from tb_manager where manager_type=0 limit #{pageNo},5
+	</select>
+	<select id="getManagerCount" resultType="int">
+		select count(manager_id) from tb_manager where manager_type=0
+	</select>
+</mapper>

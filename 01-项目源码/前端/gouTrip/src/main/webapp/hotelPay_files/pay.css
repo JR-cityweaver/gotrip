@@ -1,0 +1,217 @@
+.main{background:#f5f5f5;}
+/*头部进度条   */
+.progress{
+    padding: 18px 0;
+}
+.progress i{
+    display: inline-block;width:327px ;height: 12px;
+}
+.progress span{
+    display: inline;color:#666;
+}
+.prog-1,.prog-2,.prog-4{
+    background: url(../image/pross1.png) no-repeat;
+}
+.prog-3{
+    background: url(../image/pross2.png) no-repeat;
+}
+span.prog-fill,span.prog-pay,span#prog_succ{
+    color:#f4b01c;
+}
+/*支付详情*/
+.detail{
+    padding-bottom: 20px;
+
+}
+.order-detail{
+  background: #fff;
+}
+.order-detail span{
+    padding-left: 17px;display: inline-block;
+}
+.order-detail i{
+    display: inline-block;width: 115px;text-align: right;font-style: normal;
+}
+.pay-btn{
+    padding: 25px 25px 25px 0;
+    border-bottom: 1px solid #f5f5f5;
+    margin: 0 10px;
+}
+.detail-inner span{
+    font-size: 14px;color:#999;
+}
+.pay-money i{
+    font-size: 22px;color:#333;
+}
+.pay-money span{
+    font-size: 27px;color:#f4b01c;
+}
+.pay-money span b{
+    font-size: 16px;font-weight: 500;
+}
+.order-detail ul{
+    clear: both;padding: 15px 0 0 0px;border-bottom: 1px solid #f5f5f5;margin: 0 10px;
+}
+.order-detail ul i{
+ font-size: 16px;color:#666;padding-bottom: 15px;
+}
+.detial-btn{
+    outline: none;border: 0;display: block;width:115px; cursor:pointer;padding-top: 8px;font-family:"Microsoft yahei";
+    font-size: 20px;color: #666;background: url(../image/btm.png) no-repeat 100% 70%;
+}
+.over-time{
+    padding: 15px 0 25px 0;margin: 0 10px;
+}
+.over-time i{
+    font-size: 16px;color:#666;
+}
+.over-time b{
+    font-weight: 500;color:#e4c4b0
+}
+.main_tab{
+    background: #fff;    margin-top: 20px; 
+}
+.main_tab ol{
+    background: #ecf6ff;
+}
+.main_tab ol li{
+    float:left;padding:17px 43px;color:#333;cursor: pointer;font-family: "Microsoft yahei";
+}
+.main_tab ol li.bord_btm{
+    ;color:#fff;font-weight: 600;background: #2f71b0;
+}
+.tab{
+    padding:40px 0 0px 112px;height:300px;
+}
+.main_tab ol li.remcon{
+    background: url(../image/remcon.png) no-repeat #2f71b0 100% 0;
+}
+.pay-type{
+    font-size: 26px;color:#333;
+}
+.pay-go{
+    font-size: 26px;color:#fff;width:170px;margin-top: 22px;
+    height:55px;text-align: center;line-height: 55px;border-radius: 3px;    border: 0; outline: 0;
+}
+.pay-go-y{
+	background: #f4b01c;
+}
+.pay-go-c{
+	background: #ccc;cursor: no-drop;
+}
+.pay-choose{
+    padding-top: 50px;
+}
+.pay-tip{
+    color: #666;text-align: center;margin-right: 228px;
+    background: url(../image/secces.png) no-repeat;width:230px;height:180px;
+}
+.pay-tip p:first-child{
+    padding-top: 55px;
+}
+.top{
+    background: url(../image/top.png) no-repeat 100% 70%;
+}
+.over-time-alert{
+    width:490px;border: 1px solid #d2e1f0;    left: 50%;
+    top: 35%;background: #fff;    z-index: 1000;
+    
+    position: absolute;
+    margin-left: -245px;
+    margin-top: -100px;
+}
+.warm-tip{
+    background: #ecf6ff;padding: 8px 10px;
+}
+.warm-tip span{
+    font-size: 18px;color:#333;display: inline-block;
+}
+.warm-tip i{
+    display: inline-block;width:14px;height:14px;margin-top: 5px;
+    background: url(../image/alert-close.png) no-repeat;cursor: pointer;
+}
+.tip-txt{
+    text-align: right;width:320px;padding: 35px 30px;font-size: 16px;
+    background: url(../image/tip-txt.png) no-repeat 0 50%;color:#333;margin: 0 auto;
+}
+.over-time-alert button{
+  margin: 0 auto;display: block;width:110px;font-size: 20px;color:#fff;margin-bottom: 28px;
+    background: #f4b01c;height: 40px;outline: none;border: 0;border-radius: 3px;
+}
+/*支付成功*/
+
+.inner-pay{
+    text-align: center;border: 1px solid #d2e1f0;
+}
+.success-img{
+    margin: 0 auto;padding: 50px 0 15px 0;
+}
+.pay-success{
+    font-size: 30px;color:#333;width:190px;margin: 0 auto;
+    background: url(/images_new/index_new/hotel/pay/pay-success.png) no-repeat 0 75%;
+}
+.pay-back{background: #f4b01c;color:#fff;margin: 15px auto;
+    width:180px;height: 40px;line-height: 40px;padding-bottom: 15px;
+}
+.tip{
+font-size:14px;color:#999;padding-bottom: 60px;
+}
+.inner-tip{
+    border: 1px solid #d2e1f0;margin-top: 20px;padding: 20px 0 25px 30px;margin-bottom: 60px;
+}
+.inner-name{
+    color:#f4b01c;font-size: 14px;padding-bottom: 8px;
+}
+.inner-txt{
+    font-size: 14px;color:#999;
+}
+/*支付失败*/
+.pay-fail{
+    font-size: 30px;color:#333;width:190px;margin: 0 auto;	
+    background: url(/images_new/index_new/hotel/pay/pay-fail.png) no-repeat 0 75%;
+}
+.fail-img{
+    margin: 0 auto;padding: 50px 0 15px 0;
+}
+/*微信支付*/
+.weixin {
+    margin-top: 20px;    background: #fff;
+    
+    padding: 40px;
+}
+.weixin-pay,.weixin-img{
+    display: inline-block;width:49%;text-align: center;    vertical-align: middle;
+}
+.weixin-pay p{
+    color:#858585;text-align: center;
+}
+.weixin-pay div{
+    text-align: center;
+}
+.weixin-pay div p{
+    color:#858585;font-size: 12px;
+}
+.weixin-pay div img{
+    display: inline-block;    vertical-align: text-bottom;
+}
+.weixin-pay div p{
+    display: inline-block;
+}
+.weixin-pay div p span{
+    display: block;text-align: left;
+}
+.choose{
+    padding:20px;font-size: 14px;color: #3a9bfc;
+}
+.choose img{
+    display: inline-block;vertical-align: middle;
+}
+.pop{
+	width: 100%;height: 100%; background-color: rgba(0,0,0,.7); position: fixed; top: 0;
+    right: 0;bottom: 0;left: 0;z-index: 999;
+}
+.hideDiv{display: none;}
+.showDiv{display: block;}
+.hotel-a {
+    color: #f2af33 !important;
+}

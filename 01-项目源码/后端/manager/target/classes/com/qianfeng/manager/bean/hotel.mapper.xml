@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.manager.bean.hotelMapper">
+	<resultMap type="com.qianfeng.manager.bean.ThemeHotelBean" id="hotelResultMap">
+		<id column="hotel_id" property="hId"/>
+		<result column="hotel_name" property="hName"/>
+		<result column="hotel_introduce" property="hIntroduce"/>
+		<result column="hotel_address" property="hAddress"/>
+		<result column="hotel_price" property="hPrice"/>
+		<result column="hotel_type" property="hType"/>
+		<result column="hotel_groom" property="hGroom"/>
+		<result column="hotel_around" property="hAround"/>
+		<result column="hotel_xingji" property="hXingji"/>
+		<result column="hotel_food" property="hFood"/>
+		<result column="hotel_play" property="hPlay"/>
+		<result column="hotel_meeting" property="hMeeting"/>
+		<result column="hotel_card" property="hCard"/>
+		<result column="hotel_traffic" property="hTraffic"/>
+		<collection property="roomList" ofType="com.qianfeng.manager.bean.RoomBean" column="tb_hotel_hotel_id">
+			<id column="room_id" property="room_id"/>
+			<result column="room_name" property="room_name"/>
+			<result column="room_bed" property="room_bed"/>
+			<result column="room_breakfast" property="room_breakfast"/>
+			<result column="room_wifi" property="room_wifi"/>
+			<result column="room_explain" property="room_explain"/>
+			<result column="room_price" property="room_price"/>
+			<result column="room_area" property="room_area"/>
+			<result column="room_floor" property="room_floor"/>
+		</collection>
+	</resultMap>
+	<select id="queryHotelListByType" parameterType="hashmap" resultMap="hotelResultMap">
+		select * from tb_hotel where hotel_type=#{hType} limit #{pageNo},5
+	</select>
+	<select id="queryHotelCount" parameterType="int" resultType="int">
+		select count(hotel_id) from tb_hotel where hotel_type=#{hType}
+	</select>
+	<update id="updateHotel" parameterType="com.qianfeng.manager.bean.ThemeHotelBean">
+		update tb_hotel set hotel_id=#{hId},hotel_name=#{hName},hotel_introduce=#{hIntroduce},hotel_address=#{hAddress},hotel_price=#{hPrice},hotel_groom=#{hGroom},hotel_around=#{hAround} where hotel_id=#{hId}
+	</update>
+	<select id="queryHotelById" parameterType="int" resultMap="hotelResultMap">
+		select * from tb_hotel where hotel_id=#{hId}
+	</select>
+	<delete id="deleteHotelById" parameterType="int">
+		delete from tb_hotel where hotel_id=#{hId}
+	</delete>
+	<insert id="insertHotel" parameterType="com.qianfeng.manager.bean.ThemeHotelBean">
+		insert into tb_hotel(hotel_name,hotel_introduce,hotel_address,hotel_price,hotel_type,hotel_groom,hotel_around) values(#{hName},#{hIntroduce},#{hAddress},#{hPrice},#{hType},#{hGroom},#{hAround})
+	</insert>
+	
+	<select id="getHotelInfo" parameterType="Integer" resultMap="hotelResultMap">
+		select * from tb_room r join tb_hotel h where r.tb_hotel_hotel_id=h.hotel_id and h.hotel_id=#{hId} and r.room_status=0
+	</select>
+	
+</mapper>

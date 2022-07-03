@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.qianfeng.goutrip.fqy.bean.TbTravellerMapper">
+	<resultMap type="com.qianfeng.goutrip.fqy.bean.TbTraveller" id="TbTravellerResultMapper">
+		<id column="traveller_id" property="traveller_id"/>
+		<result column="traveller_name" property="traveller_name"/>
+		<result column="traveller_phone" property="traveller_phone"/>
+		<result column="traveller_cardtype" property="traveller_cardtype"/>
+		<result column="traveller_cardnum" property="traveller_cardnum"/>
+		<result column="traveller_sex" property="traveller_sex"/>
+		<result column="traveller_date" property="traveller_date"/>
+		<result column="traveller_mail" property="traveller_mail"/>
+		<result column="traveller_type" property="traveller_type"/>
+		<result column="tb_user_user_id" property="tb_user_user_id"/>
+	</resultMap>
+	
+	<insert id="saveTraveller" parameterType="com.qianfeng.goutrip.fqy.bean.TbTraveller">
+		insert into tb_traveller (traveller_name,traveller_phone,traveller_cardtype,traveller_cardnum,
+			traveller_sex,traveller_date,traveller_mail,traveller_type) values(#{traveller_name},#{traveller_phone},
+				#{traveller_cardtype},#{traveller_cardnum},#{traveller_sex},#{traveller_date},#{traveller_mail},
+					#{traveller_type})
+	</insert>
+	
+	<select id="getTraveller" parameterType="Integer" resultMap="TbTravellerResultMapper">
+		select * from tb_traveller where traveller_status=0 limit #{pageNo},5
+	</select>
+	<select id="getCount" resultType="Integer">
+		select count(*) from tb_traveller where traveller_status=0
+	</select>
+	
+	<update id="deleteTra" parameterType="Integer">
+		update tb_traveller set traveller_status=1 where traveller_id=#{traveller_id} 
+	</update>
+	
+	<update id="updateTra" parameterType="com.qianfeng.goutrip.fqy.bean.TbTraveller">
+		update tb_traveller set traveller_name=#{traveller_name},traveller_phone=#{traveller_phone},
+			traveller_cardtype=#{traveller_cardtype},traveller_cardnum=#{traveller_cardnum},traveller_sex=#{traveller_sex},
+				traveller_date=#{traveller_date},traveller_mail=#{traveller_mail},traveller_type=#{traveller_type} where traveller_id=#{traveller_id}
+	</update>
+</mapper>
